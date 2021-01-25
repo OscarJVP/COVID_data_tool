@@ -1,0 +1,4 @@
+name = "COVID_data_tool"
+uuid = "8143b591-6887-44c2-a86e-4c7827c7df1e"
+authors = ["Oscar Vargas <lost9924@gmail.com>"]
+version = "0.1.0"
