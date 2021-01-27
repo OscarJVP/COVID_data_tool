@@ -19,9 +19,9 @@
           }
         },
         "execution": {
-          "iopub.status.busy": "2021-01-21T15:26:41.694Z",
-          "iopub.execute_input": "2021-01-21T15:26:44.374Z",
-          "iopub.status.idle": "2021-01-21T15:27:04.185Z"
+          "iopub.status.busy": "2021-01-26T21:59:36.261Z",
+          "iopub.execute_input": "2021-01-26T21:59:39.275Z",
+          "iopub.status.idle": "2021-01-26T21:59:56.972Z"
         }
       }
     },
@@ -38,14 +38,14 @@
       "outputs": [
         {
           "output_type": "execute_result",
-          "execution_count": 34,
+          "execution_count": 2,
           "data": {
-            "text/plain": "Ct_DocCSV (generic function with 2 methods)"
+            "text/plain": "Ct_DocCSV (generic function with 1 method)"
           },
           "metadata": {}
         }
       ],
-      "execution_count": 34,
+      "execution_count": 2,
       "metadata": {
         "collapsed": true,
         "jupyter": {
@@ -58,9 +58,9 @@
           }
         },
         "execution": {
-          "iopub.status.busy": "2021-01-21T16:07:30.668Z",
-          "iopub.execute_input": "2021-01-21T16:07:30.688Z",
-          "iopub.status.idle": "2021-01-21T16:07:30.730Z"
+          "iopub.status.busy": "2021-01-26T22:04:09.896Z",
+          "iopub.execute_input": "2021-01-26T22:04:10.496Z",
+          "iopub.status.idle": "2021-01-26T22:04:13.343Z"
         }
       }
     },
@@ -80,14 +80,14 @@
       "outputs": [
         {
           "output_type": "execute_result",
-          "execution_count": 238,
+          "execution_count": 3,
           "data": {
             "text/plain": "getIn_Mun (generic function with 1 method)"
           },
           "metadata": {}
         }
       ],
-      "execution_count": 238,
+      "execution_count": 3,
       "metadata": {
         "collapsed": true,
         "jupyter": {
@@ -100,9 +100,9 @@
           }
         },
         "execution": {
-          "iopub.status.busy": "2021-01-21T20:06:38.321Z",
-          "iopub.execute_input": "2021-01-21T20:06:38.349Z",
-          "iopub.status.idle": "2021-01-21T20:06:38.499Z"
+          "iopub.status.busy": "2021-01-26T22:04:20.603Z",
+          "iopub.execute_input": "2021-01-26T22:04:20.659Z",
+          "iopub.status.idle": "2021-01-26T22:04:20.976Z"
         }
       }
     },
@@ -140,9 +140,9 @@
           }
         },
         "execution": {
-          "iopub.status.busy": "2021-01-21T15:36:39.806Z",
-          "iopub.execute_input": "2021-01-21T15:36:39.837Z",
-          "iopub.status.idle": "2021-01-21T15:36:40.063Z"
+          "iopub.status.busy": "2021-01-26T22:04:23.495Z",
+          "iopub.execute_input": "2021-01-26T22:04:23.523Z",
+          "iopub.status.idle": "2021-01-26T22:04:23.627Z"
         }
       }
     },
@@ -182,9 +182,9 @@
           }
         },
         "execution": {
-          "iopub.status.busy": "2021-01-21T15:36:42.849Z",
-          "iopub.execute_input": "2021-01-21T15:36:42.907Z",
-          "iopub.status.idle": "2021-01-21T15:36:43.079Z"
+          "iopub.status.busy": "2021-01-26T22:04:26.135Z",
+          "iopub.execute_input": "2021-01-26T22:04:26.161Z",
+          "iopub.status.idle": "2021-01-26T22:04:26.327Z"
         }
       }
     },
@@ -198,14 +198,14 @@
       "outputs": [
         {
           "output_type": "execute_result",
-          "execution_count": 122,
+          "execution_count": 6,
           "data": {
             "text/plain": "getDF (generic function with 1 method)"
           },
           "metadata": {}
         }
       ],
-      "execution_count": 122,
+      "execution_count": 6,
       "metadata": {
         "collapsed": true,
         "jupyter": {
@@ -218,9 +218,9 @@
           }
         },
         "execution": {
-          "iopub.status.busy": "2021-01-21T18:02:18.962Z",
-          "iopub.execute_input": "2021-01-21T18:02:18.982Z",
-          "iopub.status.idle": "2021-01-21T18:02:19.026Z"
+          "iopub.status.busy": "2021-01-26T22:04:28.481Z",
+          "iopub.execute_input": "2021-01-26T22:04:28.525Z",
+          "iopub.status.idle": "2021-01-26T22:04:28.628Z"
         }
       }
     },
@@ -236,14 +236,14 @@
       "outputs": [
         {
           "output_type": "execute_result",
-          "execution_count": 201,
+          "execution_count": 13,
           "data": {
-            "text/plain": "com_JS (generic function with 2 methods)"
+            "text/plain": "com_JS (generic function with 1 method)"
           },
           "metadata": {}
         }
       ],
-      "execution_count": 201,
+      "execution_count": 13,
       "metadata": {
         "collapsed": true,
         "jupyter": {
@@ -256,28 +256,28 @@
           }
         },
         "execution": {
-          "iopub.status.busy": "2021-01-21T19:10:42.921Z",
-          "iopub.execute_input": "2021-01-21T19:10:42.938Z",
-          "iopub.status.idle": "2021-01-21T19:10:42.979Z"
+          "iopub.status.busy": "2021-01-26T22:53:59.857Z",
+          "iopub.execute_input": "2021-01-26T22:53:59.959Z",
+          "iopub.status.idle": "2021-01-26T22:54:01.573Z"
         }
       }
     },
     {
       "cell_type": "code",
       "source": [
-        "ind_tabla= Dict(\"Defunciones Generales 2019\"=>\"1002000030\", \"Nacimientos 2019\"=>\"1002000026\",\"Población de 5 años y más hablante de lengua indígena\"=>\"1005000039\",\"Porcentaje de hombres\"=>\"6207020032\",\"Porcentaje de mujeres\"=>\"6207020033\",\"Edad mediana\"=>\"1002000010\",\"Población total\"=>\"1002000001\",\"Densidad de población\"=>\"3105001001\",\"Población de 5 años y más inmigrante\"=>\"6200205252\",\"Población de 5 años y más emigrante\"=>\"6200205277\")"
+        "ind_tabla= Dict(\"Defunciones Generales\"=>\"1002000030\", \"Nacimientos\"=>\"1002000026\",\"Población de 5 años y más hablante de lengua indígena\"=>\"1005000039\",\"Porcentaje de hombres\"=>\"6207020032\",\"Porcentaje de mujeres\"=>\"6207020033\",\"Edad mediana\"=>\"1002000010\",\"Población total\"=>\"1002000001\",\"Densidad de población\"=>\"3105001001\",\"Población de 5 años y más inmigrante\"=>\"6200205252\",\"Población de 5 años y más emigrante\"=>\"6200205277\")"
       ],
       "outputs": [
         {
           "output_type": "execute_result",
-          "execution_count": 250,
+          "execution_count": 8,
           "data": {
-            "text/plain": "Dict{String,String} with 10 entries:\n  \"Población de 5 años y más inmigrante\"                  => \"6200205252\"\n  \"Población de 5 años y más hablante de lengua indígena\" => \"1005000039\"\n  \"Densidad de población\"                                 => \"3105001001\"\n  \"Población total\"                                       => \"1002000001\"\n  \"Población de 5 años y más emigrante\"                   => \"6200205277\"\n  \"Porcentaje de hombres\"                                 => \"6207020032\"\n  \"Porcentaje de mujeres\"                                 => \"6207020033\"\n  \"Edad mediana\"                                          => \"1002000010\"\n  \"Defunciones Generales 2019\"                            => \"1002000030\"\n  \"Nacimientos 2019\"                                      => \"1002000026\""
+            "text/plain": "Dict{String,String} with 10 entries:\n  \"Población de 5 años y más inmigrante\"                  => \"6200205252\"\n  \"Población de 5 años y más hablante de lengua indígena\" => \"1005000039\"\n  \"Densidad de población\"                                 => \"3105001001\"\n  \"Nacimientos\"                                           => \"1002000026\"\n  \"Población total\"                                       => \"1002000001\"\n  \"Población de 5 años y más emigrante\"                   => \"6200205277\"\n  \"Defunciones Generales\"                                 => \"1002000030\"\n  \"Porcentaje de hombres\"                                 => \"6207020032\"\n  \"Porcentaje de mujeres\"                                 => \"6207020033\"\n  \"Edad mediana\"                                          => \"1002000010\""
           },
           "metadata": {}
         }
       ],
-      "execution_count": 250,
+      "execution_count": 8,
       "metadata": {
         "collapsed": true,
         "jupyter": {
@@ -290,24 +290,36 @@
           }
         },
         "execution": {
-          "iopub.status.busy": "2021-01-21T20:19:25.688Z",
-          "iopub.execute_input": "2021-01-21T20:19:25.708Z",
-          "iopub.status.idle": "2021-01-21T20:19:25.755Z"
+          "iopub.status.busy": "2021-01-26T22:04:45.367Z",
+          "iopub.execute_input": "2021-01-26T22:04:45.400Z",
+          "iopub.status.idle": "2021-01-26T22:04:47.639Z"
         }
       }
     },
     {
       "cell_type": "code",
       "source": [
-        "table=\"Densidad de población\"\n",
+        "table=\"Población total\"\n",
         "token=\"2e01d681-33e2-9414-67d3-5580000f46b4\";\n",
-        "estado=\"Jalisco\";\n",
-        "indicator=setIT(table);\n",
+        "estado=\"Colima\";\n",
         "ind_E=get_ind(estado);\n",
-        "geo_a=get_ind_mun(ind_E);"
+        "geo_a=get_ind_mun(ind_E);\n",
+        "indicator=setIT(table);\n",
+        "process(indicator, geo_a, token, estado, ind_E)\n"
       ],
-      "outputs": [],
-      "execution_count": 251,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "execution_count": 89,
+          "data": {
+            "text/plain": "\u001b[1m11×2 DataFrame\u001b[0m\n\u001b[1m Row \u001b[0m│\u001b[1m Municipio        \u001b[0m\u001b[1m Total    \u001b[0m\n\u001b[1m     \u001b[0m│\u001b[90m String           \u001b[0m\u001b[90m Float64  \u001b[0m\n─────┼────────────────────────────\n   1 │ Total estatal     731391.0\n   2 │ Manzanillo        191031.0\n   3 │ Armería            27626.0\n   4 │ Cómala             21661.0\n   5 │ Ixtlahuacan         5623.0\n   6 │ Tecoman           116305.0\n   7 │ Colima            157048.0\n   8 │ Villa de Álvarez  149762.0\n   9 │ Coquimatlan        20837.0\n  10 │ Cuauhtémoc         31267.0\n  11 │ Minatitlán         10231.0",
+            "text/html": "<table class=\"data-frame\"><thead><tr><th></th><th>Municipio</th><th>Total</th></tr><tr><th></th><th>String</th><th>Float64</th></tr></thead><tbody><p>11 rows × 2 columns</p><tr><th>1</th><td>Total estatal</td><td>731391.0</td></tr><tr><th>2</th><td>Manzanillo</td><td>191031.0</td></tr><tr><th>3</th><td>Armería</td><td>27626.0</td></tr><tr><th>4</th><td>Cómala</td><td>21661.0</td></tr><tr><th>5</th><td>Ixtlahuacan</td><td>5623.0</td></tr><tr><th>6</th><td>Tecoman</td><td>116305.0</td></tr><tr><th>7</th><td>Colima</td><td>157048.0</td></tr><tr><th>8</th><td>Villa de Álvarez</td><td>149762.0</td></tr><tr><th>9</th><td>Coquimatlan</td><td>20837.0</td></tr><tr><th>10</th><td>Cuauhtémoc</td><td>31267.0</td></tr><tr><th>11</th><td>Minatitlán</td><td>10231.0</td></tr></tbody></table>",
+            "text/latex": "\\begin{tabular}{r|cc}\n\t& Municipio & Total\\\\\n\t\\hline\n\t& String & Float64\\\\\n\t\\hline\n\t1 & Total estatal & 731391.0 \\\\\n\t2 & Manzanillo & 191031.0 \\\\\n\t3 & Armería & 27626.0 \\\\\n\t4 & Cómala & 21661.0 \\\\\n\t5 & Ixtlahuacan & 5623.0 \\\\\n\t6 & Tecoman & 116305.0 \\\\\n\t7 & Colima & 157048.0 \\\\\n\t8 & Villa de Álvarez & 149762.0 \\\\\n\t9 & Coquimatlan & 20837.0 \\\\\n\t10 & Cuauhtémoc & 31267.0 \\\\\n\t11 & Minatitlán & 10231.0 \\\\\n\\end{tabular}\n"
+          },
+          "metadata": {}
+        }
+      ],
+      "execution_count": 89,
       "metadata": {
         "collapsed": true,
         "jupyter": {
@@ -320,34 +332,34 @@
           }
         },
         "execution": {
-          "iopub.status.busy": "2021-01-21T20:19:32.732Z",
-          "iopub.execute_input": "2021-01-21T20:19:32.751Z",
-          "iopub.status.idle": "2021-01-21T20:19:32.790Z"
+          "iopub.status.busy": "2021-01-27T01:35:45.873Z",
+          "iopub.execute_input": "2021-01-27T01:35:45.891Z",
+          "iopub.status.idle": "2021-01-27T01:35:50.067Z"
         }
       }
     },
     {
       "cell_type": "code",
       "source": [
-        "Ardic=getJSSIn(indicator,geo_a,token,estado,ind_E);\n",
-        "#Ardic=com_JS(getJSS(indicator,\"070000140104\",token))\n",
-        "header= [\"Municipio\",\"Total\"];\n",
-        "doc=Ct_DocCSV((table*\"_\"*estado),getDF(Ardic),header);\n",
-        "CSV.read(doc,DataFrame)"
+        "function process(indicator:: String,geo_a:: String,token:: String,estado:: String,ind_E:: String)\n",
+        "  Ardic=getJSSIn(indicator,geo_a,token,estado,ind_E);\n",
+        "  #Ardic=com_JS( getJSS(indicator,geo_a,token) );\n",
+        "  header= [\"Municipio\",\"Total\"];\n",
+        "  doc=Ct_DocCSV((table*\"_\"*estado),getDF(Ardic),header);\n",
+        "  CSV.read(doc,DataFrame)\n",
+        "end"
       ],
       "outputs": [
         {
           "output_type": "execute_result",
-          "execution_count": 252,
+          "execution_count": 86,
           "data": {
-            "text/plain": "\u001b[1m126×2 DataFrame\u001b[0m\n\u001b[1m Row \u001b[0m│\u001b[1m Municipio                     \u001b[0m\u001b[1m Total     \u001b[0m\n\u001b[1m     \u001b[0m│\u001b[90m String                        \u001b[0m\u001b[90m Float64   \u001b[0m\n─────┼──────────────────────────────────────────\n   1 │ Mezquitic                        5.78311\n   2 │ Cocula                          80.5651\n   3 │ Totatiche                        7.51575\n   4 │ Zapotlán el Grande             385.47\n   5 │ Ahualulco de Mercado            85.2662\n   6 │ San Sebastián del Oeste          5.05313\n   7 │ Atotonilco el Alto             118.381\n   8 │ Teocaltiche                     44.2167\n   9 │ Tequila                         24.8135\n  10 │ Tolimán                         20.1119\n  11 │ El Limón                        47.0882\n  ⋮  │               ⋮                    ⋮\n 117 │ Villa Hidalgo                   44.723\n 118 │ San Cristóbal de la Barranca     5.96017\n 119 │ Poncitlán                       62.2228\n 120 │ Mexticacán                      17.728\n 121 │ Ocotlán                        409.779\n 122 │ Tecolotlán                      22.554\n 123 │ Zapotitlán de Vadillo           22.9814\n 124 │ Santa María de los Ángeles      11.6287\n 125 │ Valle de Guadalupe              19.6559\n 126 │ Arandas                         81.1875\n\u001b[31m                                105 rows omitted\u001b[0m",
-            "text/html": "<table class=\"data-frame\"><thead><tr><th></th><th>Municipio</th><th>Total</th></tr><tr><th></th><th>String</th><th>Float64</th></tr></thead><tbody><p>126 rows × 2 columns</p><tr><th>1</th><td>Mezquitic </td><td>5.78311</td></tr><tr><th>2</th><td>Cocula</td><td>80.5651</td></tr><tr><th>3</th><td>Totatiche</td><td>7.51575</td></tr><tr><th>4</th><td>Zapotlán el Grande</td><td>385.47</td></tr><tr><th>5</th><td>Ahualulco de Mercado</td><td>85.2662</td></tr><tr><th>6</th><td>San Sebastián del Oeste</td><td>5.05313</td></tr><tr><th>7</th><td>Atotonilco el Alto</td><td>118.381</td></tr><tr><th>8</th><td>Teocaltiche</td><td>44.2167</td></tr><tr><th>9</th><td>Tequila</td><td>24.8135</td></tr><tr><th>10</th><td>Tolimán</td><td>20.1119</td></tr><tr><th>11</th><td>El Limón</td><td>47.0882</td></tr><tr><th>12</th><td>Magdalena</td><td>77.231</td></tr><tr><th>13</th><td>Pihuamo</td><td>12.797</td></tr><tr><th>14</th><td>Ixtlahuacán de los Membrillos</td><td>263.59</td></tr><tr><th>15</th><td>Jesús María</td><td>29.2691</td></tr><tr><th>16</th><td>San Martín Hidalgo</td><td>80.9999</td></tr><tr><th>17</th><td>Valle de Juárez</td><td>27.6027</td></tr><tr><th>18</th><td>Autlán de Navarro</td><td>85.9006</td></tr><tr><th>19</th><td>Zacoalco de Torres</td><td>58.8719</td></tr><tr><th>20</th><td>Puerto Vallarta</td><td>404.85</td></tr><tr><th>21</th><td>Jilotlán de los Dolores</td><td>6.71772</td></tr><tr><th>22</th><td>Villa Corona</td><td>56.0192</td></tr><tr><th>23</th><td>San Julián</td><td>60.6629</td></tr><tr><th>24</th><td>El Grullo</td><td>137.114</td></tr><tr><th>25</th><td>Ameca</td><td>72.6371</td></tr><tr><th>26</th><td>Tuxcacuesco </td><td>9.83546</td></tr><tr><th>27</th><td>Yahualica de González Gallo</td><td>40.0934</td></tr><tr><th>28</th><td>Cabo Corrientes</td><td>6.67552</td></tr><tr><th>29</th><td>Cuquío</td><td>27.9628</td></tr><tr><th>30</th><td>San Ignacio Cerro Gordo</td><td>83.1882</td></tr><tr><th>&vellip;</th><td>&vellip;</td><td>&vellip;</td></tr></tbody></table>",
-            "text/latex": "\\begin{tabular}{r|cc}\n\t& Municipio & Total\\\\\n\t\\hline\n\t& String & Float64\\\\\n\t\\hline\n\t1 & Mezquitic  & 5.78311 \\\\\n\t2 & Cocula & 80.5651 \\\\\n\t3 & Totatiche & 7.51575 \\\\\n\t4 & Zapotlán el Grande & 385.47 \\\\\n\t5 & Ahualulco de Mercado & 85.2662 \\\\\n\t6 & San Sebastián del Oeste & 5.05313 \\\\\n\t7 & Atotonilco el Alto & 118.381 \\\\\n\t8 & Teocaltiche & 44.2167 \\\\\n\t9 & Tequila & 24.8135 \\\\\n\t10 & Tolimán & 20.1119 \\\\\n\t11 & El Limón & 47.0882 \\\\\n\t12 & Magdalena & 77.231 \\\\\n\t13 & Pihuamo & 12.797 \\\\\n\t14 & Ixtlahuacán de los Membrillos & 263.59 \\\\\n\t15 & Jesús María & 29.2691 \\\\\n\t16 & San Martín Hidalgo & 80.9999 \\\\\n\t17 & Valle de Juárez & 27.6027 \\\\\n\t18 & Autlán de Navarro & 85.9006 \\\\\n\t19 & Zacoalco de Torres & 58.8719 \\\\\n\t20 & Puerto Vallarta & 404.85 \\\\\n\t21 & Jilotlán de los Dolores & 6.71772 \\\\\n\t22 & Villa Corona & 56.0192 \\\\\n\t23 & San Julián & 60.6629 \\\\\n\t24 & El Grullo & 137.114 \\\\\n\t25 & Ameca & 72.6371 \\\\\n\t26 & Tuxcacuesco  & 9.83546 \\\\\n\t27 & Yahualica de González Gallo & 40.0934 \\\\\n\t28 & Cabo Corrientes & 6.67552 \\\\\n\t29 & Cuquío & 27.9628 \\\\\n\t30 & San Ignacio Cerro Gordo & 83.1882 \\\\\n\t$\\dots$ & $\\dots$ & $\\dots$ \\\\\n\\end{tabular}\n"
+            "text/plain": "process (generic function with 1 method)"
           },
           "metadata": {}
         }
       ],
-      "execution_count": 252,
+      "execution_count": 86,
       "metadata": {
         "collapsed": true,
         "jupyter": {
@@ -360,9 +372,9 @@
           }
         },
         "execution": {
-          "iopub.status.busy": "2021-01-21T20:19:38.967Z",
-          "iopub.execute_input": "2021-01-21T20:19:38.986Z",
-          "iopub.status.idle": "2021-01-21T20:20:05.933Z"
+          "iopub.status.busy": "2021-01-27T01:34:16.375Z",
+          "iopub.execute_input": "2021-01-27T01:34:16.390Z",
+          "iopub.status.idle": "2021-01-27T01:34:17.005Z"
         }
       }
     },
@@ -370,7 +382,7 @@
       "cell_type": "code",
       "source": [
         "function getJSS(indicator:: String, geo_a:: String, token:: String)                                          jurl=\"https://www.inegi.org.mx/app/api/indicadores/desarrolladores/jsonxml/INDICATOR/$(indicator)/es/$(geo_a)/true/BISE/2.0/$(token)?type=json\";\n",
-        "\n",
+        "    # @show jurl\n",
         "    resp = HTTP.get(jurl);\n",
         "    str = String(resp.body);\n",
         "    jobj = JSON.Parser.parse(str);\n",
@@ -380,14 +392,14 @@
       "outputs": [
         {
           "output_type": "execute_result",
-          "execution_count": 141,
+          "execution_count": 56,
           "data": {
             "text/plain": "getJSS (generic function with 1 method)"
           },
           "metadata": {}
         }
       ],
-      "execution_count": 141,
+      "execution_count": 56,
       "metadata": {
         "collapsed": true,
         "jupyter": {
@@ -400,9 +412,9 @@
           }
         },
         "execution": {
-          "iopub.status.busy": "2021-01-21T18:14:47.087Z",
-          "iopub.execute_input": "2021-01-21T18:14:47.105Z",
-          "iopub.status.idle": "2021-01-21T18:14:47.145Z"
+          "iopub.status.busy": "2021-01-27T00:44:11.946Z",
+          "iopub.execute_input": "2021-01-27T00:44:11.961Z",
+          "iopub.status.idle": "2021-01-27T00:44:12.096Z"
         }
       }
     },
@@ -424,19 +436,19 @@
         "        j+=1\n",
         "     end\n",
         "   return Ax\n",
-        "end\n"
+        "end"
       ],
       "outputs": [
         {
           "output_type": "execute_result",
-          "execution_count": 187,
+          "execution_count": 31,
           "data": {
             "text/plain": "getJSSIn (generic function with 1 method)"
           },
           "metadata": {}
         }
       ],
-      "execution_count": 187,
+      "execution_count": 31,
       "metadata": {
         "collapsed": true,
         "jupyter": {
@@ -449,9 +461,9 @@
           }
         },
         "execution": {
-          "iopub.status.busy": "2021-01-21T18:56:27.225Z",
-          "iopub.execute_input": "2021-01-21T18:56:27.244Z",
-          "iopub.status.idle": "2021-01-21T18:56:27.283Z"
+          "iopub.status.busy": "2021-01-26T23:12:15.648Z",
+          "iopub.execute_input": "2021-01-26T23:12:15.671Z",
+          "iopub.status.idle": "2021-01-26T23:12:15.727Z"
         }
       }
     },
@@ -479,14 +491,14 @@
       "outputs": [
         {
           "output_type": "execute_result",
-          "execution_count": 31,
+          "execution_count": 16,
           "data": {
-            "text/plain": "getVG (generic function with 2 methods)"
+            "text/plain": "getVG (generic function with 1 method)"
           },
           "metadata": {}
         }
       ],
-      "execution_count": 31,
+      "execution_count": 16,
       "metadata": {
         "collapsed": true,
         "jupyter": {
@@ -499,9 +511,9 @@
           }
         },
         "execution": {
-          "iopub.status.busy": "2021-01-21T16:05:05.589Z",
-          "iopub.execute_input": "2021-01-21T16:05:05.911Z",
-          "iopub.status.idle": "2021-01-21T16:05:05.964Z"
+          "iopub.status.busy": "2021-01-26T22:54:15.498Z",
+          "iopub.execute_input": "2021-01-26T22:54:15.516Z",
+          "iopub.status.idle": "2021-01-26T22:54:15.565Z"
         }
       }
     },
@@ -522,14 +534,14 @@
       "outputs": [
         {
           "output_type": "execute_result",
-          "execution_count": 8,
+          "execution_count": 17,
           "data": {
             "text/plain": "setIT (generic function with 1 method)"
           },
           "metadata": {}
         }
       ],
-      "execution_count": 8,
+      "execution_count": 17,
       "metadata": {
         "collapsed": true,
         "jupyter": {
@@ -542,9 +554,9 @@
           }
         },
         "execution": {
-          "iopub.status.busy": "2021-01-21T15:36:59.727Z",
-          "iopub.execute_input": "2021-01-21T15:36:59.760Z",
-          "iopub.status.idle": "2021-01-21T15:36:59.956Z"
+          "iopub.status.busy": "2021-01-26T22:57:26.168Z",
+          "iopub.execute_input": "2021-01-26T22:57:26.193Z",
+          "iopub.status.idle": "2021-01-26T22:57:26.245Z"
         }
       }
     },
@@ -554,7 +566,7 @@
         "ind_est= Dict(\"Aguascalientes\"=>\"0001\",\"Baja California\"=>\"0002\",\"Baja California Sur\"=>\"0003\",\"Campeche\"=>\"0004\",\"Chiapas\"=>\"0007\",\"Chihuahua\"=>\"0008\",\"Ciudad de México\"=>\"0009\",\"Coahuila de Zaragoza\"=>\"0005\", \"Colima\"=>\"0006\",\"Durango\"=>\"0010\",\"Guanajuato\"=>\"0011\",\"Guerrero\"=>\"0012\",\"Hidalgo\"=>\"0013\",\"Jalisco\"=>\"0014\",\"Michoacán de Ocampo\"=>\"0016\",\"Morelos\"=>\"0017\", \"México\"=>\"0015\",\"Nayarit\"=>\"0018\",\"Nuevo León\"=>\"0019\",\"Oaxaca\"=>\"0020\",\"Puebla\"=>\"0021\", \"Querétaro\"=>\"0022\", \"Quintana Roo\"=>\"0023\",\"San Luis Potosí\"=>\"0024\",\"Sinaloa\"=>\"0025\",\"Sonora\"=>\"0026\", \"Tabasco\"=>\"0027\",\"Tamaulipas\"=>\"0028\",\"Tlaxcala\"=>\"0029\", \"Veracruz de Ignacio de la Llave\"=>\"0030\",\"Yucatán\"=>\"0031\", \"Zacatecas\"=>\"0032\");"
       ],
       "outputs": [],
-      "execution_count": 210,
+      "execution_count": 18,
       "metadata": {
         "collapsed": true,
         "jupyter": {
@@ -567,9 +579,9 @@
           }
         },
         "execution": {
-          "iopub.status.busy": "2021-01-21T19:24:13.790Z",
-          "iopub.execute_input": "2021-01-21T19:24:13.807Z",
-          "iopub.status.idle": "2021-01-21T19:24:13.835Z"
+          "iopub.status.busy": "2021-01-26T22:57:30.479Z",
+          "iopub.execute_input": "2021-01-26T22:57:30.512Z",
+          "iopub.status.idle": "2021-01-26T22:57:34.831Z"
         }
       }
     },
@@ -1321,53 +1333,53 @@
         "\"San Juan Achiutla \"=>\"0172\",\n",
         "\"San Juan Atepec \"=>\"0173\",\n",
         "\"Ánimas Trujano \"=>\"0174\",\n",
-        "\"San Juan Bautista Atatlahuca \"=>\"0175\",\n",
-        "\"San Juan Bautista Coixtlahuaca \"=>\"0176\",\n",
+        "\"San Juan Bautista Atatlahuca\"=>\"0175\",\n",
+        "\"San Juan Bautista Coixtlahuaca\"=>\"0176\",\n",
         "\"San Juan Bautista Cuicatlán\"=>\"0177\",\n",
         "\"San Juan Bautista Guelache\"=>\"0178\",\n",
-        "\"San Juan Bautista Jayacatlán \"=>\"0179\",\n",
-        "\"San Juan Bautista Lo de Soto \"=>\"0180\",\n",
-        "\"San Juan Bautista Suchitepec \"=>\"0181\",\n",
-        "\"San Juan Bautista Tlacoatzintepec \"=>\"0182\",\n",
-        "\"San Juan Bautista Tlachichilco \"=>\"0183\",\n",
+        "\"San Juan Bautista Jayacatlán\"=>\"0179\",\n",
+        "\"San Juan Bautista Lo de Soto\"=>\"0180\",\n",
+        "\"San Juan Bautista Suchitepec\"=>\"0181\",\n",
+        "\"San Juan Bautista Tlacoatzintepec\"=>\"0182\",\n",
+        "\"San Juan Bautista Tlachichilco\"=>\"0183\",\n",
         "\"San Juan Bautista Tuxtepec\"=>\"0184\",\n",
         "\"San Juan Cacahuatepec\"=>\"0185\",\n",
-        "\"San Juan Cieneguilla \"=>\"0186\",\n",
-        "\"San Juan Coatzóspam \"=>\"0187\",\n",
+        "\"San Juan Cieneguilla\"=>\"0186\",\n",
+        "\"San Juan Coatzóspam\"=>\"0187\",\n",
         "\"San Juan Colorado\"=>\"0188\",\n",
         "\"San Juan Comaltepec\"=>\"0189\",\n",
         "\"San Juan Cotzocón\"=>\"0190\",\n",
-        "\"San Juan Chicomezúchil \"=>\"0191\",\n",
-        "\"San Juan Chilateca \"=>\"0192\",\n",
-        "\"San Juan del Estado \"=>\"0193\",\n",
+        "\"San Juan Chicomezúchil\"=>\"0191\",\n",
+        "\"San Juan Chilateca\"=>\"0192\",\n",
+        "\"San Juan del Estado\"=>\"0193\",\n",
         "\"San Juan del Río\"=>\"0194\",\n",
-        "\"San Juan Diuxi \"=>\"0195\",\n",
+        "\"San Juan Diuxi\"=>\"0195\",\n",
         "\"San Juan Evangelista Analco \"=>\"0196\",\n",
-        "\"San Juan Guelavía \"=>\"0197\",\n",
+        "\"San Juan Guelavía\"=>\"0197\",\n",
         "\"San Juan Guichicovi\"=>\"0198\",\n",
-        "\"San Juan Ihualtepec \"=>\"0199\",\n",
-        "\"San Juan Juquila Mixes \"=>\"0200\",\n",
-        "\"San Juan Juquila Vijanos \"=>\"0201\",\n",
-        "\"San Juan Lachao \"=>\"0202\",\n",
-        "\"San Juan Lachigalla \"=>\"0203\",\n",
-        "\"San Juan Lajarcia \"=>\"0204\",\n",
-        "\"San Juan Lalana \"=>\"0205\",\n",
-        "\"San Juan de los Cués \"=>\"0206\",\n",
+        "\"San Juan Ihualtepec\"=>\"0199\",\n",
+        "\"San Juan Juquila Mixes\"=>\"0200\",\n",
+        "\"San Juan Juquila Vijanos\"=>\"0201\",\n",
+        "\"San Juan Lachao\"=>\"0202\",\n",
+        "\"San Juan Lachigalla\"=>\"0203\",\n",
+        "\"San Juan Lajarcia\"=>\"0204\",\n",
+        "\"San Juan Lalana\"=>\"0205\",\n",
+        "\"San Juan de los Cués\"=>\"0206\",\n",
         "\"San Juan Mazatlán\"=>\"0207\",\n",
         "\"San Juan Mixtepec\"=>\"0208\",\n",
-        "\"San Juan Mixtepec \"=>\"0209\",\n",
+        "\"San Juan Mixtepec\"=>\"0209\",\n",
         "\"San Juan Ñumí\"=>\"0210\",\n",
-        "\"San Juan Ozolotepec \"=>\"0211\",\n",
-        "\"San Juan Petlapa \"=>\"0212\",\n",
+        "\"San Juan Ozolotepec\"=>\"0211\",\n",
+        "\"San Juan Petlapa\"=>\"0212\",\n",
         "\"San Juan Quiahije\"=>\"0213\",\n",
-        "\"San Juan Quiotepec \"=>\"0214\",\n",
-        "\"San Juan Sayultepec \"=>\"0215\",\n",
-        "\"San Juan Tabaá \"=>\"0216\",\n",
-        "\"San Juan Tamazola \"=>\"0217\",\n",
-        "\"San Juan Teita \"=>\"0218\",\n",
-        "\"San Juan Teitipac \"=>\"0219\",\n",
-        "\"San Juan Tepeuxila \"=>\"0220\",\n",
-        "\"San Juan Teposcolula \"=>\"0221\",\n",
+        "\"San Juan Quiotepec\"=>\"0214\",\n",
+        "\"San Juan Sayultepec\"=>\"0215\",\n",
+        "\"San Juan Tabaá\"=>\"0216\",\n",
+        "\"San Juan Tamazola\"=>\"0217\",\n",
+        "\"San Juan Teita\"=>\"0218\",\n",
+        "\"San Juan Teitipac\"=>\"0219\",\n",
+        "\"San Juan Tepeuxila\"=>\"0220\",\n",
+        "\"San Juan Teposcolula\"=>\"0221\",\n",
         "\"San Juan Yaeé \"=>\"0222\",\n",
         "\"San Juan Yatzona \"=>\"0223\",\n",
         "\"San Juan Yucuita \"=>\"0224\",\n",
@@ -2565,7 +2577,7 @@
         "\"Santa María de la Paz\"=>\"0058\");"
       ],
       "outputs": [],
-      "execution_count": 249,
+      "execution_count": 19,
       "metadata": {
         "collapsed": true,
         "jupyter": {
@@ -2578,9 +2590,9 @@
           }
         },
         "execution": {
-          "iopub.status.busy": "2021-01-21T20:19:10.331Z",
-          "iopub.execute_input": "2021-01-21T20:19:10.355Z",
-          "iopub.status.idle": "2021-01-21T20:19:10.588Z"
+          "iopub.status.busy": "2021-01-26T22:57:39.620Z",
+          "iopub.execute_input": "2021-01-26T22:57:39.643Z",
+          "iopub.status.idle": "2021-01-26T22:57:40.914Z"
         }
       }
     },
