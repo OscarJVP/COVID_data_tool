@@ -66,17 +66,7 @@
     },
     {
       "cell_type": "code",
-      "source": [
-        "function getIn_Mun(in_e::String,nam_Mun::String)\n",
-        "  ind_req=\"\"  \n",
-        "  for k in keys(ind_mun_est[parse(Int64,in_e)])\n",
-        "        if nam_Mun == k\n",
-        "            ind_req=get(ind_mun_est[parse(Int64,in_e)],k,\"Not founded\")\n",
-        "        end\n",
-        "  end\n",
-        "  return ind_req\n",
-        "end"
-      ],
+      "source": [],
       "outputs": [
         {
           "output_type": "execute_result",
@@ -299,27 +289,16 @@
     {
       "cell_type": "code",
       "source": [
-        "table=\"Población total\"\n",
+        "table=\"Edad mediana\"\n",
         "token=\"2e01d681-33e2-9414-67d3-5580000f46b4\";\n",
         "estado=\"Colima\";\n",
         "ind_E=get_ind(estado);\n",
         "geo_a=get_ind_mun(ind_E);\n",
         "indicator=setIT(table);\n",
-        "process(indicator, geo_a, token, estado, ind_E)\n"
+        "process(indicator, geo_a, token, estado, ind_E)"
       ],
-      "outputs": [
-        {
-          "output_type": "execute_result",
-          "execution_count": 89,
-          "data": {
-            "text/plain": "\u001b[1m11×2 DataFrame\u001b[0m\n\u001b[1m Row \u001b[0m│\u001b[1m Municipio        \u001b[0m\u001b[1m Total    \u001b[0m\n\u001b[1m     \u001b[0m│\u001b[90m String           \u001b[0m\u001b[90m Float64  \u001b[0m\n─────┼────────────────────────────\n   1 │ Total estatal     731391.0\n   2 │ Manzanillo        191031.0\n   3 │ Armería            27626.0\n   4 │ Cómala             21661.0\n   5 │ Ixtlahuacan         5623.0\n   6 │ Tecoman           116305.0\n   7 │ Colima            157048.0\n   8 │ Villa de Álvarez  149762.0\n   9 │ Coquimatlan        20837.0\n  10 │ Cuauhtémoc         31267.0\n  11 │ Minatitlán         10231.0",
-            "text/html": "<table class=\"data-frame\"><thead><tr><th></th><th>Municipio</th><th>Total</th></tr><tr><th></th><th>String</th><th>Float64</th></tr></thead><tbody><p>11 rows × 2 columns</p><tr><th>1</th><td>Total estatal</td><td>731391.0</td></tr><tr><th>2</th><td>Manzanillo</td><td>191031.0</td></tr><tr><th>3</th><td>Armería</td><td>27626.0</td></tr><tr><th>4</th><td>Cómala</td><td>21661.0</td></tr><tr><th>5</th><td>Ixtlahuacan</td><td>5623.0</td></tr><tr><th>6</th><td>Tecoman</td><td>116305.0</td></tr><tr><th>7</th><td>Colima</td><td>157048.0</td></tr><tr><th>8</th><td>Villa de Álvarez</td><td>149762.0</td></tr><tr><th>9</th><td>Coquimatlan</td><td>20837.0</td></tr><tr><th>10</th><td>Cuauhtémoc</td><td>31267.0</td></tr><tr><th>11</th><td>Minatitlán</td><td>10231.0</td></tr></tbody></table>",
-            "text/latex": "\\begin{tabular}{r|cc}\n\t& Municipio & Total\\\\\n\t\\hline\n\t& String & Float64\\\\\n\t\\hline\n\t1 & Total estatal & 731391.0 \\\\\n\t2 & Manzanillo & 191031.0 \\\\\n\t3 & Armería & 27626.0 \\\\\n\t4 & Cómala & 21661.0 \\\\\n\t5 & Ixtlahuacan & 5623.0 \\\\\n\t6 & Tecoman & 116305.0 \\\\\n\t7 & Colima & 157048.0 \\\\\n\t8 & Villa de Álvarez & 149762.0 \\\\\n\t9 & Coquimatlan & 20837.0 \\\\\n\t10 & Cuauhtémoc & 31267.0 \\\\\n\t11 & Minatitlán & 10231.0 \\\\\n\\end{tabular}\n"
-          },
-          "metadata": {}
-        }
-      ],
-      "execution_count": 89,
+      "outputs": [],
+      "execution_count": null,
       "metadata": {
         "collapsed": true,
         "jupyter": {
@@ -332,9 +311,9 @@
           }
         },
         "execution": {
-          "iopub.status.busy": "2021-01-27T01:35:45.873Z",
-          "iopub.execute_input": "2021-01-27T01:35:45.891Z",
-          "iopub.status.idle": "2021-01-27T01:35:50.067Z"
+          "iopub.status.busy": "2021-01-27T02:52:49.074Z",
+          "iopub.execute_input": "2021-01-27T02:52:49.093Z",
+          "iopub.status.idle": "2021-01-27T02:52:53.369Z"
         }
       }
     },
@@ -386,20 +365,21 @@
         "    resp = HTTP.get(jurl);\n",
         "    str = String(resp.body);\n",
         "    jobj = JSON.Parser.parse(str);\n",
-        "    return ser=jobj[\"Series\"]\n",
+        "@show typeof(jobj[\"Series\"])\n",
+        "  return ser=jobj[\"Series\"]\n",
         "end"
       ],
       "outputs": [
         {
           "output_type": "execute_result",
-          "execution_count": 56,
+          "execution_count": 97,
           "data": {
             "text/plain": "getJSS (generic function with 1 method)"
           },
           "metadata": {}
         }
       ],
-      "execution_count": 56,
+      "execution_count": 97,
       "metadata": {
         "collapsed": true,
         "jupyter": {
@@ -412,9 +392,9 @@
           }
         },
         "execution": {
-          "iopub.status.busy": "2021-01-27T00:44:11.946Z",
-          "iopub.execute_input": "2021-01-27T00:44:11.961Z",
-          "iopub.status.idle": "2021-01-27T00:44:12.096Z"
+          "iopub.status.busy": "2021-01-27T02:52:38.806Z",
+          "iopub.execute_input": "2021-01-27T02:52:38.823Z",
+          "iopub.status.idle": "2021-01-27T02:52:38.937Z"
         }
       }
     },
@@ -441,14 +421,14 @@
       "outputs": [
         {
           "output_type": "execute_result",
-          "execution_count": 31,
+          "execution_count": 96,
           "data": {
             "text/plain": "getJSSIn (generic function with 1 method)"
           },
           "metadata": {}
         }
       ],
-      "execution_count": 31,
+      "execution_count": 96,
       "metadata": {
         "collapsed": true,
         "jupyter": {
@@ -461,9 +441,9 @@
           }
         },
         "execution": {
-          "iopub.status.busy": "2021-01-26T23:12:15.648Z",
-          "iopub.execute_input": "2021-01-26T23:12:15.671Z",
-          "iopub.status.idle": "2021-01-26T23:12:15.727Z"
+          "iopub.status.busy": "2021-01-27T02:52:36.025Z",
+          "iopub.execute_input": "2021-01-27T02:52:36.040Z",
+          "iopub.status.idle": "2021-01-27T02:52:36.083Z"
         }
       }
     },
@@ -563,7 +543,7 @@
     {
       "cell_type": "code",
       "source": [
-        "ind_est= Dict(\"Aguascalientes\"=>\"0001\",\"Baja California\"=>\"0002\",\"Baja California Sur\"=>\"0003\",\"Campeche\"=>\"0004\",\"Chiapas\"=>\"0007\",\"Chihuahua\"=>\"0008\",\"Ciudad de México\"=>\"0009\",\"Coahuila de Zaragoza\"=>\"0005\", \"Colima\"=>\"0006\",\"Durango\"=>\"0010\",\"Guanajuato\"=>\"0011\",\"Guerrero\"=>\"0012\",\"Hidalgo\"=>\"0013\",\"Jalisco\"=>\"0014\",\"Michoacán de Ocampo\"=>\"0016\",\"Morelos\"=>\"0017\", \"México\"=>\"0015\",\"Nayarit\"=>\"0018\",\"Nuevo León\"=>\"0019\",\"Oaxaca\"=>\"0020\",\"Puebla\"=>\"0021\", \"Querétaro\"=>\"0022\", \"Quintana Roo\"=>\"0023\",\"San Luis Potosí\"=>\"0024\",\"Sinaloa\"=>\"0025\",\"Sonora\"=>\"0026\", \"Tabasco\"=>\"0027\",\"Tamaulipas\"=>\"0028\",\"Tlaxcala\"=>\"0029\", \"Veracruz de Ignacio de la Llave\"=>\"0030\",\"Yucatán\"=>\"0031\", \"Zacatecas\"=>\"0032\");"
+        "ind_est= Dict(\"Aguascalientes\"=>\"0001\",\"Baja California\"=>\"0002\",\"Baja California Sur\"=>\"0003\",\"Campeche\"=>\"0004\",\"Chiapas\"=>\"0007\",\"Chihuahua\"=>\"0008\",\"Ciudad de México\"=>\"0009\",\"Coahuila de Zaragoza\"=>\"0005\", \"Colima\"=>\"0006\",\"Durango\"=>\"0010\",\"Guanajuato\"=>\"0011\",\"Guerrero\"=>\"0012\",\"Hidalgo\"=>\"0013\",\"Jalisco\"=>\"0014\",\"Michoacán de Ocampo\"=>\"0016\",\"Morelos\"=>\"0017\", \"México\"=>\"0015\",\"Nayarit\"=>\"0018\",\"Nuevo León\"=>\"0019\",\"Oaxaca\"=>\"0020\",\"Puebla\"=>\"0021\", \"Querétaro\"=>\"0022\", \"Quintana Roo\"=>\"0023\",\"San Luis Potosí\"=>\"0024\",\"Sinaloa\"=>\"0025\",\"Sonora\"=>\"0026\", \"Tabasco\"=>\"002 7\",\"Tamaulipas\"=>\"0028\",\"Tlaxcala\"=>\"0029\", \"Veracruz de Ignacio de la Llave\"=>\"0030\",\"Yucatán\"=>\"0031\", \"Zacatecas\"=>\"0032\");"
       ],
       "outputs": [],
       "execution_count": 18,
