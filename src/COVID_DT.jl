@@ -1,3 +1,4 @@
+module COVID_data_tool
 
 using HTTP,DataFrames,CSV,JSON
 function Ct_DocCSV(Name_Doc:: String,Con_Tables:: DataFrame, head:: Array{String,1})
@@ -139,3 +140,5 @@ ind_E=get_ind(estado);
 geo_a=get_ind_mun(ind_E);
 indicator=setIT(table);
 process(indicator, geo_a, token, estado, ind_E)
+
+end # module

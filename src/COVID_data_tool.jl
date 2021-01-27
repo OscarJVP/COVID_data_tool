@@ -1,5 +1,3 @@
-module COVID_data_tool
-
 {
   "cells": [
     {
@@ -2655,5 +2653,3 @@ module COVID_data_tool
   "nbformat": 4,
   "nbformat_minor": 0
 }
-
-end # module
