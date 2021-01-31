@@ -193,13 +193,15 @@ municipio_final_id=COVID_data_tool.data_municipio("Colima", "Manzanillo")
 =#
 
 table="Edad mediana"
-indicadores=["Defunciones Generales","Edad mediana","Nacimientos","Población total","Población de 5 años y más hablante de lengua indígena"]
 token="2e01d681-33e2-9414-67d3-5580000f46b4";
 estado="Colima";
 ind_E=get_ind(estado);
 geo_a=get_ind_mun(ind_E);
 indicator=setIT(table);
 #process(indicator, geo_a, token, estado, ind_E)
+
+#Necesita de entrada el estado, municipio de ese estado y el arreglo de indicadores con los indicadores que se necesitan
+indicadores=["Defunciones Generales","Edad mediana","Nacimientos","Población total","Población de 5 años y más hablante de lengua indígena"]
 data_municipio("Aguascalientes", "Aguascalientes", indicadores)
 
 #end # module
