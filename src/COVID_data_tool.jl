@@ -1,6 +1,7 @@
-module COVID_data_tool
+#module COVID_data_tool
 
 using HTTP,DataFrames,CSV,JSON
+
 function Ct_DocCSV(Name_Doc:: String,Con_Tables:: DataFrame, head:: Array{String,1})
     Name_DocF = string(Name_Doc,".csv")
     CSV.write(Name_DocF,Con_Tables,header=[head[1],head[2]])
@@ -14,6 +15,7 @@ function get_ind(Nombre_estado:: String)
        end
      end
 end
+
 function get_ind_mun(ind_E:: String)
    indicat=""
      ind=""
@@ -133,12 +135,71 @@ function setIT(ind_tabla_nombre:: String)
   return indT
 end
 
+function data_municipio(estado::String, municipio::String, indicadores)
+  ind_E=get_ind(estado)
+  ind=""
+  claves_indicadores=[]
+  tablas_datos=[]
+  arreglo_df_datos=[]
+  token="2e01d681-33e2-9414-67d3-5580000f46b4"
+
+  for k in keys(ind_mun_est[parse(Int64,ind_E)])
+    if k == municipio
+      ind= "0700"*ind_E*get(ind_mun_est[parse(Int64,ind_E)],k,"Not founded")*","
+    end
+  end
+
+  for indicador in indicadores
+    push!(claves_indicadores, setIT(indicador))
+  end
+
+  for clave in claves_indicadores
+    push!(tablas_datos,getJSSIn(clave,ind,token,estado,ind_E))
+  end
+
+
+  for i in 1:length(indicadores)
+    aux=DataFrame(tablas_datos[i])
+    rename!(aux,:x1=>:Municipio)
+    rename!(aux,:x2=>indicadores[i])
+    push!(arreglo_df_datos,aux)
+  end
+
+  df=DataFrame(Municipio=municipio)
+
+  for i in 1:length(indicadores)
+    df=innerjoin(df,arreglo_df_datos[i],on=:Municipio)
+  end
+
+  Name_DocF = "datos_"*estado*"_"*municipio*".csv"
+
+  CSV.write(Name_DocF,df)
+    #=
+  CSV.read(doc,DataFrame)
+=#
+end
+
+#=
+using COVID_data_tool
 table="Edad mediana"
+tables=["Edad mediana","Nacimientos"]
+token="2e01d681-33e2-9414-67d3-5580000f46b4";
+estado="Colima";
+ind_E=COVID_data_tool.get_ind(estado);
+geo_a=COVID_data_tool.get_ind_mun(ind_E);
+indicator=COVID_data_tool.setIT(table);
+COVID_data_tool.process(indicator, geo_a, token, estado, ind_E)
+municipio_final_id=COVID_data_tool.data_municipio("Colima", "Manzanillo")
+=#
+
+table="Edad mediana"
+indicadores=["Defunciones Generales","Edad mediana","Nacimientos","Población total","Población de 5 años y más hablante de lengua indígena"]
 token="2e01d681-33e2-9414-67d3-5580000f46b4";
 estado="Colima";
 ind_E=get_ind(estado);
 geo_a=get_ind_mun(ind_E);
 indicator=setIT(table);
-process(indicator, geo_a, token, estado, ind_E)
+#process(indicator, geo_a, token, estado, ind_E)
+data_municipio("Aguascalientes", "Aguascalientes", indicadores)
 
-end # module
+#end # module
