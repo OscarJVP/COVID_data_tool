@@ -1,6 +1,7 @@
-module COVID_data_tool
+#module COVID_data_tool
 
 using HTTP,DataFrames,CSV,JSON
+
 function Ct_DocCSV(Name_Doc:: String,Con_Tables:: DataFrame, head:: Array{String,1})
     Name_DocF = string(Name_Doc,".csv")
     CSV.write(Name_DocF,Con_Tables,header=[head[1],head[2]])
@@ -14,6 +15,7 @@ function get_ind(Nombre_estado:: String)
        end
      end
 end
+
 function get_ind_mun(ind_E:: String)
    indicat=""
      ind=""
@@ -188,4 +190,4 @@ process(indicator, geo_a, token, estado, ind_E)
 #indicadores=["Defunciones Generales","Edad mediana","Nacimientos","Población total","Población de 5 años y más hablante de lengua indígena"]
 #data_municipio("Aguascalientes", "Aguascalientes", indicadores)
 
-end # module
+#end #module
