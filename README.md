@@ -21,7 +21,7 @@ Compilar paquetería tecleando\
 
 ## Equipo de Trabajo
 Deep Alpha\
-<img src="images/deep_alpha.jpg" width="100">
+<img src="images/deep_alpha.jpg" width="200">\
     - **Carlos Espadín** - *Director de proyecto* -\
     - **Luis Moysén** - *SCRUM Master* -\
     - **Luis Roa** - *Miembro del equpo desarrollador* -\
