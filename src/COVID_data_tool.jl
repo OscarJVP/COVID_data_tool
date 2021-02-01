@@ -133,6 +133,49 @@ function setIT(ind_tabla_nombre:: String)
   return indT
 end
 
+function data_municipio(estado::String, municipio::String, indicadores)
+  ind_E=get_ind(estado)
+  ind=""
+  claves_indicadores=[]
+  tablas_datos=[]
+  arreglo_df_datos=[]
+  token="2e01d681-33e2-9414-67d3-5580000f46b4"
+
+  for k in keys(ind_mun_est[parse(Int64,ind_E)])
+    if k == municipio
+      ind= "0700"*ind_E*get(ind_mun_est[parse(Int64,ind_E)],k,"Not founded")*","
+    end
+  end
+
+  for indicador in indicadores
+    push!(claves_indicadores, setIT(indicador))
+  end
+
+  for clave in claves_indicadores
+    push!(tablas_datos,getJSSIn(clave,ind,token,estado,ind_E))
+  end
+
+  for i in 1:length(indicadores)
+    aux=DataFrame(tablas_datos[i])
+    rename!(aux,:x1=>:Municipio)
+    rename!(aux,:x2=>indicadores[i])
+    push!(arreglo_df_datos,aux)
+  end
+
+  df=DataFrame(Municipio=municipio)
+
+  for i in 1:length(indicadores)
+    df=innerjoin(df,arreglo_df_datos[i],on=:Municipio)
+  end
+
+  Name_DocF = "datos_"*estado*"_"*municipio*".csv"
+
+  CSV.write(Name_DocF,df)
+  #=
+  CSV.read(doc,DataFrame)
+  =#
+end
+
 table="Edad mediana"
 token="2e01d681-33e2-9414-67d3-5580000f46b4";
 estado="Colima";
@@ -140,5 +183,9 @@ ind_E=get_ind(estado);
 geo_a=get_ind_mun(ind_E);
 indicator=setIT(table);
 process(indicator, geo_a, token, estado, ind_E)
+
+#Necesita de entrada el estado, municipio de ese estado y el arreglo de indicadores con los indicadores que se necesitan
+#indicadores=["Defunciones Generales","Edad mediana","Nacimientos","Población total","Población de 5 años y más hablante de lengua indígena"]
+#data_municipio("Aguascalientes", "Aguascalientes", indicadores)
 
 end # module
