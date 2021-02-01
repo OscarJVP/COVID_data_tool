@@ -1,4 +1,4 @@
-#module COVID_data_tool
+module COVID_data_tool
 
 using HTTP,DataFrames,CSV,JSON
 
@@ -190,4 +190,6 @@ process(indicator, geo_a, token, estado, ind_E)
 #indicadores=["Defunciones Generales","Edad mediana","Nacimientos","Población total","Población de 5 años y más hablante de lengua indígena"]
 #data_municipio("Aguascalientes", "Aguascalientes", indicadores)
 
-#end #module
+export data_municipio
+
+end #module
