@@ -14,11 +14,14 @@ Haciendo uso del REPL de JULIA ingresar\
     `Pkg.add("https://github.com/OscarJVP/COVID_data_tool.jl")`\
 O dentro del administrador de paquetes de JULIA (tecla `]`)\
     `add https://github.com/OscarJVP/COVID_data_tool.jl`\
+    ![](images/instalacion_1.jpg)
 Compilar paquetería tecleando\
     `using COVID_data_tool`
+    ![](images/instalacion_2.jpg)
 
 ## Equipo de Trabajo
 Deep Alpha\
+![](images/deep_alpha.jpg)
     - **Carlos Espadín** - *Director de proyecto* -\
     - **Luis Moysén** - *SCRUM Master* -\
     - **Luis Roa** - *Miembro del equpo desarrollador* -\
