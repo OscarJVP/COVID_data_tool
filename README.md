@@ -16,7 +16,7 @@ Haciendo uso del REPL de JULIA teclear `]` e ingresar\
     ![](images/instalacion_1.jpg)
     \
 Compilar paquetería tecleando\
-    `using COVID_data_tool`
+    `using COVID_data_tool`\
     \
     ![](images/instalacion_2.jpg)
     \
