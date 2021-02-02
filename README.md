@@ -12,18 +12,26 @@ Paquetes de JULIA necesarios para el funcionamiento de la paquetería.\
 ### Instalación
 Haciendo uso del REPL de JULIA teclear `]` e ingresar\
     `add https://github.com/OscarJVP/COVID_data_tool.jl`\
+    \
     ![](images/instalacion_1.jpg)
+    \
 Compilar paquetería tecleando\
     `using COVID_data_tool`
+    \
     ![](images/instalacion_2.jpg)
+    \
+Puedes probarla con\
+    `COVID_data_tool.indicadores_disponibles()`
 
 ### Funciones
 `datos_indicador(indicador:: String, estado:: String)`\
 Recibe el indicador a consultar como `String` y el estado como `String`.\
 Crea un .csv con la información deseada en la entrada de la función y muestra el nombre del archivo creado.\
+\
 `datos_municipio(indicadores, estado::String, municipio::String)`\
 Recibe el indicador a consultar como `String` y el estado como `String` y el municipio como `String`.\
 Crea un .csv con la información deseada en la entrada de la función y muestra el nombre del archivo creado.\
+\
 `indicadores_disponibles()`\
 Muestra la lista de indicadores disponibles para consulta.
 
