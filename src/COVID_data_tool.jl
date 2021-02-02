@@ -88,13 +88,6 @@ function getDF(val:: Array{Any,2})
   return DataFrame(val, :auto)
 end
 
-function com_JS(Ardic:: Array{Any,1})
-  Arob=get(Ardic[1],"OBSERVATIONS","Not founded");
-  ArVG=getVG(Arob,ind_E)
-
-  return ArVG
-end
-
 function Ct_DocCSV(nombre_documento:: String,Con_Tables:: DataFrame)
   CSV.write(nombre_documento,Con_Tables)
   return nombre_documento*" creado"
@@ -106,7 +99,6 @@ function datos_indicador(indicador:: String, estado:: String)
   clave_indicador=setIT(indicador);
 
   Ardic=getJSSIn(clave_indicador,claves_municipios,estado,clave_estado);
-  #Ardic=com_JS(getJSS(indicator,geo_a,token));
 
   Ardic=getDF(Ardic)
   rename!(Ardic,:x1=>:Municipio)
