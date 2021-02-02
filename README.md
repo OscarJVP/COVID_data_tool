@@ -10,14 +10,22 @@ Paquetes de JULIA necesarios para el funcionamiento de la paquetería.\
     `JSON`
 
 ### Instalación
-Haciendo uso del REPL de JULIA ingresar\
-    `Pkg.add("https://github.com/OscarJVP/COVID_data_tool.jl")`\
-O dentro del administrador de paquetes de JULIA (tecla `]`)\
+Haciendo uso del REPL de JULIA teclear `]` e ingresar\
     `add https://github.com/OscarJVP/COVID_data_tool.jl`\
     ![](images/instalacion_1.jpg)
 Compilar paquetería tecleando\
     `using COVID_data_tool`
     ![](images/instalacion_2.jpg)
+
+### Funciones
+`datos_indicador(indicador:: String, estado:: String)`\
+Recibe el indicador a consultar como `String` y el estado como `String`.\
+Crea un .csv con la información deseada en la entrada de la función y muestra el nombre del archivo creado.\
+`datos_municipio(indicadores, estado::String, municipio::String)`\
+Recibe el indicador a consultar como `String` y el estado como `String` y el municipio como `String`.\
+Crea un .csv con la información deseada en la entrada de la función y muestra el nombre del archivo creado.\
+`lista_indicadores_disponibles()`\
+Muestra la lista de indicadores disponibles para consulta.
 
 ## Equipo de Trabajo
 Deep Alpha\

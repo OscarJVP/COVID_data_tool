@@ -93,6 +93,12 @@ function Ct_DocCSV(nombre_archivo:: String, tabla_datos:: DataFrame)
   return nombre_archivo * " creado"
 end
 
+function lista_indicadores_disponibles()
+  for key in keys(diccionario_indicadores)
+    println(key)
+  end
+end
+
 function datos_indicador(indicador:: String, estado:: String)
   clave_estado = get_clave_estado(estado);
   claves_municipios = get_clave_municipio(clave_estado);
@@ -112,7 +118,7 @@ function datos_indicador(indicador:: String, estado:: String)
   =#
 end
 
-function datos_municipio(estado::String, municipio::String, indicadores)
+function datos_municipio(indicadores, estado::String, municipio::String)
   clave_estado = get_clave_estado(estado)
   clave_municipio = ""
   claves_indicadores = []
@@ -157,13 +163,16 @@ end
 
 #Codigo para prueba
 
+#Muestra los indicadores disponibles
+lista_indicadores_disponibles()
+
 #Necesita de entrada el estado y el indicador a consultar
 indicador = "Edad mediana"
 datos_indicador("Edad mediana", "Colima")
 
 #Necesita de entrada el estado, municipio de ese estado y el arreglo de indicadores con los indicadores que se necesitan
 indicadores = ["Defunciones Generales", "Edad mediana", "Nacimientos", "Población total", "Población de 5 años y más hablante de lengua indígena"]
-datos_municipio("Aguascalientes", "Aguascalientes", indicadores)
+datos_municipio(indicadores, "Aguascalientes", "Aguascalientes", )
 
 
 export datos_municipio
