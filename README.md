@@ -24,7 +24,7 @@ Crea un .csv con la información deseada en la entrada de la función y muestra 
 `datos_municipio(indicadores, estado::String, municipio::String)`\
 Recibe el indicador a consultar como `String` y el estado como `String` y el municipio como `String`.\
 Crea un .csv con la información deseada en la entrada de la función y muestra el nombre del archivo creado.\
-`lista_indicadores_disponibles()`\
+`indicadores_disponibles()`\
 Muestra la lista de indicadores disponibles para consulta.
 
 ## Equipo de Trabajo
