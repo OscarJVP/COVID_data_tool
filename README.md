@@ -7,7 +7,12 @@ Paquetes de JULIA necesarios para el funcionamiento de la paquetería.\
     `HTTP`\
     `DataFrames`\
     `CSV`\
-    `JSON`
+    `JSON`\
+    `InfoZIP`\
+    `ZipFile`\
+    `XLSX`\
+    `ExcelFiles`\
+    `Dates`
 
 ### Instalación
 Haciendo uso del REPL de JULIA presiona la tecla `]` e ingresar\
