@@ -1,83 +1,83 @@
-Municipio,Total
-Tlacoapa,Tlacoapa
-Cocula,Cocula
-Buena vista de Cuellar,Buena vista de Cuellar
-Coyuca de Catalan,Coyuca de Catalan
-Azoyu,Azoyu
-Iliatenco,Iliatenco
-Ometepec,Ometepec
-Pungarabato,Pungarabato
-Arcelia,Arcelia
-Coahuayutla de José Maria Izazaga,Coahuayutla de José Maria Izazaga
-Teloloapan,Teloloapan
-Petatlan,Petatlan
-Benito Juárez,Benito Juárez
-Igualapa,Igualapa
-Atoyac de Alvarez,Atoyac de Alvarez
-Copanatoyac,Copanatoyac
-Tapa de Comonfort,Tapa de Comonfort
-Leonardo Bravo,Leonardo Bravo
-Ahuacoutzingo,Ahuacoutzingo
-Chilapa de Alvarez,Chilapa de Alvarez
-Ixcateopan de Cuauhtémoc,Ixcateopan de Cuauhtémoc
-Tlalixtaquilla de Maldonado,Tlalixtaquilla de Maldonado
-Total estatal,Total estatal
-Pilcaya,Pilcaya
-Tlapehuala,Tlapehuala
-Juan R. Escudero,Juan R. Escudero
-Zitlala,Zitlala
-Cualac,Cualac
-Iguala de la Independencia,Iguala de la Independencia
-Zirandano,Zirandano
-Taxco de Alarcón,Taxco de Alarcón
-Atennago del Río,Atennago del Río
-Atlamajalcingo del Monte,Atlamajalcingo del Monte
-Cuajinicuilapa,Cuajinicuilapa
-Alcozauca de Guerrero,Alcozauca de Guerrero
-Cuautepec,Cuautepec
-Metlatonoc,Metlatonoc
-Apaxtla,Apaxtla
-Cochoapa el Grande,Cochoapa el Grande
-Quechultenango,Quechultenango
-San Luis Acatlan,San Luis Acatlan
-Huitzuco de Los Figueroa,Huitzuco de Los Figueroa
-Tecpan de Galeana,Tecpan de Galeana
-Acatepec,Acatepec
-Florencio Villarreal,Florencio Villarreal
-Coyuca de Benitez,Coyuca de Benitez
-San Marcos,San Marcos
-Cuetzala del progreso,Cuetzala del progreso
-Mochitlan,Mochitlan
-San Miguel Totolapan,San Miguel Totolapan
-Cópala,Cópala
-Chilpancingo de los Bravos,Chilpancingo de los Bravos
-Malinaltepec,Malinaltepec
-Zihuatanejo de Azuela,Zihuatanejo de Azuela
-Tlalchapa,Tlalchapa
-Juchitan,Juchitan
-Tepecoacuilco de Trujano,Tepecoacuilco de Trujano
-Tixtla de Guerrero,Tixtla de Guerrero
-General Canuto A. Neri,General Canuto A. Neri
-Pedro Ascencio Alquisiras,Pedro Ascencio Alquisiras
-Xalpatlahuac,Xalpatlahuac
-General Heliodoro Castillo,General Heliodoro Castillo
-Mártir de Cuilapan,Mártir de Cuilapan
-Olinala,Olinala
-Márquelia,Márquelia
-Ajuchitlan del Progreso,Ajuchitlan del Progreso
-Cutzamala de Pinzon,Cutzamala de Pinzon
-Atlixtac,Atlixtac
-Acapulco de Juárez,Acapulco de Juárez
-José Joaquín de Herrera,José Joaquín de Herrera
-Xochihuehuetlan,Xochihuehuetlan
-Zapotitlan tablas,Zapotitlan tablas
-Eduardo Neri,Eduardo Neri
-La Unión de Isidoro Montes de Oca,La Unión de Isidoro Montes de Oca
-Ayutla de los Libres,Ayutla de los Libres
-Huamuxtitlan,Huamuxtitlan
-Alpoyeca,Alpoyeca
-Tlacoachistlahuaca,Tlacoachistlahuaca
-Xochistlahuaca,Xochistlahuaca
-Tetipac,Tetipac
-Tecoanapa,Tecoanapa
-Coapalillo,Coapalillo
+Municipio,Porcentaje de hombres
+Tlacoapa,46.8985334918748
+Cocula,48.9826047884973
+Buena vista de Cuellar,48.1435834232014
+Coyuca de Catalan,49.3463713233387
+Azoyu,48.9237697860785
+Iliatenco,47.65818991352
+Ometepec,48.4422419986218
+Pungarabato,48.8254248739671
+Arcelia,48.2730633961584
+Coahuayutla de José Maria Izazaga,50.4432624113475
+Teloloapan,47.7265548061022
+Petatlan,49.1039185339704
+Benito Juárez,49.0091957000389
+Igualapa,47.6957151375756
+Atoyac de Alvarez,48.5810810810811
+Copanatoyac,46.3322246858832
+Tapa de Comonfort,46.8358907672302
+Leonardo Bravo,48.5525666805782
+Ahuacoutzingo,46.6653441777425
+Chilapa de Alvarez,46.6699536056643
+Ixcateopan de Cuauhtémoc,48.8432714239166
+Tlalixtaquilla de Maldonado,48.6714022625625
+Total estatal,48.0305929502342
+Pilcaya,48.9531874852976
+Tlapehuala,48.966635147913
+Juan R. Escudero,48.9058368144713
+Zitlala,45.7341766392137
+Cualac,47.9552959105918
+Iguala de la Independencia,47.9565163809487
+Zirandano,50.3521712606067
+Taxco de Alarcón,47.7004527115337
+Atennago del Río,48.2343937903138
+Atlamajalcingo del Monte,46.7217346411977
+Cuajinicuilapa,49.5136515566906
+Alcozauca de Guerrero,46.6195524146054
+Cuautepec,48.5726033834586
+Metlatonoc,46.5295084575004
+Apaxtla,48.6231101511879
+Cochoapa el Grande,46.7445035544466
+Quechultenango,47.9982292560108
+San Luis Acatlan,48.9366760319862
+Huitzuco de Los Figueroa,47.8479490612959
+Tecpan de Galeana,49.6666002421939
+Acatepec,48.6105928303107
+Florencio Villarreal,49.0202247191011
+Coyuca de Benitez,48.6133924660534
+San Marcos,49.0264144920597
+Cuetzala del progreso,49.468085106383
+Mochitlan,48.5728108369618
+San Miguel Totolapan,49.1611085794772
+Cópala,48.2887367766024
+Chilpancingo de los Bravos,47.4660671809821
+Malinaltepec,46.8759493670886
+Zihuatanejo de Azuela,48.7591368322474
+Tlalchapa,49.8245013269412
+Juchitan,50.5093266305067
+Tepecoacuilco de Trujano,48.17243394144
+Tixtla de Guerrero,47.7334321651108
+General Canuto A. Neri,48.6619942656897
+Pedro Ascencio Alquisiras,47.3713962690786
+Xalpatlahuac,45.3033595186361
+General Heliodoro Castillo,48.9987652332635
+Mártir de Cuilapan,46.671681083114
+Olinala,47.4899810166632
+Márquelia,49.2086834733893
+Ajuchitlan del Progreso,48.8062674279644
+Cutzamala de Pinzon,49.6080245410722
+Atlixtac,47.4044435084764
+Acapulco de Juárez,47.6924339953256
+José Joaquín de Herrera,47.8265600348186
+Xochihuehuetlan,47.5705927244976
+Zapotitlan tablas,48.5588137287571
+Eduardo Neri,48.422617927192
+La Unión de Isidoro Montes de Oca,50.7078067478842
+Ayutla de los Libres,48.4325043762568
+Huamuxtitlan,47.4153705397987
+Alpoyeca,47.382567515679
+Tlacoachistlahuaca,46.5782889249813
+Xochistlahuaca,47.706667558797
+Tetipac,48.6865407319953
+Tecoanapa,49.0371881987712
+Coapalillo,47.9292216950891
