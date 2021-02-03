@@ -10,12 +10,12 @@ Paquetes de JULIA necesarios para el funcionamiento de la paquetería.\
     `JSON`
 
 ### Instalación
-Haciendo uso del REPL de JULIA teclear `]` e ingresar\
+Haciendo uso del REPL de JULIA presiona la tecla `]` e ingresar\
     `add https://github.com/OscarJVP/COVID_data_tool.jl`\
     \
     ![](images/instalacion_1.jpg)
     \
-Compilar paquetería tecleando\
+Regresar a la línea de comandos de JULIA presionando la tecla `backspace` e ingresar\
     `using COVID_data_tool`\
     \
     ![](images/instalacion_2.jpg)

@@ -24,6 +24,8 @@ end
 
 function getJSS(clave_indicador:: String, clave_municipio:: String)
   token = "2e01d681-33e2-9414-67d3-5580000f46b4";
+  #token = "60f078ff-60e6-4906-a4da-0dec849de700";
+  #token = "d4f8f24b-8030-4864-b5e6-858a83ab5605";
   jurl = "https://www.inegi.org.mx/app/api/indicadores/desarrolladores/jsonxml/INDICATOR/$(clave_indicador)/es/$(clave_municipio)/true/BISE/2.0/$(token)?type=json";
   # @show jurl
   resp = HTTP.get(jurl);
