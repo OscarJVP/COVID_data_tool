@@ -123,6 +123,37 @@ function datos_indicador(indicador:: String, estado:: String)
   nombre_archivo = "datos_" * indicador * "_" * estado * ".csv"
   Ct_DocCSV(nombre_archivo, Ardic)
 end
+function lista_ComponentesIDH()
+  adh=XLSX.readxlsx(path*"\\"*"Indice de Desarrollo Humano Municipal 2010 2015.xlsx")["IDH municipal 2015"]
+  headIDH=adh["E8:L8"];
+  for str in headIDH
+    println(str)
+  end
+    println("IDH y componentes")
+end
+function lista_IndicadoresPobreza()
+  ar=XLSX.readxlsx(path*"\\"*"Concentrado, indicadores de pobreza.xlsx")["Concentrado municipal"]
+  indPob= []
+  for a in ar["G5:CU5"]
+      if !isequal(missing,a)
+          push!(indPob,a)
+      end
+  end
+  push!(indPob,"Indicadores de pobreza")
+  indPob[16]="Población con ingreso inferior a la línea de bienestar"
+  for i in indPob
+    println(i)
+  end
+end
+function lista_ComponentesIIM()
+  df=DataFrame(ExcelFiles.load(path*"\\"*"IIM2010_BASEMUN.xls","IIM2010_BASEMUN"))
+  ar=[:ENT,:NOM_ENT,:MUN]
+  select!(df,Not(ar))
+  for i in names(df)
+    println(i)
+  end
+    println("Intensidad migratoria y componentes")
+end
 
 function datos_municipio(indicadores, estado::String, municipio::String)
   clave_estado = get_clave_estado(estado)
@@ -155,11 +186,399 @@ function datos_municipio(indicadores, estado::String, municipio::String)
   nombre_archivo = "datos_" * estado * "_" * municipio * ".csv"
   Ct_DocCSV(nombre_archivo, df)
 end
+#=f=getCovData()
+compar1=Matrix(select(f,[:ENTIDAD_UM]))
+compar2=Matrix(select(f,[:MUNICIPIO_RES]))
+=#
+#=function union_Covcon(Indicadores::Vector{String})
+  f=getCovData()
+  compar1=Matrix(select(f,[:ENTIDAD_UM]))
+  compar2=Matrix(select(f,[:MUNICIPIO_RES]))
+  ind_estado=""
+  ind_mun=""
+  indicadorNom="Union_Cov"
+  dfUnion=Array{DataFrame}(undef,4721997)
+  for i in 1:length(compar1)
+    @show i
+    for k in keys(diccionario_estados)
+      if parse(Int64,get(diccionario_estados,k,"Not founded"))==compar1[i]
+        for h in keys(diccionario_municipios[compar1[i]])
+          if h=="Total estatal"
+          elseif parse(Int64,get(diccionario_municipios[compar1[i]],h,"Not founded"))==compar2[i]
+
+              break
+          end
+        end
+        break
+      end
+    end
+  end
+  for ind in indicadores
+    indicadorNom=indicadorNom*"_"*ind
+  end
+  nombre="Union_Cov_"*indicadores*".csv"
+  Ct_DocCSV(nombre,f)
+end
+=#
+function dato_estado(indicador::String,estado::String)
+  if indicador=="Extension territorial"
+    dfaux=getExtTer(estado)
+  elseif indicador=="Indicadores de pobreza"
+    dfaux=getIndPobreza("All")
+  elseif indicador=="IDH y componentes"
+    dfaux=getIDH("All")
+  elseif indicador=="Intesidad migratoria y componentes"
+    dfaux=getIndIM("All")
+  elseif haskey(diccionario_indicadores,indicador)
+    dfaux=getIndINEGI(indicador)
+  elseif indicador=="Años promedio de escolaridad"
+    dfaux=getIDH(indicador)
+  elseif indicador=="Años esperados de escolaridad"
+    dfaux=getIDH(indicador)
+  elseif indicador=="Ingreso per cápita anual"
+    dfaux=getIDH(indicador)
+  elseif indicador=="Tasa de mortalidad infantil"
+    dfaux=getIDH(indicador)
+  elseif indicador=="Índice de educación"
+    dfaux=getIDH(indicador)
+  elseif indicador=="Indice de salud"
+    dfaux=getIDH(indicador)
+  elseif indicador=="Indice de ingreso"
+    dfaux=getIDH(indicador)
+  elseif indicador=="IDH"
+    dfaux=getIDH(indicador)
+  elseif indicador=="Pobreza"
+    dfaux=getIndPobreza(indicador)
+  elseif indicador=="Pobreza extrema"
+    dfaux=getIndPobreza(indicador)
+  elseif indicador=="Pobreza moderada"
+    dfaux=getIndPobreza(indicador)
+  elseif indicador=="Vulnerables por carencia social"
+    dfaux=getIndPobreza(indicador)
+  elseif indicador=="Vulnerables por ingreso"
+    dfaux=getIndPobreza(indicador)
+  elseif indicador=="No pobres y no vulnerables"
+    dfaux=getIndPobreza(indicador)
+  elseif indicador=="Rezago educativo"
+    dfaux=getIndPobreza(indicador)
+  elseif indicador=="Carencia por acceso a los servicios de salud"
+    dfaux=getIndPobreza(indicador)
+  elseif indicador=="Carencia por acceso a la seguridad social"
+    dfaux=getIndPobreza(indicador)
+  elseif indicador=="Carencia por acceso a los servicios básicos en la vivienda"
+    dfaux=getIndPobreza(indicador)
+  elseif indicador=="Carencia por acceso a la alimentación"
+    dfaux=getIndPobreza(indicador)
+  elseif indicador=="Población con al menos una carencia social"
+    dfaux=getIndPobreza(indicador)
+  elseif indicador=="Población con tres o más carencias sociales"
+    dfaux=getIndPobreza(indicador)
+  elseif indicador=="Población con ingreso inferior a la línea de bienestar"
+    dfaux=getIndPobreza(indicador)
+  elseif indicador=="Población con ingreso inferior a la línea de bienestar mínimo"
+    dfaux=getIndPobreza(indicador)
+  elseif indicador=="TOT_VIV"
+    dfaux=getIndIM(indicador)
+  elseif indicador=="VIV_REM"
+    dfaux=getIndIM(indicador)
+  elseif indicador=="VIV_EMIG"
+    dfaux=getIndIM(indicador)
+  elseif indicador=="VIV_CIRC"
+    dfaux=getIndIM(indicador)
+  elseif indicador=="VIV_RET"
+    dfaux=getIndIM(indicador)
+  elseif indicador=="IIM_2010"
+    dfaux=getIndIM(indicador)
+  elseif indicador=="IIMa100"
+    dfaux=getIndIM(indicador)
+  elseif indicador=="GIM_2010"
+    dfaux=getIndIM(indicador)
+  elseif indicador=="LUG_EDO"
+    dfaux=getIndIM(indicador)
+  elseif indicador=="LUG_NAL"
+    dfaux=getIndIM(indicador)
+  end
+  plu=[]
+  for k in keys(diccionario_municipios[parse(Int64,get(diccionario_estados,estado,"Not founded"))])
+    push!(plu,k)
+  end
+  dfDel=DataFrame(Municipio=plu)
+  dfaux=innerjoin(dfaux,dfDel,on=:Municipio)
+  nombre_doc=indicador*"_"*estado*".csv"
+  Ct_DocCSV(nombre_doc,dfaux)
+end
+function conjunto_estado(indicadores::Vector{String},estado::String)
+  munau=[]
+  for k in keys(diccionario_municipios[parse(Int64,get(diccionario_estados,estado,"Not founded"))])
+    push!(munau,k)
+  end
+  dfaux=DataFrame(Municipio=munau)
+  for indicador in indicadores
+      if indicador=="Extension territorial"
+        dfaux=innerjoin(dfaux,getExtTer(estado),on=:Municipio)
+        rename!(dfaux,:Total=>indicador)
+      elseif indicador=="Indicadores de pobreza"
+        dfaux=innerjoin(dfaux,getIndPobreza("All",estado),on=:Municipio)
+      elseif indicador=="IDH y componentes"
+        dfaux=innerjoin(dfaux,getIDH("All",estado),on=:Municipio)
+      elseif indicador=="Intesidad migratoria y componentes"
+        dfaux=innerjoin(dfaux,getIndIM("All",estado),on=:Municipio)
+      elseif haskey(diccionario_indicadores,indicador)
+        dfaux=innerjoin(dfaux,getIndINEGI(estado,indicador),on=:Municipio)
+        rename!(dfaux,:Total=>indicador)
+      elseif indicador=="Años promedio de escolaridad"
+          dfaux=innerjoin(dfaux,getIDH("Años promedio de escolaridad",estado),on=:Municipio)
+      elseif indicador=="Años esperados de escolaridad"
+          dfaux=innerjoin(dfaux,getIDH("Años esperados de escolaridad",estado),on=:Municipio)
+      elseif indicador=="Ingreso per cápita anual"
+          dfaux=innerjoin(dfaux,getIDH("Ingreso per cápita anual",estado),on=:Municipio)
+      elseif indicador=="Tasa de mortalidad infantil"
+          dfaux=innerjoin(dfaux,getIDH("Tasa de mortalidad infantil",estado),on=:Municipio)
+      elseif indicador=="Índice de educación"
+          dfaux=innerjoin(dfaux,getIDH("Índice de educación",estado),on=:Municipio)
+      elseif indicador=="Indice de salud"
+          dfaux=innerjoin(dfaux,getIDH("Índice de salud",estado),on=:Municipio)
+      elseif indicador=="Indice de ingreso"
+          dfaux=innerjoin(dfaux,getIDH("Índice de ingreso",estado),on=:Municipio)
+      elseif indicador=="IDH"
+          dfaux=innerjoin(dfaux,getIDH("IDH",estado),on=:Municipio)
+      elseif indicador=="Pobreza"
+        dfaux=innerjoin(dfaux,getIndPobreza("Pobreza",estado),on=:Municipio)
+      elseif indicador=="Pobreza extrema"
+        dfaux=innerjoin(dfaux,getIndPobreza("Pobreza extrema",estado),on=:Municipio)
+      elseif indicador=="Pobreza moderada"
+        dfaux=innerjoin(dfaux,getIndPobreza("Pobreza moderada",estado),on=:Municipio)
+      elseif indicador=="Vulnerables por carencia social"
+        dfaux=innerjoin(dfaux,getIndPobreza("Vulnerables por carencia social",estado),on=:Municipio)
+      elseif indicador=="Vulnerables por ingreso"
+        dfaux=innerjoin(dfaux,getIndPobreza("Vulnerables por ingreso",estado),on=:Municipio)
+      elseif indicador=="No pobres y no vulnerables"
+        dfaux=innerjoin(dfaux,getIndPobreza("No pobres y no vulnerables",estado),on=:Municipio)
+      elseif indicador=="Rezago educativo"
+        dfaux=innerjoin(dfaux,getIndPobreza("Rezago educativo",estado),on=:Municipio)
+      elseif indicador=="Carencia por acceso a los servicios de salud"
+        dfaux=innerjoin(dfaux,getIndPobreza("Carencia por acceso a los servicios de salud",estado),on=:Municipio)
+      elseif indicador=="Carencia por acceso a la seguridad social"
+        dfaux=innerjoin(dfaux,getIndPobreza("Carencia por acceso a la seguridad social",estado),on=:Municipio)
+      elseif indicador=="Carencia por acceso a los servicios básicos en la vivienda"
+        dfaux=innerjoin(dfaux,getIndPobreza("Carencia por acceso a los servicios básicos en la vivienda",estado),on=:Municipio)
+      elseif indicador=="Carencia por acceso a la alimentación"
+        dfaux=innerjoin(dfaux,getIndPobreza("Carencia por acceso a la alimentación",estado),on=:Municipio)
+      elseif indicador=="Población con al menos una carencia social"
+        dfaux=innerjoin(dfaux,getIndPobreza("Población con al menos una carencia social",estado),on=:Municipio)
+      elseif indicador=="Población con tres o más carencias sociales"
+        dfaux=innerjoin(dfaux,getIndPobreza("Población con tres o más carencias sociales",estado),on=:Municipio)
+      elseif indicador=="Población con ingreso inferior a la línea de bienestar"
+        dfaux=innerjoin(dfaux,getIndPobreza("Población con ingreso inferior a la línea de bienestar",estado),on=:Municipio)
+      elseif indicador=="Población con ingreso inferior a la línea de bienestar mínimo"
+        dfaux=innerjoin(dfaux,getIndPobreza("Población con ingreso inferior a la línea de bienestar mínimo",estado),on=:Municipio)
+      elseif indicador=="TOT_VIV"
+        dfaux=innerjoin(dfaux,getIndIM("TOT_VIV",estado),on=:Municipio)
+      elseif indicador=="VIV_REM"
+        dfaux=innerjoin(dfaux,getIndIM("VIV_REM",estado),on=:Municipio)
+      elseif indicador=="VIV_EMIG"
+        dfaux=innerjoin(dfaux,getIndIM("VIV_EMIG",estado),on=:Municipio)
+      elseif indicador=="VIV_CIRC"
+        dfaux=innerjoin(dfaux,getIndIM("VIV_CIRC",estado),on=:Municipio)
+      elseif indicador=="VIV_RET"
+        dfaux=innerjoin(dfaux,getIndIM("VIV_RET",estado),on=:Municipio)
+      elseif indicador=="IIM_2010"
+        dfaux=innerjoin(dfaux,getIndIM("IIM_2010",estado),on=:Municipio)
+      elseif indicador=="IIMa100"
+        dfaux=innerjoin(dfaux,getIndIM("IIMa100",estado),on=:Municipio)
+      elseif indicador=="GIM_2010"
+        dfaux=innerjoin(dfaux,getIndIM("GIM_2010",estado),on=:Municipio)
+      elseif indicador=="LUG_EDO"
+        dfaux=innerjoin(dfaux,getIndIM("LUG_EDO",estado),on=:Municipio)
+      elseif indicador=="LUG_NAL"
+        dfaux=innerjoin(dfaux,getIndIM("LUG_NAL",estado),on=:Municipio)
+      end
+  end
+  nombre_doc="Conjunto_de_"*estado*".csv"
+  Ct_DocCSV(nombre_doc,dfaux)
+end
+function dato_estado(indicador::String,estado::String,municipio::String)
+  if indicador=="Extension territorial"
+    dfaux=getExtTer(estado)
+  elseif indicador=="Indicadores de pobreza"
+    dfaux=getIndPobreza("All")
+  elseif indicador=="IDH y componentes"
+    dfaux=getIDH("All")
+  elseif indicador=="Intesidad migratoria y componentes"
+    dfaux=getIndIM("All")
+  elseif haskey(diccionario_indicadores,indicador)
+    dfaux=getIndINEGI(indicador)
+  elseif indicador=="Años promedio de escolaridad"
+    dfaux=getIDH(indicador)
+  elseif indicador=="Años esperados de escolaridad"
+    dfaux=getIDH(indicador)
+  elseif indicador=="Ingreso per cápita anual"
+    dfaux=getIDH(indicador)
+  elseif indicador=="Tasa de mortalidad infantil"
+    dfaux=getIDH(indicador)
+  elseif indicador=="Índice de educación"
+    dfaux=getIDH(indicador)
+  elseif indicador=="Indice de salud"
+    dfaux=getIDH(indicador)
+  elseif indicador=="Indice de ingreso"
+    dfaux=getIDH(indicador)
+  elseif indicador=="IDH"
+    dfaux=getIDH(indicador)
+  elseif indicador=="Pobreza"
+    dfaux=getIndPobreza(indicador)
+  elseif indicador=="Pobreza extrema"
+    dfaux=getIndPobreza(indicador)
+  elseif indicador=="Pobreza moderada"
+    dfaux=getIndPobreza(indicador)
+  elseif indicador=="Vulnerables por carencia social"
+    dfaux=getIndPobreza(indicador)
+  elseif indicador=="Vulnerables por ingreso"
+    dfaux=getIndPobreza(indicador)
+  elseif indicador=="No pobres y no vulnerables"
+    dfaux=getIndPobreza(indicador)
+  elseif indicador=="Rezago educativo"
+    dfaux=getIndPobreza(indicador)
+  elseif indicador=="Carencia por acceso a los servicios de salud"
+    dfaux=getIndPobreza(indicador)
+  elseif indicador=="Carencia por acceso a la seguridad social"
+    dfaux=getIndPobreza(indicador)
+  elseif indicador=="Carencia por acceso a los servicios básicos en la vivienda"
+    dfaux=getIndPobreza(indicador)
+  elseif indicador=="Carencia por acceso a la alimentación"
+    dfaux=getIndPobreza(indicador)
+  elseif indicador=="Población con al menos una carencia social"
+    dfaux=getIndPobreza(indicador)
+  elseif indicador=="Población con tres o más carencias sociales"
+    dfaux=getIndPobreza(indicador)
+  elseif indicador=="Población con ingreso inferior a la línea de bienestar"
+    dfaux=getIndPobreza(indicador)
+  elseif indicador=="Población con ingreso inferior a la línea de bienestar mínimo"
+    dfaux=getIndPobreza(indicador)
+  elseif indicador=="TOT_VIV"
+    dfaux=getIndIM(indicador)
+  elseif indicador=="VIV_REM"
+    dfaux=getIndIM(indicador)
+  elseif indicador=="VIV_EMIG"
+    dfaux=getIndIM(indicador)
+  elseif indicador=="VIV_CIRC"
+    dfaux=getIndIM(indicador)
+  elseif indicador=="VIV_RET"
+    dfaux=getIndIM(indicador)
+  elseif indicador=="IIM_2010"
+    dfaux=getIndIM(indicador)
+  elseif indicador=="IIMa100"
+    dfaux=getIndIM(indicador)
+  elseif indicador=="GIM_2010"
+    dfaux=getIndIM(indicador)
+  elseif indicador=="LUG_EDO"
+    dfaux=getIndIM(indicador)
+  elseif indicador=="LUG_NAL"
+    dfaux=getIndIM(indicador)
+  end
+  plu=[]
+  for k in keys(diccionario_municipios[parse(Int64,get(diccionario_estados,estado,"Not founded"))])
+    push!(plu,k)
+  end
+  dfDel=DataFrame(Municipio=plu)
+  dfaux=innerjoin(dfaux,dfDel,on=:Municipio)
+  nombre_doc=indicador*"_"*estado*".csv"
+  Ct_DocCSV(nombre_doc,dfaux)
+end
+function conjunto_estado(indicadores::Vector{String},estado::String,municipio::String)
+  dfaux=DataFrame(Municipio=municipio)
+  for indicador in indicadores
+      if indicador=="Extension territorial"
+        dfaux=innerjoin(dfaux,getExtTer(estado),on=:Municipio)
+        rename!(dfaux,:Total=>indicador)
+      elseif indicador=="Indicadores de pobreza"
+        dfaux=innerjoin(dfaux,getIndPobreza("All",estado),on=:Municipio)
+      elseif indicador=="IDH y componentes"
+        dfaux=innerjoin(dfaux,getIDH("All",estado),on=:Municipio)
+      elseif indicador=="Intesidad migratoria y componentes"
+        dfaux=innerjoin(dfaux,getIndIM("All",estado),on=:Municipio)
+      elseif haskey(diccionario_indicadores,indicador)
+        dfaux=innerjoin(dfaux,getIndINEGI(estado,indicador),on=:Municipio)
+        for c in 1:length(names(dfaux))
+           if string(names(dfaux)[c])=="Total"
+              rename!(dfaux,:Total=>indicador)
+           end
+         end
+      elseif indicador=="Años promedio de escolaridad"
+          dfaux=innerjoin(dfaux,getIDH("Años promedio de escolaridad",estado),on=:Municipio)
+      elseif indicador=="Años esperados de escolaridad"
+          dfaux=innerjoin(dfaux,getIDH("Años esperados de escolaridad",estado),on=:Municipio)
+      elseif indicador=="Ingreso per cápita anual"
+          dfaux=innerjoin(dfaux,getIDH("Ingreso per cápita anual",estado),on=:Municipio)
+      elseif indicador=="Tasa de mortalidad infantil"
+          dfaux=innerjoin(dfaux,getIDH("Tasa de mortalidad infantil",estado),on=:Municipio)
+      elseif indicador=="Índice de educación"
+          dfaux=innerjoin(dfaux,getIDH("Índice de educación",estado),on=:Municipio)
+      elseif indicador=="Indice de salud"
+          dfaux=innerjoin(dfaux,getIDH("Índice de salud",estado),on=:Municipio)
+      elseif indicador=="Indice de ingreso"
+          dfaux=innerjoin(dfaux,getIDH("Índice de ingreso",estado),on=:Municipio)
+      elseif indicador=="IDH"
+          dfaux=innerjoin(dfaux,getIDH("IDH",estado),on=:Municipio)
+      elseif indicador=="Pobreza"
+        dfaux=innerjoin(dfaux,getIndPobreza("Pobreza",estado),on=:Municipio)
+      elseif indicador=="Pobreza extrema"
+        dfaux=innerjoin(dfaux,getIndPobreza("Pobreza extrema",estado),on=:Municipio)
+      elseif indicador=="Pobreza moderada"
+        dfaux=innerjoin(dfaux,getIndPobreza("Pobreza moderada",estado),on=:Municipio)
+      elseif indicador=="Vulnerables por carencia social"
+        dfaux=innerjoin(dfaux,getIndPobreza("Vulnerables por carencia social",estado),on=:Municipio)
+      elseif indicador=="Vulnerables por ingreso"
+        dfaux=innerjoin(dfaux,getIndPobreza("Vulnerables por ingreso",estado),on=:Municipio)
+      elseif indicador=="No pobres y no vulnerables"
+        dfaux=innerjoin(dfaux,getIndPobreza("No pobres y no vulnerables",estado),on=:Municipio)
+      elseif indicador=="Rezago educativo"
+        dfaux=innerjoin(dfaux,getIndPobreza("Rezago educativo",estado),on=:Municipio)
+      elseif indicador=="Carencia por acceso a los servicios de salud"
+        dfaux=innerjoin(dfaux,getIndPobreza("Carencia por acceso a los servicios de salud",estado),on=:Municipio)
+      elseif indicador=="Carencia por acceso a la seguridad social"
+        dfaux=innerjoin(dfaux,getIndPobreza("Carencia por acceso a la seguridad social",estado),on=:Municipio)
+      elseif indicador=="Carencia por acceso a los servicios básicos en la vivienda"
+        dfaux=innerjoin(dfaux,getIndPobreza("Carencia por acceso a los servicios básicos en la vivienda",estado),on=:Municipio)
+      elseif indicador=="Carencia por acceso a la alimentación"
+        dfaux=innerjoin(dfaux,getIndPobreza("Carencia por acceso a la alimentación",estado),on=:Municipio)
+      elseif indicador=="Población con al menos una carencia social"
+        dfaux=innerjoin(dfaux,getIndPobreza("Población con al menos una carencia social",estado),on=:Municipio)
+      elseif indicador=="Población con tres o más carencias sociales"
+        dfaux=innerjoin(dfaux,getIndPobreza("Población con tres o más carencias sociales",estado),on=:Municipio)
+      elseif indicador=="Población con ingreso inferior a la línea de bienestar"
+        dfaux=innerjoin(dfaux,getIndPobreza("Población con ingreso inferior a la línea de bienestar",estado),on=:Municipio)
+      elseif indicador=="Población con ingreso inferior a la línea de bienestar mínimo"
+        dfaux=innerjoin(dfaux,getIndPobreza("Población con ingreso inferior a la línea de bienestar mínimo",estado),on=:Municipio)
+      elseif indicador=="TOT_VIV"
+        dfaux=innerjoin(dfaux,getIndIM("TOT_VIV",estado),on=:Municipio)
+      elseif indicador=="VIV_REM"
+        dfaux=innerjoin(dfaux,getIndIM("VIV_REM",estado),on=:Municipio)
+      elseif indicador=="VIV_EMIG"
+        dfaux=innerjoin(dfaux,getIndIM("VIV_EMIG",estado),on=:Municipio)
+      elseif indicador=="VIV_CIRC"
+        dfaux=innerjoin(dfaux,getIndIM("VIV_CIRC",estado),on=:Municipio)
+      elseif indicador=="VIV_RET"
+        dfaux=innerjoin(dfaux,getIndIM("VIV_RET",estado),on=:Municipio)
+      elseif indicador=="IIM_2010"
+        dfaux=innerjoin(dfaux,getIndIM("IIM_2010",estado),on=:Municipio)
+      elseif indicador=="IIMa100"
+        dfaux=innerjoin(dfaux,getIndIM("IIMa100",estado),on=:Municipio)
+      elseif indicador=="GIM_2010"
+        dfaux=innerjoin(dfaux,getIndIM("GIM_2010",estado),on=:Municipio)
+      elseif indicador=="LUG_EDO"
+        dfaux=innerjoin(dfaux,getIndIM("LUG_EDO",estado),on=:Municipio)
+      elseif indicador=="LUG_NAL"
+        dfaux=innerjoin(dfaux,getIndIM("LUG_NAL",estado),on=:Municipio)
+      end
+  end
+  return dfaux
+end
 #Codigo para la obtencion de los datos faltantes
 function downloadCD()
     fileDir=HTTP.download(url,pathCov);
     InfoZIP.unzip(fileDir,pathCov);
 end
+downloadCD()
 function getCovData()
     covName=string(Dates.today()-Dates.Day(1))
     covName=replace(covName,"-"=>"")
@@ -169,19 +588,160 @@ function getCovData()
     ce=CSV.read(covFile,DataFrame);
     return ce
 end
+
 function downloadIP()
     inPobDir=HTTP.download(turl,path)
     InfoZIP.unzip(inPobDir,path)
+end
+function getIndPobreza(ind:: String,estado::String)
+    ar=XLSX.readxlsx(path*"\\"*"Concentrado, indicadores de pobreza.xlsx")["Concentrado municipal"]
+    pobData=Array{Float64,2}
+    indPob= []
+    for a in ar["G5:CU5"]
+        if !isequal(missing,a)
+            push!(indPob,a)
+        end
+    end
+    indPob[16]="Población con ingreso inferior a la línea de bienestar"
+    headPob=ar["H6:M6"]
+    for i in 1:length(headPob)
+        headPob[i]=replace(headPob[i],"\n"=>" ")
+    end
+    dfIPob=DataFrame(ar["H9:M2465"])
+    rename!(dfIPob,[Symbol(headPob[h]) for h in 1:6])
+    dfIPobEx=DataFrame(ar["N9:S2465"])
+    rename!(dfIPobEx,[Symbol(headPob[h]) for h in 1:6])
+    dfIPobMod=DataFrame(ar["T9:Y2465"])
+    rename!(dfIPobMod,[Symbol(headPob[h]) for h in 1:6])
+    dfIVCS=DataFrame(ar["Z9:AE2465"])
+    rename!(dfIVCS,[Symbol(headPob[h]) for h in 1:6])
+    dfIVI=DataFrame(ar["AF9:AI2465"])
+    rename!(dfIVI,[Symbol(headPob[h]) for h in 1:4])
+    dfINPV=DataFrame(ar["AJ9:AM2465"])
+    rename!(dfINPV,[Symbol(headPob[h]) for h in 1:4])
+    dfIRe=DataFrame(ar["AN9:AS2465"])
+    rename!(dfIRe,[Symbol(headPob[h]) for h in 1:6])
+    dfICASS=DataFrame(ar["AT9:AY2465"])
+    rename!(dfICASS,[Symbol(headPob[h]) for h in 1:6])
+    dfICASSO=DataFrame(ar["AZ9:BE2465"])
+    rename!(dfICASSO,[Symbol(headPob[h]) for h in 1:6])
+    dfICCEV=DataFrame(ar["BF9:BK2465"])
+    rename!(dfICCEV,[Symbol(headPob[h]) for h in 1:6])
+    dfICASBV=DataFrame(ar["BL9:BQ2465"])
+    rename!(dfICASBV,[Symbol(headPob[h]) for h in 1:6])
+    dfICAA=DataFrame(ar["BR9:BW2465"])
+    rename!(dfICAA,[Symbol(headPob[h]) for h in 1:6])
+    dfIUCS=DataFrame(ar["BX9:CC2465"])
+    rename!(dfIUCS,[Symbol(headPob[h]) for h in 1:6])
+    dfITCS=DataFrame(ar["CD9:CI2465"])
+    rename!(dfITCS,[Symbol(headPob[h]) for h in 1:6])
+    dfIIILB=DataFrame(ar["CJ9:CO2465"])
+    rename!(dfIIILB,[Symbol(headPob[h]) for h in 1:6])
+    dfIIILBM=DataFrame(ar["CP9:CU2465"])
+    rename!(dfIIILBM,[Symbol(headPob[h]) for h in 1:6])
+    headINDPOB=[]
+    headPob=ar["H6:CU6"]
+    for i in 1:length(headPob)
+        headPob[i]=replace(headPob[i],"\n"=>" ")
+    end
+    for i in 1:6
+        push!(headINDPOB,headPob[i]*"_Pob")
+    end
+    for i in 7:12
+        push!(headINDPOB,headPob[i]*"_PobEx")
+    end
+    for i in 13:18
+        push!(headINDPOB,headPob[i]*"_PobMod")
+    end
+    for i in 19:24
+        push!(headINDPOB,headPob[i]*"_VCS")
+    end
+    for i in 25:28
+        push!(headINDPOB,headPob[i]*"_VI")
+    end
+    for i in 29:32
+        push!(headINDPOB,headPob[i]*"_NPV")
+    end
+    for i in 33:38
+        push!(headINDPOB,headPob[i]*"_RE")
+    end
+    for i in 39:44
+        push!(headINDPOB,headPob[i]*"_CASS")
+    end
+    for i in 45:50
+        push!(headINDPOB,headPob[i]*"_CASSO")
+    end
+    for i in 51:56
+        push!(headINDPOB,headPob[i]*"_CCEV")
+    end
+    for i in 57:62
+        push!(headINDPOB,headPob[i]*"_CASBV")
+    end
+    for i in 63:68
+        push!(headINDPOB,headPob[i]*"_CAA")
+    end
+    for i in 69:74
+        push!(headINDPOB,headPob[i]*"_UCS")
+    end
+    for i in 75:80
+        push!(headINDPOB,headPob[i]*"_TCS")
+    end
+    for i in 81:86
+        push!(headINDPOB,headPob[i]*"_IIILB")
+    end
+    for i in 87:92
+        push!(headINDPOB,headPob[i]*"_IIILBM")
+    end
+    dfINDPOB=hcat(dfIPob,dfIPobEx,dfIPobMod,dfIVCS,dfIVI,dfINPV,dfIRe,dfICASS,dfICASSO,dfICCEV,dfICASBV,dfICAA,dfIUCS,dfITCS,dfIIILB,dfIIILBM;
+    makeunique=true)
+    rename!(dfINDPOB,[Symbol(headINDPOB[c]) for c in 1:length(headINDPOB)])
+    if ind==indPob[1]
+        dfIndreq=getdf2015data(ar,dfIPob,estado);
+    elseif ind==indPob[2]
+        dfIndreq=getdf2015data(ar,dfIPobEx,estado);
+    elseif ind==indPob[3]
+        dfIndreq=getdf2015data(ar,dfIPobMod,estado);
+    elseif ind==indPob[4]
+        dfIndreq=getdf2015data(ar,dfIVCS,estado);
+    elseif ind==indPob[5]
+        dfIndreq=getdf2015data(ar,dfIVI,estado);
+    elseif ind==indPob[6]
+        dfIndreq=getdf2015data(ar,dfINPV,estado);
+    elseif ind==indPob[7]
+        dfIndreq=getdf2015data(ar,dfIRe,estado);
+    elseif ind==indPob[8]
+        dfIndreq=getdf2015data(ar,dfICASS,estado);
+    elseif ind==indPob[9]
+        dfIndreq=getdf2015data(ar,dfICASSO,estado);
+    elseif ind==indPob[10]
+        dfIndreq=getdf2015data(ar,dfICCEV,estado);
+    elseif ind==indPob[11]
+        dfIndreq=getdf2015data(ar,dfICASBV,estado);
+    elseif ind==indPob[12]
+        dfIndreq=getdf2015data(ar,dfICAA,estado);
+    elseif ind==indPob[13]
+        dfIndreq=getdf2015data(ar,dfIUCS,estado);
+    elseif ind==indPob[14]
+        dfIndreq=getdf2015data(ar,dfITCS,estado);
+    elseif ind==indPob[15]
+        dfIndreq=getdf2015data(ar,dfIIILB,estado);
+    elseif ind==indPob[16]
+        dfIndreq=getdf2015data(ar,dfIIILBM,estado);
+    elseif ind=="All"
+        dfIndreq=getdf2015data(ar,dfINDPOB,estado);
+    end
+    return dfIndreq
 end
 function getIndPobreza(ind:: String)
     ar=XLSX.readxlsx(path*"\\"*"Concentrado, indicadores de pobreza.xlsx")["Concentrado municipal"]
     pobData=Array{Float64,2}
     indPob= []
-    for a in ar["H5:CU5"]
+    for a in ar["G5:CU5"]
         if !isequal(missing,a)
             push!(indPob,a)
         end
     end
+    indPob[16]="Población con ingreso inferior a la línea de bienestar"
     headPob=ar["H6:M6"]
     for i in 1:length(headPob)
         headPob[i]=replace(headPob[i],"\n"=>" ")
@@ -311,10 +871,13 @@ function getIndPobreza(ind:: String)
     end
     return dfIndreq
 end
-function getdf2015data(ar::XLSX.Worksheet,dfaux:: DataFrame)
+function getdf2015data(ar::XLSX.Worksheet,dfaux:: DataFrame,estado::String)
         munPob=ar["E9:E2465"]
+        estPob=ar["C9:C2465"]
         dfmunPob=DataFrame(munPob,["Municipio"])
+        dfestPob=DataFrame(estPob,["Estado"])
         dfPob=hcat(dfmunPob,dfaux)
+        dfPob=hcat(dfestPob,dfPob)
         notoddAR=collect(2:2:length(names(dfaux)))
         headPob2015=[]
         sin=[]
@@ -324,40 +887,93 @@ function getdf2015data(ar::XLSX.Worksheet,dfaux:: DataFrame)
         for n in notoddAR
             push!(headPob2015,sin[n])
         end
-        return select(dfPob,Not(headPob2015))
+        select(dfPob,Not(headPob2015))
+        munau=[]
+        for k in keys(diccionario_municipios[parse(Int64,get(diccionario_estados,estado,"Not founded"))])
+          push!(munau,k)
+        end
+        dfmunIM=DataFrame(Municipio=munau)
+        dfmunIM=innerjoin(dfmunIM,dfPob,on=:Municipio)
+        dfmunIM=innerjoin(dfmunIM,DataFrame(Estado=[estado]),on=:Estado)
+        return select(dfmunIM,Not(:Estado))
 end
 function downloadIIM()
     HTTP.download(murl,path)
 end
-function getIndIM(field:: String)
+function getIndIM(field:: String,estado::String)
     dfIIM=DataFrame(ExcelFiles.load(path*"\\"*"IIM2010_BASEMUN.xls","IIM2010_BASEMUN"))
-    ar=[:ENT,:NOM_ENT,:MUN]
+    ar=[:ENT,:MUN]
     select!(dfIIM,Not(ar))
     rename!(dfIIM,:NOM_MUN=>"Municipio")
+    rename!(dfIIM,:NOM_ENT=>"Estado")
     if field==names(dfIIM)[2]
-        dfret=select(dfIIM,[:Municipio,Symbol(names(dfIIM)[2])])
+        dfret=select(dfIIM,[:Estado,:Municipio,Symbol(names(dfIIM)[2])])
     elseif field==names(dfIIM)[3]
-        dfret=select(dfIIM,[:Municipio,Symbol(names(dfIIM)[3])])
+        dfret=select(dfIIM,[:Estado,:Municipio,Symbol(names(dfIIM)[3])])
     elseif field==names(dfIIM)[4]
-        dfret=select(dfIIM,[:Municipio,Symbol(names(dfIIM)[4])])
+        dfret=select(dfIIM,[:Estado,:Municipio,Symbol(names(dfIIM)[4])])
     elseif field==names(dfIIM)[5]
-        dfret=select(dfIIM,[:Municipio,Symbol(names(dfIIM)[5])])
+        dfret=select(dfIIM,[:Estado,:Municipio,Symbol(names(dfIIM)[5])])
     elseif field==names(dfIIM)[6]
-        dfret=select(dfIIM,[:Municipio,Symbol(names(dfIIM)[6])])
+        dfret=select(dfIIM,[:Estado,:Municipio,Symbol(names(dfIIM)[6])])
     elseif field==names(dfIIM)[7]
-        dfret=select(dfIIM,[:Municipio,Symbol(names(dfIIM)[7])])
+        dfret=select(dfIIM,[:Estado,:Municipio,Symbol(names(dfIIM)[7])])
     elseif field==names(dfIIM)[8]
-        dfret=select(dfIIM,[:Municipio,Symbol(names(dfIIM)[8])])
+        dfret=select(dfIIM,[:Estado,:Municipio,Symbol(names(dfIIM)[8])])
     elseif field==names(dfIIM)[9]
-        dfret=select(dfIIM,[:Municipio,Symbol(names(dfIIM)[9])])
+        dfret=select(dfIIM,[:Estado,:Municipio,Symbol(names(dfIIM)[9])])
     elseif field==names(dfIIM)[10]
-        dfret=select(dfIIM,[:Municipio,Symbol(names(dfIIM)[10])])
+        dfret=select(dfIIM,[:Estado,:Municipio,Symbol(names(dfIIM)[10])])
     elseif field==names(dfIIM)[11]
-        dfret=select(dfIIM,[:Municipio,Symbol(names(dfIIM)[11])])
+        dfret=select(dfIIM,[:Estado,:Municipio,Symbol(names(dfIIM)[11])])
     elseif field=="All"
         dfret=dfIIM
     end
-    return dfret
+    munau=[]
+    for k in keys(diccionario_municipios[parse(Int64,get(diccionario_estados,estado,"Not founded"))])
+      push!(munau,k)
+    end
+    dfmunIM=DataFrame(Municipio=munau)
+    dfmunIM=innerjoin(dfmunIM,dfret,on=:Municipio)
+    dfmunIM=innerjoin(dfmunIM,DataFrame(Estado=[estado]),on=:Estado)
+    return select(dfmunIM,Not(:Estado))
+end
+function getIDH(componente::String,estado::String)
+    adh=XLSX.readxlsx(path*"\\"*"Indice de Desarrollo Humano Municipal 2010 2015.xlsx")["IDH municipal 2015"]
+    headIDH=adh["C8:L8"]
+    idhData=adh["C10:L2469"]
+    tfd=DataFrame(idhData)
+    for i in 1:length(headIDH)
+        rename!(tfd,Symbol("x$i")=>(headIDH[i]))
+    end
+    tfd=dropmissing(tfd)
+    if componente==names(tfd)[3]
+        dfret=select(tfd,[:Estado,:Municipio,Symbol(names(tfd)[3])])
+    elseif componente==names(tfd)[4]
+        dfret=select(tfd,[:Estado,:Municipio,Symbol(names(tfd)[4])])
+    elseif componente=="Ingreso per capita anual"
+        dfret=select(tfd,[:Estado,:Municipio,Symbol(names(tfd)[5])])
+    elseif componente==names(tfd)[6]
+        dfret=select(tfd,[:Estado,:Municipio,Symbol(names(tfd)[6])])
+    elseif componente==names(tfd)[7]
+        dfret=select(tfd,[:Estado,:Municipio,Symbol(names(tfd)[7])])
+    elseif componente==names(tfd)[8]
+        dfret=select(tfd,[:Estado,:Municipio,Symbol(names(tfd)[8])])
+    elseif componente==names(tfd)[9]
+        dfret=select(tfd,[:Estado,:Municipio,Symbol(names(tfd)[9])])
+    elseif componente=="IDH"
+        dfret=select(tfd,[:Estado,:Municipio,Symbol(names(tfd)[10])])
+    elseif componente=="All"
+        dfret=tfd
+    end
+    munau=[]
+    for k in keys(diccionario_municipios[parse(Int64,get(diccionario_estados,estado,"Not founded"))])
+      push!(munau,k)
+    end
+    dfmunIM=DataFrame(Municipio=munau)
+    dfmunIM=innerjoin(dfmunIM,dfret,on=:Municipio)
+    dfmunIM=innerjoin(dfmunIM,DataFrame(Estado=[estado]),on=:Estado)
+    return select(dfmunIM,Not(:Estado))
 end
 function getIDH(componente::String)
     adh=XLSX.readxlsx(path*"\\"*"Indice de Desarrollo Humano Municipal 2010 2015.xlsx")["IDH municipal 2015"]
@@ -372,7 +988,7 @@ function getIDH(componente::String)
         dfret=select(tfd,[:Municipio,Symbol(names(tfd)[2])])
     elseif componente==names(tfd)[3]
         dfret=select(tfd,[:Municipio,Symbol(names(tfd)[3])])
-    elseif componente==names(tfd)[4]
+    elseif componente=="Ingreso per capita anual"
         dfret=select(tfd,[:Municipio,Symbol(names(tfd)[4])])
     elseif componente==names(tfd)[5]
         dfret=select(tfd,[:Municipio,Symbol(names(tfd)[5])])
@@ -392,69 +1008,101 @@ end
 function codPos_municipio(estado::String,municipio::String)
     headCP=[:d_codigo,:d_asenta,:d_tipo_asenta,:D_mnpio]
     if estado=="Aguascalientes"
-        dfCPA=select!(DataFrame(XLSX.readxlsx(path*"\\"*"CPdescarga.xlsx")["Aguascalientes"]),headCP)
+      CPdata=(XLSX.readxlsx(path*"\\"*"CPdescarga.xlsx")["Aguascalientes"])["A2:D1357"]
+      dfCPA=DataFrame(CPdata,headCP)
     elseif estado=="Baja California"
-        dfCPA=select!(DataFrame(ExcelFiles.load(path*"\\"*"CPdescarga.xls","Baja_California")),headCP)
+      CPdata=(XLSX.readxlsx(path*"\\"*"CPdescarga.xlsx")["Baja_California"])["A2:D2437"]
+      dfCPA=DataFrame(CPdata,headCP)
     elseif estado=="Baja California Sur"
-        dfCPA=select!(DataFrame(ExcelFiles.load(path*"\\"*"CPdescarga.xls","Baja_California_Sur")),headCP)
+      CPdata=(XLSX.readxlsx(path*"\\"*"CPdescarga.xlsx")["Baja_California_Sur"])["A2:D988"]
+      dfCPA=DataFrame(CPdata,headCP)
     elseif estado=="Campeche"
-        dfCPA=select!(DataFrame(ExcelFiles.load(path*"\\"*"CPdescarga.xls","Campeche")),headCP)
+      CPdata=(XLSX.readxlsx(path*"\\"*"CPdescarga.xlsx")["Campeche"])["A2:D1310"]
+      dfCPA=DataFrame(CPdata,headCP)
     elseif estado=="Coahuila de Zaragoza"
-        dfCPA=select!(DataFrame(ExcelFiles.load(path*"\\"*"CPdescarga.xls","Coahuila_de_Zaragoza")),headCP)
+      CPdata=(XLSX.readxlsx(path*"\\"*"CPdescarga.xlsx")["Coahuila_de_Zaragoza"])["A2:D3967"]
+      dfCPA=DataFrame(CPdata,headCP)
     elseif estado=="Colima"
-        dfCPA=select!(DataFrame(ExcelFiles.load(path*"\\"*"CPdescarga.xls","Colima")),headCP)
+      CPdata=(XLSX.readxlsx(path*"\\"*"CPdescarga.xlsx")["Colima"])["A2:D834"]
+      dfCPA=DataFrame(CPdata,headCP)
     elseif estado=="Chiapas"
-        dfCPA=select!(DataFrame(ExcelFiles.load(path*"\\"*"CPdescarga.xls","Chiapas")),headCP)
+      CPdata=(XLSX.readxlsx(path*"\\"*"CPdescarga.xlsx")["Chiapas"])["A2:D7639"]
+      dfCPA=DataFrame(CPdata,headCP)
     elseif estado=="Chihuahua"
-        dfCPA=select!(DataFrame(ExcelFiles.load(path*"\\"*"CPdescarga.xls","Chihuahua")),headCP)
+      CPdata=(XLSX.readxlsx(path*"\\"*"CPdescarga.xlsx")["Chihuahua"])["A2:D9561"]
+      dfCPA=DataFrame(CPdata,headCP)
     elseif estado=="Ciudad de México"
-        dfCPA=select!(DataFrame(ExcelFiles.load(path*"\\"*"CPdescarga.xls","Distrito_Federal")),headCP)
+      CPdata=(XLSX.readxlsx(path*"\\"*"CPdescarga.xlsx")["Distrito_Federal"])["A2:D1516"]
+      dfCPA=DataFrame(CPdata,headCP)
     elseif estado=="Durango"
-        dfCPA=select!(DataFrame(ExcelFiles.load(path*"\\"*"CPdescarga.xls","Durango")),headCP)
+      CPdata=(XLSX.readxlsx(path*"\\"*"CPdescarga.xlsx")["Durango"])["A2:D7049"]
+      dfCPA=DataFrame(CPdata,headCP)
     elseif estado=="Guanajuato"
-        dfCPA=select!(DataFrame(ExcelFiles.load(path*"\\"*"CPdescarga.xls","Guanajuato")),headCP)
+      CPdata=(XLSX.readxlsx(path*"\\"*"CPdescarga.xlsx")["Guanajuato"])["A2:D10050"]
+      dfCPA=DataFrame(CPdata,headCP)
     elseif estado=="Guerrero"
-        dfCPA=select!(DataFrame(ExcelFiles.load(path*"\\"*"CPdescarga.xls","Guerrero")),headCP)
+      CPdata=(XLSX.readxlsx(path*"\\"*"CPdescarga.xlsx")["Guerrero"])["A2:D4793"]
+      dfCPA=DataFrame(CPdata,headCP)
     elseif estado=="Hidalgo"
-        dfCPA=select!(DataFrame(ExcelFiles.load(path*"\\"*"CPdescarga.xls","Hidalgo")),headCP)
+      CPdata=(XLSX.readxlsx(path*"\\"*"CPdescarga.xlsx")["Hidalgo"])["A2:D6090"]
+      dfCPA=DataFrame(CPdata,headCP)
     elseif estado=="Jalisco"
-        dfCPA=select!(DataFrame(ExcelFiles.load(path*"\\"*"CPdescarga.xls","Jalisco")),headCP)
+      CPdata=(XLSX.readxlsx(path*"\\"*"CPdescarga.xlsx")["Jalisco"])["A2:D5741"]
+      dfCPA=DataFrame(CPdata,headCP)
     elseif estado=="México"
-        dfCPA=select!(DataFrame(ExcelFiles.load(path*"\\"*"CPdescarga.xls","México")),headCP)
+      CPdata=(XLSX.readxlsx(path*"\\"*"CPdescarga.xlsx")["México"])["A2:D8158"]
+      dfCPA=DataFrame(CPdata,headCP)
     elseif estado=="Michoacán de Ocampo"
-        dfCPA=select!(DataFrame(ExcelFiles.load(path*"\\"*"CPdescarga.xls","Michoacán_de_Ocampo")),headCP)
+      CPdata=(XLSX.readxlsx(path*"\\"*"CPdescarga.xlsx")["Michoacán_de_Ocampo"])["A2:D10182"]
+      dfCPA=DataFrame(CPdata,headCP)
     elseif estado=="Morelos"
-        dfCPA=select!(DataFrame(ExcelFiles.load(path*"\\"*"CPdescarga.xls","Morelos")),headCP)
+      CPdata=(XLSX.readxlsx(path*"\\"*"CPdescarga.xlsx")["Morelos"])["A2:D1744"]
+      dfCPA=DataFrame(CPdata,headCP)
     elseif estado=="Nayarit"
-        dfCPA=select!(DataFrame(ExcelFiles.load(path*"\\"*"CPdescarga.xls","Nayarit")),headCP)
+      CPdata=(XLSX.readxlsx(path*"\\"*"CPdescarga.xlsx")["Nayarit"])["A2:D1980"]
+      dfCPA=DataFrame(CPdata,headCP)
     elseif estado=="Nuevo León"
-        dfCPA=select!(DataFrame(ExcelFiles.load(path*"\\"*"CPdescarga.xls","Nuevo_León")),headCP)
+      CPdata=(XLSX.readxlsx(path*"\\"*"CPdescarga.xlsx")["Nuevo_León"])["A2:D4878"]
+      dfCPA=DataFrame(CPdata,headCP)
     elseif estado=="Oaxaca"
-        dfCPA=select!(DataFrame(ExcelFiles.load(path*"\\"*"CPdescarga.xls","Oaxaca")),headCP)
+      CPdata=(XLSX.readxlsx(path*"\\"*"CPdescarga.xlsx")["Oaxaca"])["A2:6063"]
+      dfCPA=DataFrame(CPdata,headCP)
     elseif estado=="Puebla"
-        dfCPA=select!(DataFrame(ExcelFiles.load(path*"\\"*"CPdescarga.xls","Puebla")),headCP)
+      CPdata=(XLSX.readxlsx(path*"\\"*"CPdescarga.xlsx")["Puebla"])["A2:D5428"]
+      dfCPA=DataFrame(CPdata,headCP)
     elseif estado=="Querétaro"
-        dfCPA=select!(DataFrame(ExcelFiles.load(path*"\\"*"CPdescarga.xls","Querétaro")),headCP)
+      CPdata=(XLSX.readxlsx(path*"\\"*"CPdescarga.xlsx")["Querétaro"])["A2:D3100"]
+      dfCPA=DataFrame(CPdata,headCP)
     elseif estado=="Quintana Roo"
-        dfCPA=select!(DataFrame(ExcelFiles.load(path*"\\"*"CPdescarga.xls","Quintana_Roo")),headCP)
+      CPdata=(XLSX.readxlsx(path*"\\"*"CPdescarga.xlsx")["Quintana_Roo"])["A2:D1150"]
+      dfCPA=DataFrame(CPdata,headCP)
     elseif estado=="San Luis Potosí"
-        dfCPA=select!(DataFrame(ExcelFiles.load(path*"\\"*"CPdescarga.xls","San_Luis_Potosí")),headCP)
+      CPdata=(XLSX.readxlsx(path*"\\"*"CPdescarga.xlsx")["San_Luis_Potosí"])["A2:D5982"]
+      dfCPA=DataFrame(CPdata,headCP)
     elseif estado=="Sinaloa"
-        dfCPA=select!(DataFrame(ExcelFiles.load(path*"\\"*"CPdescarga.xls","Sinaloa")),headCP)
+      CPdata=(XLSX.readxlsx(path*"\\"*"CPdescarga.xlsx")["Sinaloa"])["A2:D4165"]
+      dfCPA=DataFrame(CPdata,headCP)
     elseif estado=="Sonora"
-        dfCPA=select!(DataFrame(ExcelFiles.load(path*"\\"*"CPdescarga.xls","Sonora")),headCP)
+      CPdata=(XLSX.readxlsx(path*"\\"*"CPdescarga.xlsx")["Sonora"])["A2:D8734"]
+      dfCPA=DataFrame(CPdata,headCP)
     elseif estado=="Tabasco"
-        dfCPA=select!(DataFrame(ExcelFiles.load(path*"\\"*"CPdescarga.xls","Tabasco")),headCP)
+      CPdata=(XLSX.readxlsx(path*"\\"*"CPdescarga.xlsx")["Tabasco"])["A2:D2645"]
+      dfCPA=DataFrame(CPdata,headCP)
     elseif estado=="Tamaulipas"
-        dfCPA=select!(DataFrame(ExcelFiles.load(path*"\\"*"CPdescarga.xls","Tamaulipas")),headCP)
+      CPdata=(XLSX.readxlsx(path*"\\"*"CPdescarga.xlsx")["Tamaulipas"])["A2:D3281"]
+      dfCPA=DataFrame(CPdata,headCP)
     elseif estado=="Tlaxcala"
-        dfCPA=select!(DataFrame(ExcelFiles.load(path*"\\"*"CPdescarga.xls","Tlaxcala")),headCP)
+      CPdata=(XLSX.readxlsx(path*"\\"*"CPdescarga.xlsx")["Tlaxcala"])["A2:D1443"]
+      dfCPA=DataFrame(CPdata,headCP)
     elseif estado=="Veracruz de Ignacio de la Llave"
-        dfCPA=select!(DataFrame(ExcelFiles.load(path*"\\"*"CPdescarga.xls","Veracruz_de_Ignacio_de_la_Llave")),headCP)
+      CPdata=(XLSX.readxlsx(path*"\\"*"CPdescarga.xlsx")["Veracruz_de_Ignacio_de_la_Llave"])["A2:D8950"]
+      dfCPA=DataFrame(CPdata,headCP)
     elseif estado=="Yucatán"
-        dfCPA=select!(DataFrame(ExcelFiles.load(path*"\\"*"CPdescarga.xls","Yucatán")),headCP)
+      CPdata=(XLSX.readxlsx(path*"\\"*"CPdescarga.xlsx")["Yucatán"])["A2:D1643"]
+      dfCPA=DataFrame(CPdata,headCP)
     elseif estado=="Zacatecas"
-        dfCPA=select!(DataFrame(ExcelFiles.load(path*"\\"*"CPdescarga.xls","Zacatecas")),headCP)
+      CPdata=(XLSX.readxlsx(path*"\\"*"CPdescarga.xlsx")["Zacatecas"])["A2:D1846"]
+      dfCPA=DataFrame(CPdata,headCP)
     end
         dfaux=DataFrame(D_mnpio=[municipio])
         return innerjoin(dfaux,dfCPA,on= :D_mnpio)
