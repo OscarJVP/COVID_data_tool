@@ -155,7 +155,6 @@ function datos_municipio(indicadores, estado::String, municipio::String)
   nombre_archivo = "datos_" * estado * "_" * municipio * ".csv"
   Ct_DocCSV(nombre_archivo, df)
 end
-datos_indicador("Porcentaje de hombres","Morelos")
 #Codigo para la obtencion de los datos faltantes
 function downloadCD()
     fileDir=HTTP.download(url,pathCov);
@@ -393,7 +392,7 @@ end
 function codPos_municipio(estado::String,municipio::String)
     headCP=[:d_codigo,:d_asenta,:d_tipo_asenta,:D_mnpio]
     if estado=="Aguascalientes"
-        dfCPA=select!(DataFrame(ExcelFiles.load(path*"\\"*"CPdescarga.xls","Aguascalientes")),headCP)
+        dfCPA=select!(DataFrame(XLSX.readxlsx(path*"\\"*"CPdescarga.xlsx")["Aguascalientes"]),headCP)
     elseif estado=="Baja California"
         dfCPA=select!(DataFrame(ExcelFiles.load(path*"\\"*"CPdescarga.xls","Baja_California")),headCP)
     elseif estado=="Baja California Sur"
@@ -464,7 +463,75 @@ function getIndINEGI(estado::String,indicador::String)
     dfIndINE=CSV.read(pathINEGI*estado*"\\datos_"*indicador*"_"*estado*".csv",DataFrame);
     return dfIndINE
 end
-
+function getExtTer(estado:: String)
+  headET=[:Municipio,:Total]
+  if estado=="Aguascalientes"
+      dfET=DataFrame((XLSX.readxlsx(path*"\\"*"Extension territorial.xlsx")[estado])["A2:B11"],headET)
+  elseif estado=="Baja California"
+      dfET=DataFrame((XLSX.readxlsx(path*"\\"*"Extension territorial.xlsx")[estado])["A2:B7"],headET)
+  elseif estado=="Baja California Sur"
+      dfET=DataFrame((XLSX.readxlsx(path*"\\"*"Extension territorial.xlsx")[estado])["A2:B6"],headET)
+  elseif estado=="Campeche"
+      dfET=DataFrame((XLSX.readxlsx(path*"\\"*"Extension territorial.xlsx")[estado])["A2:B13"],headET)
+  elseif estado=="Coahuila de Zaragoza"
+      dfET=DataFrame((XLSX.readxlsx(path*"\\"*"Extension territorial.xlsx")[estado])["A2:B39"],headET)
+  elseif estado=="Colima"
+      dfET=DataFrame((XLSX.readxlsx(path*"\\"*"Extension territorial.xlsx")[estado])["A2:B11"],headET)
+  elseif estado=="Chiapas"
+      dfET=DataFrame((XLSX.readxlsx(path*"\\"*"Extension territorial.xlsx")[estado])["A2:B125"],headET)
+  elseif estado=="Chihuahua"
+      dfET=DataFrame((XLSX.readxlsx(path*"\\"*"Extension territorial.xlsx")[estado])["A2:B68"],headET)
+  elseif estado=="Ciudad de México"
+      dfET=DataFrame((XLSX.readxlsx(path*"\\"*"Extension territorial.xlsx")[estado])["A2:B17"],headET)
+  elseif estado=="Durango"
+      dfET=DataFrame((XLSX.readxlsx(path*"\\"*"Extension territorial.xlsx")[estado])["A2:B40"],headET)
+  elseif estado=="Guanajuato"
+      dfET=DataFrame((XLSX.readxlsx(path*"\\"*"Extension territorial.xlsx")[estado])["A2:B47"],headET)
+  elseif estado=="Guerrero"
+      dfET=DataFrame((XLSX.readxlsx(path*"\\"*"Extension territorial.xlsx")[estado])["A2:B82"],headET)
+  elseif estado=="Hidalgo"
+      dfET=DataFrame((XLSX.readxlsx(path*"\\"*"Extension territorial.xlsx")[estado])["A2:B85"],headET)
+  elseif estado=="Jalisco"
+      dfET=DataFrame((XLSX.readxlsx(path*"\\"*"Extension territorial.xlsx")[estado])["A2:B126"],headET)
+  elseif estado=="México"
+      dfET=DataFrame((XLSX.readxlsx(path*"\\"*"Extension territorial.xlsx")[estado])["A2:B126"],headET)
+  elseif estado=="Michoacán de Ocampo"
+      dfET=DataFrame((XLSX.readxlsx(path*"\\"*"Extension territorial.xlsx")[estado])["A2:B114"],headET)
+  elseif estado=="Morelos"
+      dfET=DataFrame((XLSX.readxlsx(path*"\\"*"Extension territorial.xlsx")[estado])["A2:B37"],headET)
+  elseif estado=="Nayarit"
+      dfET=DataFrame((XLSX.readxlsx(path*"\\"*"Extension territorial.xlsx")[estado])["A2:B21"],headET)
+  elseif estado=="Nuevo León"
+      dfET=DataFrame((XLSX.readxlsx(path*"\\"*"Extension territorial.xlsx")[estado])["A2:B52"],headET)
+  elseif estado=="Oaxaca"
+      dfET=DataFrame((XLSX.readxlsx(path*"\\"*"Extension territorial.xlsx")[estado])["A2:B11"],headET)
+  elseif estado=="Puebla"
+      dfET=DataFrame((XLSX.readxlsx(path*"\\"*"Extension territorial.xlsx")[estado])["A2:B218"],headET)
+  elseif estado=="Querétaro"
+      dfET=DataFrame((XLSX.readxlsx(path*"\\"*"Extension territorial.xlsx")[estado])["A2:B19"],headET)
+  elseif estado=="Quintana Roo"
+      dfET=DataFrame((XLSX.readxlsx(path*"\\"*"Extension territorial.xlsx")[estado])["A2:B10"],headET)
+  elseif estado=="San Luis Potosí"
+      dfET=DataFrame((XLSX.readxlsx(path*"\\"*"Extension territorial.xlsx")[estado])["A2:B59"],headET)
+  elseif estado=="Sinaloa"
+      dfET=DataFrame((XLSX.readxlsx(path*"\\"*"Extension territorial.xlsx")[estado])["A2:B19"],headET)
+  elseif estado=="Sonora"
+      dfET=DataFrame((XLSX.readxlsx(path*"\\"*"Extension territorial.xlsx")[estado])["A2:B73"],headET)
+  elseif estado=="Tabasco"
+      dfET=DataFrame((XLSX.readxlsx(path*"\\"*"Extension territorial.xlsx")[estado])["A2:B18"],headET)
+  elseif estado=="Tamaulipas"
+      dfET=DataFrame((XLSX.readxlsx(path*"\\"*"Extension territorial.xlsx")[estado])["A2:B44"],headET)
+  elseif estado=="Tlaxcala"
+      dfET=DataFrame((XLSX.readxlsx(path*"\\"*"Extension territorial.xlsx")[estado])["A2:B61"],headET)
+  elseif estado=="Veracruz de Ignacio de la Llave"
+      dfET=DataFrame((XLSX.readxlsx(path*"\\"*"Extension territorial.xlsx")[estado])["A2:B213"],headET)
+  elseif estado=="Yucatán"
+      dfET=DataFrame((XLSX.readxlsx(path*"\\"*"Extension territorial.xlsx")[estado])["A2:B11"],headET)
+  elseif estado=="Zacatecas"
+      dfET=DataFrame((XLSX.readxlsx(path*"\\"*"Extension territorial.xlsx")[estado])["A2:B59"],headET)
+  end
+      return dfET
+end
 #Codigo para prueba
 #=
 #Muestra los indicadores disponibles
