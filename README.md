@@ -15,12 +15,15 @@ Paquetes de JULIA necesarios para el funcionamiento de la paquetería.\
     `Dates`\
 Pueden instalarse con el administrador de paquetes de JULIA pulsando la tecla `]` en el REPL\
     `add HTTP DataFrames CSV JSON InfoZIP ZipFile XLSX ExcelFiles Dates`
+    \
+    ![](images/prerrequisitos.gif)
+    \
 
 ### Instalación
 Haciendo uso del REPL de JULIA presiona la tecla `]` para al administrador de paquetes de JULIA e ingresar\
     `add https://github.com/OscarJVP/COVID_data_tool.jl`\
     \
-    ![](images/instalacion_1.gif)
+    ![](images/instalacion_1.jpg)
     \
 Regresar a la línea de comandos de JULIA presionando la tecla `backspace` e ingresar\
     `using COVID_data_tool`\
