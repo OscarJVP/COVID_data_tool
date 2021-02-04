@@ -23,21 +23,21 @@ Pueden instalarse con el administrador de paquetes de JULIA pulsando la tecla `]
 Haciendo uso del REPL de JULIA presiona la tecla `]` para al administrador de paquetes de JULIA e ingresar\
     `add https://github.com/OscarJVP/COVID_data_tool.jl`\
     \
-    ![](images/instalacion_1.jpg)
+    ![](images/instalacion_1.gif)
     \
 Regresar a la línea de comandos de JULIA presionando la tecla `backspace` e ingresar\
     `using COVID_data_tool`\
     \
-    ![](images/instalacion_2.jpg)
+    ![](images/instalacion_2.gif)
     \
 Por último ejecutar la función `COVID_data_tool.downloadCD()`, esta descargara datos necesarios para el funcionamiento de la paquetería.\
     \
-    ![](images/instalacion_3.jpg)
+    ![](images/instalacion_3.gif)
     \
 Puedes probarla con\
     `COVID_data_tool.indicadores_disponibles()`\
     \
-    ![](images/instalacion_4.jpg)
+    ![](images/instalacion_4.gif)
     \
 
 ### Funciones
