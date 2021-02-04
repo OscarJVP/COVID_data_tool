@@ -1,7 +1,6 @@
 module COVID_data_tool
 
 using DataFrames, JSON, InfoZIP, ZipFile, HTTP, CSV, XLSX, ExcelFiles, Dates
-
 include("diccionarios_claves.jl");
 include("url_paths.jl");
 function getJSSIn(clave_indicador:: String, clave_municipio:: String, estado:: String, clave_estado:: String)
@@ -190,113 +189,94 @@ end
 compar1=Matrix(select(f,[:ENTIDAD_UM]))
 compar2=Matrix(select(f,[:MUNICIPIO_RES]))
 =#
-#=function union_Covcon(Indicadores::Vector{String})
-  f=getCovData()
-  compar1=Matrix(select(f,[:ENTIDAD_UM]))
-  compar2=Matrix(select(f,[:MUNICIPIO_RES]))
-  ind_estado=""
-  ind_mun=""
-  indicadorNom="Union_Cov"
-  dfUnion=Array{DataFrame}(undef,4721997)
-  for i in 1:length(compar1)
-    @show i
-    for k in keys(diccionario_estados)
-      if parse(Int64,get(diccionario_estados,k,"Not founded"))==compar1[i]
-        for h in keys(diccionario_municipios[compar1[i]])
-          if h=="Total estatal"
-          elseif parse(Int64,get(diccionario_municipios[compar1[i]],h,"Not founded"))==compar2[i]
-
-              break
-          end
-        end
-        break
-      end
-    end
-  end
-  for ind in indicadores
-    indicadorNom=indicadorNom*"_"*ind
-  end
-  nombre="Union_Cov_"*indicadores*".csv"
-  Ct_DocCSV(nombre,f)
+function comp_CovInd(indicadores::Vector{String},estado::String,municipio::String)
+   dfest=DataFrame(ENTIDAD_UM=parse(Int64,get(diccionario_estados,estado,"Not founded")))
+   dfmun=DataFrame(MUNICIPIO_RES=parse(Int64,get(diccionario_municipios[parse(Int64,get(diccionario_estados,estado,"Not founded"))],municipio,"Not founded")))
+   f=getCovData()
+   f=innerjoin(f,dfest,on=:ENTIDAD_UM)
+   f=innerjoin(f,dfmun,on=:MUNICIPIO_RES)
+   dfind=conjunto_estado(indicadores,estado,municipio)
+   dfrec=hcat(dfmun,dfest)
+   dfind=hcat(dfrec,dfind)
+   f=innerjoin(f,dfind,on=[:MUNICIPIO_RES,:ENTIDAD_UM])
 end
-=#
 function dato_estado(indicador::String,estado::String)
   if indicador=="Extension territorial"
     dfaux=getExtTer(estado)
   elseif indicador=="Indicadores de pobreza"
-    dfaux=getIndPobreza("All")
+    dfaux=getIndPobreza("All",estado)
   elseif indicador=="IDH y componentes"
-    dfaux=getIDH("All")
+    dfaux=getIDH("All",estado)
   elseif indicador=="Intesidad migratoria y componentes"
-    dfaux=getIndIM("All")
+    dfaux=getIndIM("All",estado)
   elseif haskey(diccionario_indicadores,indicador)
     dfaux=getIndINEGI(estado, indicador)
   elseif indicador=="Años promedio de escolaridad"
-    dfaux=getIDH(indicador)
+    dfaux=getIDH(indicador,estado)
   elseif indicador=="Años esperados de escolaridad"
-    dfaux=getIDH(indicador)
+    dfaux=getIDH(indicador,estado)
   elseif indicador=="Ingreso per cápita anual"
-    dfaux=getIDH(indicador)
+    dfaux=getIDH(indicador,estado)
   elseif indicador=="Tasa de mortalidad infantil"
-    dfaux=getIDH(indicador)
+    dfaux=getIDH(indicador,estado)
   elseif indicador=="Índice de educación"
-    dfaux=getIDH(indicador)
+    dfaux=getIDH(indicador,esatdo)
   elseif indicador=="Indice de salud"
-    dfaux=getIDH(indicador)
+    dfaux=getIDH(indicador,esatdo)
   elseif indicador=="Indice de ingreso"
-    dfaux=getIDH(indicador)
+    dfaux=getIDH(indicador,estado)
   elseif indicador=="IDH"
-    dfaux=getIDH(indicador)
+    dfaux=getIDH(indicador,estado)
   elseif indicador=="Pobreza"
-    dfaux=getIndPobreza(indicador)
+    dfaux=getIndPobreza(indicador,estado)
   elseif indicador=="Pobreza extrema"
-    dfaux=getIndPobreza(indicador)
+    dfaux=getIndPobreza(indicador,estado)
   elseif indicador=="Pobreza moderada"
-    dfaux=getIndPobreza(indicador)
+    dfaux=getIndPobreza(indicador,estado)
   elseif indicador=="Vulnerables por carencia social"
-    dfaux=getIndPobreza(indicador)
+    dfaux=getIndPobreza(indicador,estado)
   elseif indicador=="Vulnerables por ingreso"
-    dfaux=getIndPobreza(indicador)
+    dfaux=getIndPobreza(indicador,estado)
   elseif indicador=="No pobres y no vulnerables"
-    dfaux=getIndPobreza(indicador)
+    dfaux=getIndPobreza(indicador,estado)
   elseif indicador=="Rezago educativo"
-    dfaux=getIndPobreza(indicador)
+    dfaux=getIndPobreza(indicador,estado)
   elseif indicador=="Carencia por acceso a los servicios de salud"
-    dfaux=getIndPobreza(indicador)
+    dfaux=getIndPobreza(indicador,estado)
   elseif indicador=="Carencia por acceso a la seguridad social"
-    dfaux=getIndPobreza(indicador)
+    dfaux=getIndPobreza(indicador,estado)
   elseif indicador=="Carencia por acceso a los servicios básicos en la vivienda"
-    dfaux=getIndPobreza(indicador)
+    dfaux=getIndPobreza(indicador,estado)
   elseif indicador=="Carencia por acceso a la alimentación"
-    dfaux=getIndPobreza(indicador)
+    dfaux=getIndPobreza(indicador,estado)
   elseif indicador=="Población con al menos una carencia social"
-    dfaux=getIndPobreza(indicador)
+    dfaux=getIndPobreza(indicador,estado)
   elseif indicador=="Población con tres o más carencias sociales"
-    dfaux=getIndPobreza(indicador)
+    dfaux=getIndPobreza(indicador,estado)
   elseif indicador=="Población con ingreso inferior a la línea de bienestar"
-    dfaux=getIndPobreza(indicador)
+    dfaux=getIndPobreza(indicador,estado)
   elseif indicador=="Población con ingreso inferior a la línea de bienestar mínimo"
-    dfaux=getIndPobreza(indicador)
+    dfaux=getIndPobreza(indicador,estado)
   elseif indicador=="TOT_VIV"
-    dfaux=getIndIM(indicador)
+    dfaux=getIndIM(indicador,estado)
   elseif indicador=="VIV_REM"
-    dfaux=getIndIM(indicador)
+    dfaux=getIndIM(indicador,estado)
   elseif indicador=="VIV_EMIG"
-    dfaux=getIndIM(indicador)
+    dfaux=getIndIM(indicador,estado)
   elseif indicador=="VIV_CIRC"
-    dfaux=getIndIM(indicador)
+    dfaux=getIndIM(indicador,estado)
   elseif indicador=="VIV_RET"
-    dfaux=getIndIM(indicador)
+    dfaux=getIndIM(indicador,estado)
   elseif indicador=="IIM_2010"
-    dfaux=getIndIM(indicador)
+    dfaux=getIndIM(indicador,estado)
   elseif indicador=="IIMa100"
-    dfaux=getIndIM(indicador)
+    dfaux=getIndIM(indicador,estado)
   elseif indicador=="GIM_2010"
-    dfaux=getIndIM(indicador)
+    dfaux=getIndIM(indicador,estado)
   elseif indicador=="LUG_EDO"
-    dfaux=getIndIM(indicador)
+    dfaux=getIndIM(indicador,estado)
   elseif indicador=="LUG_NAL"
-    dfaux=getIndIM(indicador)
+    dfaux=getIndIM(indicador,estado)
   end
   plu=[]
   for k in keys(diccionario_municipios[parse(Int64,get(diccionario_estados,estado,"Not founded"))])
@@ -405,84 +385,84 @@ function dato_estado(indicador::String,estado::String,municipio::String)
   if indicador=="Extension territorial"
     dfaux=getExtTer(estado)
   elseif indicador=="Indicadores de pobreza"
-    dfaux=getIndPobreza("All")
+    dfaux=getIndPobreza("All",estado)
   elseif indicador=="IDH y componentes"
-    dfaux=getIDH("All")
+    dfaux=getIDH("All",estado)
   elseif indicador=="Intesidad migratoria y componentes"
-    dfaux=getIndIM("All")
+    dfaux=getIndIM("All",estado)
   elseif haskey(diccionario_indicadores,indicador)
     dfaux=getIndINEGI(estado, indicador)
   elseif indicador=="Años promedio de escolaridad"
-    dfaux=getIDH(indicador)
+    dfaux=getIDH(indicador,estado)
   elseif indicador=="Años esperados de escolaridad"
-    dfaux=getIDH(indicador)
+    dfaux=getIDH(indicador,estado)
   elseif indicador=="Ingreso per cápita anual"
-    dfaux=getIDH(indicador)
+    dfaux=getIDH(indicador,estado)
   elseif indicador=="Tasa de mortalidad infantil"
-    dfaux=getIDH(indicador)
+    dfaux=getIDH(indicador,estado)
   elseif indicador=="Índice de educación"
-    dfaux=getIDH(indicador)
+    dfaux=getIDH(indicador,estado)
   elseif indicador=="Indice de salud"
-    dfaux=getIDH(indicador)
+    dfaux=getIDH(indicador,estado)
   elseif indicador=="Indice de ingreso"
-    dfaux=getIDH(indicador)
+    dfaux=getIDH(indicador,estado)
   elseif indicador=="IDH"
-    dfaux=getIDH(indicador)
+    dfaux=getIDH(indicador,estado)
     for c in 1:length(names(dfaux))
        if string(names(dfaux)[c])=="Total"
           rename!(dfaux,:Total=>indicador)
        end
      end
   elseif indicador=="Pobreza"
-    dfaux=getIndPobreza(indicador)
+    dfaux=getIndPobreza(indicador,estado)
   elseif indicador=="Pobreza extrema"
-    dfaux=getIndPobreza(indicador)
+    dfaux=getIndPobreza(indicador,estado)
   elseif indicador=="Pobreza moderada"
-    dfaux=getIndPobreza(indicador)
+    dfaux=getIndPobreza(indicador,estado)
   elseif indicador=="Vulnerables por carencia social"
-    dfaux=getIndPobreza(indicador)
+    dfaux=getIndPobreza(indicador,estado)
   elseif indicador=="Vulnerables por ingreso"
-    dfaux=getIndPobreza(indicador)
+    dfaux=getIndPobreza(indicador,estado)
   elseif indicador=="No pobres y no vulnerables"
-    dfaux=getIndPobreza(indicador)
+    dfaux=getIndPobreza(indicador,estado)
   elseif indicador=="Rezago educativo"
-    dfaux=getIndPobreza(indicador)
+    dfaux=getIndPobreza(indicador,estado)
   elseif indicador=="Carencia por acceso a los servicios de salud"
-    dfaux=getIndPobreza(indicador)
+    dfaux=getIndPobreza(indicador,estado)
   elseif indicador=="Carencia por acceso a la seguridad social"
-    dfaux=getIndPobreza(indicador)
+    dfaux=getIndPobreza(indicador,estado)
   elseif indicador=="Carencia por acceso a los servicios básicos en la vivienda"
-    dfaux=getIndPobreza(indicador)
+    dfaux=getIndPobreza(indicador,estado)
   elseif indicador=="Carencia por acceso a la alimentación"
-    dfaux=getIndPobreza(indicador)
+    dfaux=getIndPobreza(indicador,estado)
   elseif indicador=="Población con al menos una carencia social"
-    dfaux=getIndPobreza(indicador)
+    dfaux=getIndPobreza(indicador,estado)
   elseif indicador=="Población con tres o más carencias sociales"
-    dfaux=getIndPobreza(indicador)
+    dfaux=getIndPobreza(indicador,estado)
   elseif indicador=="Población con ingreso inferior a la línea de bienestar"
-    dfaux=getIndPobreza(indicador)
+    dfaux=getIndPobreza(indicador,estado)
   elseif indicador=="Población con ingreso inferior a la línea de bienestar mínimo"
-    dfaux=getIndPobreza(indicador)
+    dfaux=getIndPobreza(indicador,estado)
   elseif indicador=="TOT_VIV"
-    dfaux=getIndIM(indicador)
+    dfaux=getIndIM(indicador,estado)
   elseif indicador=="VIV_REM"
-    dfaux=getIndIM(indicador)
+    dfaux=getIndIM(indicador,estado)
   elseif indicador=="VIV_EMIG"
-    dfaux=getIndIM(indicador)
+    dfaux=getIndIM(indicador,estado)
   elseif indicador=="VIV_CIRC"
-    dfaux=getIndIM(indicador)
+    dfaux=getIndIM(indicador,estado)
   elseif indicador=="VIV_RET"
-    dfaux=getIndIM(indicador)
+    dfaux=getIndIM(indicador,estado)
   elseif indicador=="IIM_2010"
-    dfaux=getIndIM(indicador)
+    dfaux=getIndIM(indicador,estado)
   elseif indicador=="IIMa100"
-    dfaux=getIndIM(indicador)
+    dfaux=getIndIM(indicador,estado)
   elseif indicador=="GIM_2010"
-    dfaux=getIndIM(indicador)
+    dfaux=getIndIM(indicador,estado)
   elseif indicador=="LUG_EDO"
-    dfaux=getIndIM(indicador)
+    dfaux=getIndIM(indicador,estado)
   elseif indicador=="LUG_NAL"
-    dfaux=getIndIM(indicador)
+    dfaux=getIndIM(indicador,estado)
   end
   plu=[]
   for k in keys(diccionario_municipios[parse(Int64,get(diccionario_estados,estado,"Not founded"))])
@@ -503,7 +483,7 @@ function conjunto_estado(indicadores::Vector{String},estado::String,municipio::S
         dfaux=innerjoin(dfaux,getIndPobreza("All",estado),on=:Municipio)
       elseif indicador=="IDH y componentes"
         dfaux=innerjoin(dfaux,getIDH("All",estado),on=:Municipio)
-      elseif indicador=="Intesidad migratoria y componentes"
+      elseif indicador=="Intensidad migratoria y componentes"
         dfaux=innerjoin(dfaux,getIndIM("All",estado),on=:Municipio)
       elseif haskey(diccionario_indicadores,indicador)
         dfaux=innerjoin(dfaux,getIndINEGI(estado,indicador),on=:Municipio)
@@ -587,7 +567,6 @@ function downloadCD()
     fileDir=HTTP.download(url,pathCov);
     InfoZIP.unzip(fileDir,pathCov);
 end
-
 function getCovData()
     covName=string(Dates.today()-Dates.Day(1))
     covName=replace(covName,"-"=>"")
@@ -597,7 +576,6 @@ function getCovData()
     ce=CSV.read(covFile,DataFrame);
     return ce
 end
-
 function downloadIP()
     inPobDir=HTTP.download(turl,path)
     InfoZIP.unzip(inPobDir,path)
