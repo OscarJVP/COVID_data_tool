@@ -1,6 +1,6 @@
 # COVID_data_tool
 Paquetería de JULIA creada con el fín de unir datos abiertos sobre casos COVID-19 y demografía de México.\
-Probada con JULIA 1.4.2 y 1.5.3
+Compatible con JULIA 1.x.x
 
 ### Prerrequisitos
 Paquetes de JULIA necesarios para el funcionamiento de la paquetería.\
