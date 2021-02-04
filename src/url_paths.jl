@@ -6,10 +6,10 @@ if Sys.iswindows()
     path=chop(@__DIR__, tail=3)*"Docs\\";
     pathCov=chop(@__DIR__, tail=3)*"Docs\\Cov_data\\";
     pathINEGI=chop(@__DIR__, tail=3)*"Docs\\Datos INEGI\\Datos ";
-    pathCSV="C:\\archivos_CSV_COVID_data_tool"
+    pathCSV="C:\\archivos_CSV_COVID_data_tool\\"
 elseif Sys.islinux()
     path=chop(@__DIR__, tail=3)*"Docs/";
     pathCov=chop(@__DIR__, tail=3)*"Docs/Cov_data/";
     pathINEGI=chop(@__DIR__, tail=3)*"Docs/Datos INEGI/Datos ";
-    pathCSV="/home/archivos_CSV_COVID_data_tool"
+    pathCSV="/home/archivos_CSV_COVID_data_tool/"
 end
