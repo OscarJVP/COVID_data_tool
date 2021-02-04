@@ -424,6 +424,11 @@ function dato_estado(indicador::String,estado::String,municipio::String)
     dfaux=getIDH(indicador)
   elseif indicador=="IDH"
     dfaux=getIDH(indicador)
+    for c in 1:length(names(dfaux))
+       if string(names(dfaux)[c])=="Total"
+          rename!(dfaux,:Total=>indicador)
+       end
+     end
   elseif indicador=="Pobreza"
     dfaux=getIndPobreza(indicador)
   elseif indicador=="Pobreza extrema"
