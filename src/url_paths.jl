@@ -14,7 +14,7 @@ if Sys.iswindows()
     pathINEGI=chop(pathof(COVID_data_tool), tail=22)*"Docs\\Datos INEGI\\Datos ";
 end
 
-if Sys.isunix()
+if Sys.islinux()
     path=chop(pathof(COVID_data_tool), tail=22)*"Docs";
     pathCov=chop(pathof(COVID_data_tool), tail=22)*"Docs\\Cov_data";
     pathINEGI=chop(pathof(COVID_data_tool), tail=22)*"Docs\\Datos INEGI\\Datos ";
