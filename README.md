@@ -68,7 +68,7 @@ Realiza la descarga de datos acerca del COVID-19 para poder ser consultados.
 ### Notas
     * Las funciones que requieran un estado como entrada necesitan el nombre oficial del estado v. gr. Michoacán se deben introducir como Michoacán de Ocampo.\
     * Las funciones que requieran un indicador como entrada necesitan introducirse como están en el listado. Este se puede observar utilizando la función `indicadores_disponibles().`
-    * Todos los archivos .csv se generan en una carpeta con nombre archivos_CSV_COVID_data_tool dentro de la raíz del disco duro (por lo general C:\\archivos_CSV_COVID_data_tool).
+    * Todos los archivos .csv se generan en una carpeta con nombre archivos_CSV_COVID_data_tool dentro de la raíz del disco duro (por lo general C:\\archivos_CSV_COVID_data_tool en Windows, /home/archivos_CSV_COVID_data_tool en Linux).
 
 ## Equipo de Trabajo
 Deep Alpha\
