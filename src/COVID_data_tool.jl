@@ -196,11 +196,6 @@ function datos_municipio(indicadores, estado::String, municipio::String)
   nombre_archivo = "datos_" * estado * "_" * municipio * "_" * Dates.format(now(), "dd_u_yyyy_HH_MM_SS") * ".csv"
   Ct_DocCSV(nombre_archivo, df)
 end
-#=f=getCovData()
-compar1=Matrix(select(f,[:ENTIDAD_UM]))
-compar2=Matrix(select(f,[:MUNICIPIO_RES]))
-=#
-
 function comp_CovInd(indicadores::Vector{String},estado::String,municipio::String)
    dfest=DataFrame(ENTIDAD_UM=parse(Int64,get(diccionario_estados,estado,"Not founded")))
    dfmun=DataFrame(MUNICIPIO_RES=parse(Int64,get(diccionario_municipios[parse(Int64,get(diccionario_estados,estado,"Not founded"))],municipio,"Not founded")))
@@ -211,7 +206,8 @@ function comp_CovInd(indicadores::Vector{String},estado::String,municipio::Strin
    dfrec=hcat(dfmun,dfest)
    dfind=hcat(dfrec,dfind)
    f=innerjoin(f,dfind,on=[:MUNICIPIO_RES,:ENTIDAD_UM])
-
+   nombre="Covid_union_"*estado*"_"*municipio*".csv"
+   Ct_DocCSV(nombre,f)
 end
 function dato_estado(indicador::String,estado::String)
   if indicador=="Extension territorial"
@@ -1065,7 +1061,7 @@ function codPos_municipio(estado::String,municipio::String)
       CPdata=(XLSX.readxlsx(path*"\\"*"CPdescarga.xlsx")["Nuevo_León"])["A2:D4878"]
       dfCPA=DataFrame(CPdata,headCP)
     elseif estado=="Oaxaca"
-      CPdata=(XLSX.readxlsx(path*"\\"*"CPdescarga.xlsx")["Oaxaca"])["A2:6063"]
+      CPdata=(XLSX.readxlsx(path*"\\"*"CPdescarga.xlsx")["Oaxaca"])["A2:D6063"]
       dfCPA=DataFrame(CPdata,headCP)
     elseif estado=="Puebla"
       CPdata=(XLSX.readxlsx(path*"\\"*"CPdescarga.xlsx")["Puebla"])["A2:D5428"]
@@ -1152,7 +1148,7 @@ function getExtTer(estado:: String)
   elseif estado=="Nuevo León"
       dfET=DataFrame((XLSX.readxlsx(path*"\\"*"Extension territorial.xlsx")[estado])["A2:B52"],headET)
   elseif estado=="Oaxaca"
-      dfET=DataFrame((XLSX.readxlsx(path*"\\"*"Extension territorial.xlsx")[estado])["A2:B11"],headET)
+      dfET=DataFrame((XLSX.readxlsx(path*"\\"*"Extension territorial.xlsx")[estado])["A2:B571"],headET)
   elseif estado=="Puebla"
       dfET=DataFrame((XLSX.readxlsx(path*"\\"*"Extension territorial.xlsx")[estado])["A2:B218"],headET)
   elseif estado=="Querétaro"
@@ -1174,7 +1170,7 @@ function getExtTer(estado:: String)
   elseif estado=="Veracruz de Ignacio de la Llave"
       dfET=DataFrame((XLSX.readxlsx(path*"\\"*"Extension territorial.xlsx")[estado])["A2:B213"],headET)
   elseif estado=="Yucatán"
-      dfET=DataFrame((XLSX.readxlsx(path*"\\"*"Extension territorial.xlsx")[estado])["A2:B11"],headET)
+      dfET=DataFrame((XLSX.readxlsx(path*"\\"*"Extension territorial.xlsx")[estado])["A2:B106"],headET)
   elseif estado=="Zacatecas"
       dfET=DataFrame((XLSX.readxlsx(path*"\\"*"Extension territorial.xlsx")[estado])["A2:B59"],headET)
   end
