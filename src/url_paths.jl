@@ -3,13 +3,13 @@ turl="https://www.coneval.org.mx/Medicion/Documents/Pobreza_municipal/Concentrad
 murl="http://www.conapo.gob.mx/work/models/CONAPO/intensidad_migratoria/base_completa/IIM2010_BASEMUN.xls";
 
 if Sys.iswindows()
-    path=chop(@__DIR__, tail=3)*"Docs";
-    pathCov=chop(@__DIR__, tail=3)*"Docs\\Cov_data";
+    path=chop(@__DIR__, tail=3)*"Docs\\";
+    pathCov=chop(@__DIR__, tail=3)*"Docs\\Cov_data\\";
     pathINEGI=chop(@__DIR__, tail=3)*"Docs\\Datos INEGI\\Datos ";
     pathCSV="C:\\archivos_CSV_COVID_data_tool"
 elseif Sys.islinux()
-    path=chop(@__DIR__, tail=3)*"Docs";
-    pathCov=chop(@__DIR__, tail=3)*"Docs/Cov_data";
+    path=chop(@__DIR__, tail=3)*"Docs/";
+    pathCov=chop(@__DIR__, tail=3)*"Docs/Cov_data/";
     pathINEGI=chop(@__DIR__, tail=3)*"Docs/Datos INEGI/Datos ";
     pathCSV="/home/archivos_CSV_COVID_data_tool"
 end
