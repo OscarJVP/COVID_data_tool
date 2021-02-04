@@ -15,6 +15,7 @@ elseif Sys.islinux()
     println("Carpeta /home/archivos_CSV_COVID_data_tool existe.")
   else
     mkdir("/home/archivos_CSV_COVID_data_tool")
+  end
 end
 
 function getJSSIn(clave_indicador:: String, clave_municipio:: String, estado:: String, clave_estado:: String)
@@ -210,6 +211,7 @@ function datos_municipio(indicadores, estado::String, municipio::String)
   nombre_archivo = "datos_" * estado * "_" * municipio * "_" * Dates.format(now(), "dd_u_yyyy_HH_MM_SS") * ".csv"
   Ct_DocCSV(nombre_archivo, df)
 end
+
 function comp_CovInd(indicadores::Vector{String},estado::String,municipio::String)
    dfest=DataFrame(ENTIDAD_UM=parse(Int64,get(diccionario_estados,estado,"Not founded")))
    dfmun=DataFrame(MUNICIPIO_RES=parse(Int64,get(diccionario_municipios[parse(Int64,get(diccionario_estados,estado,"Not founded"))],municipio,"Not founded")))
@@ -223,6 +225,7 @@ function comp_CovInd(indicadores::Vector{String},estado::String,municipio::Strin
    nombre="Covid_union_"*estado*"_"*municipio*".csv"
    Ct_DocCSV(nombre,f)
 end
+
 function dato_estado(indicador::String,estado::String)
   if indicador=="Extension territorial"
     dfaux=getExtTer(estado)
@@ -310,6 +313,7 @@ function dato_estado(indicador::String,estado::String)
   nombre_doc=indicador*"_"*estado*"_"*Dates.format(now(), "dd_u_yyyy_HH_MM_SS")*".csv"
   Ct_DocCSV(nombre_doc,dfaux)
 end
+
 function conjunto_estado(indicadores::Vector{String},estado::String)
   munau=[]
   for k in keys(diccionario_municipios[parse(Int64,get(diccionario_estados,estado,"Not founded"))])
@@ -404,6 +408,7 @@ function conjunto_estado(indicadores::Vector{String},estado::String)
   nombre_doc="Conjunto_de_"*estado*"_"*Dates.format(now(), "dd_u_yyyy_HH_MM_SS")*".csv"
   Ct_DocCSV(nombre_doc,dfaux)
 end
+
 function dato_estado(indicador::String,estado::String,municipio::String)
   if indicador=="Extension territorial"
     dfaux=getExtTer(estado)
@@ -496,6 +501,7 @@ function dato_estado(indicador::String,estado::String,municipio::String)
   nombre_doc=indicador*"_"*estado*"_"*Dates.format(now(), "dd_u_yyyy_HH_MM_SS")*".csv"
   Ct_DocCSV(nombre_doc,dfaux)
 end
+
 function conjunto_estado(indicadores::Vector{String},estado::String,municipio::String)
   dfaux=DataFrame(Municipio=municipio)
   for indicador in indicadores
@@ -585,11 +591,13 @@ function conjunto_estado(indicadores::Vector{String},estado::String,municipio::S
   end
   return dfaux
 end
+
 #Codigo para la obtencion de los datos faltantes
 function downloadCD()
     fileDir=HTTP.download(url,pathCov);
     InfoZIP.unzip(fileDir,pathCov);
 end
+
 function getCovData()
     covName=string(Dates.today()-Dates.Day(1))
     covName=replace(covName,"-"=>"")
@@ -599,10 +607,12 @@ function getCovData()
     ce=CSV.read(covFile,DataFrame);
     return ce
 end
+
 function downloadIP()
     inPobDir=HTTP.download(turl,path)
     InfoZIP.unzip(inPobDir,path)
 end
+
 function getIndPobreza(ind:: String,estado::String)
     ar=XLSX.readxlsx(path*"\\"*"Concentrado, indicadores de pobreza.xlsx")["Concentrado municipal"]
     pobData=Array{Float64,2}
@@ -742,6 +752,7 @@ function getIndPobreza(ind:: String,estado::String)
     end
     return dfIndreq
 end
+
 function getIndPobreza(ind:: String)
     ar=XLSX.readxlsx(path*"\\"*"Concentrado, indicadores de pobreza.xlsx")["Concentrado municipal"]
     pobData=Array{Float64,2}
@@ -881,6 +892,7 @@ function getIndPobreza(ind:: String)
     end
     return dfIndreq
 end
+
 function getdf2015data(ar::XLSX.Worksheet,dfaux:: DataFrame,estado::String)
         munPob=ar["E9:E2465"]
         estPob=ar["C9:C2465"]
@@ -907,9 +919,11 @@ function getdf2015data(ar::XLSX.Worksheet,dfaux:: DataFrame,estado::String)
         dfmunIM=innerjoin(dfmunIM,DataFrame(Estado=[estado]),on=:Estado)
         return select(dfmunIM,Not(:Estado))
 end
+
 function downloadIIM()
     HTTP.download(murl,path)
 end
+
 function getIndIM(field:: String,estado::String)
     dfIIM=DataFrame(ExcelFiles.load(path*"\\"*"IIM2010_BASEMUN.xls","IIM2010_BASEMUN"))
     ar=[:ENT,:MUN]
@@ -948,6 +962,7 @@ function getIndIM(field:: String,estado::String)
     dfmunIM=innerjoin(dfmunIM,DataFrame(Estado=[estado]),on=:Estado)
     return select(dfmunIM,Not(:Estado))
 end
+
 function getIDH(componente::String,estado::String)
     adh=XLSX.readxlsx(path*"\\"*"Indice de Desarrollo Humano Municipal 2010 2015.xlsx")["IDH municipal 2015"]
     headIDH=adh["C8:L8"]
@@ -985,6 +1000,7 @@ function getIDH(componente::String,estado::String)
     dfmunIM=innerjoin(dfmunIM,DataFrame(Estado=[estado]),on=:Estado)
     return select(dfmunIM,Not(:Estado))
 end
+
 function getIDH(componente::String)
     adh=XLSX.readxlsx(path*"\\"*"Indice de Desarrollo Humano Municipal 2010 2015.xlsx")["IDH municipal 2015"]
     headIDH=adh["D8:L8"]
@@ -1015,6 +1031,7 @@ function getIDH(componente::String)
     end
     return dfret
 end
+
 function codPos_municipio(estado::String,municipio::String)
     headCP=[:d_codigo,:d_asenta,:d_tipo_asenta,:D_mnpio]
     if estado=="Aguascalientes"
@@ -1117,10 +1134,12 @@ function codPos_municipio(estado::String,municipio::String)
         dfaux=DataFrame(D_mnpio=[municipio])
         return innerjoin(dfaux,dfCPA,on= :D_mnpio)
 end
+
 function getIndINEGI(estado::String,indicador::String)
     dfIndINE=CSV.read(pathINEGI*estado*"\\datos_"*indicador*"_"*estado*".csv",DataFrame);
     return dfIndINE
 end
+
 function getExtTer(estado:: String)
   headET=[:Municipio,:Total]
   if estado=="Aguascalientes"
@@ -1190,21 +1209,5 @@ function getExtTer(estado:: String)
   end
       return dfET
 end
-#Codigo para prueba
-#=
-#Muestra los indicadores disponibles
-COVID_data_tool.indicadores_disponibles()
-
-#Necesita de entrada el estado y el indicador a consultar
-indicador = "Edad mediana"
-COVID_data_tool.datos_indicador("Edad mediana", "Colima")
-
-#Necesita de entrada el estado, municipio de ese estado y el arreglo de indicadores con los indicadores que se necesitan
-indicadores = ["Defunciones Generales", "Edad mediana", "Nacimientos", "Población total", "Población de 5 años y más hablante de lengua indígena"]
-COVID_data_tool.datos_municipio(indicadores, "Aguascalientes", "Aguascalientes")
-=#
-
-export datos_municipio
-export datos_indicador
 
 end #module
