@@ -21,6 +21,7 @@ Pueden instalarse con el administrador de paquetes de JULIA pulsando la tecla `]
 Si ya tienes estas paqueterías previamente mencionadas puedes omitir este paso.
 
 ### Instalación
+**Si utilizas Linux debes ejecutar JULIA como superusuario para la instalación.**
 Haciendo uso del REPL de JULIA presiona la tecla `]` para al administrador de paquetes de JULIA e ingresar\
     `add https://github.com/OscarJVP/COVID_data_tool.jl`\
     \
