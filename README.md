@@ -14,7 +14,7 @@ Paquetes de JULIA necesarios para el funcionamiento de la paquetería.\
     `ExcelFiles`\
     `Dates`\
 Pueden instalarse con el administrador de paquetes de JULIA pulsando la tecla `]` en el REPL\
-    `add HTTP DataFrames CSV JSON InfoZIP ZipFile XLSX ExcelFiles Dates`
+    `add HTTP DataFrames CSV JSON InfoZIP ZipFile XLSX ExcelFiles Dates`\
     \
     ![](images/prerrequisitos.gif)
     \
@@ -30,9 +30,15 @@ Regresar a la línea de comandos de JULIA presionando la tecla `backspace` e ing
     \
     ![](images/instalacion_2.jpg)
     \
-Ejecutar la función `COVID_data_tool.downloadCD()`, esta descargara datos necesarios para el funcionamiento de la paquetería.\
+Por último ejecutar la función `COVID_data_tool.downloadCD()`, esta descargara datos necesarios para el funcionamiento de la paquetería.\
+    \
+    ![](images/instalacion_3.jpg)
+    \
 Puedes probarla con\
-    `COVID_data_tool.indicadores_disponibles()`
+    `COVID_data_tool.indicadores_disponibles()`\
+    \
+    ![](images/instalacion_4.jpg)
+    \
 
 ### Funciones
 `datos_indicador(indicador:: String, estado:: String)`\
