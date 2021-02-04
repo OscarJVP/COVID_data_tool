@@ -43,34 +43,33 @@ Puedes probarla con\
 ### Funciones
 `indicadores_disponibles()`\
 Muestra la lista de indicadores disponibles para consulta.\
-\
+
 
 `lista_ComponentesIDH()`\
 Muestra la lista de componentes relacionados al IDH disponibles para consulta.\
-\
+
 
 `lista_IndicadoresPobreza()`\
 Muestra la lista de indicadores de pobreza disponibles para consulta.\
-\
+
 
 `dato_estado(indicador::String, estado::String)`\
 Recibe el indicador a consultar como `String` y el estado como `String`.\
 Crea un .csv con la información deseada en la entrada de la función y muestra el nombre del archivo creado con éxito.\
-\
+
 
 `conjunto_estado(indicadores::Vector{String}, estado::String)`\
 Recibe los indicadores a consultar como un `array` de tipo `String`,el estado como `String` y el municipio como `String`.\
 Crea un .csv con la información deseada en la entrada de la función y muestra el nombre del archivo creado con éxito.\
-\
+
 
 `datos_municipio(indicadores, estado::String, municipio::String)`\
 Recibe los indicadores a consultar como un `array` de tipo `String`,el estado como `String` y el municipio como `String`.\
 Crea un .csv con la información deseada en la entrada de la función y muestra el nombre del archivo creado con éxito.\
-\
+
 
 `downloadCD()`\
 Realiza la descarga de datos acerca del COVID-19 para poder ser consultados.
-\
 
 
 ### Notas
