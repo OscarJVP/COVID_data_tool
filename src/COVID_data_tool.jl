@@ -229,7 +229,7 @@ function dato_estado(indicador::String,estado::String)
     dfaux=getIndINEGI(estado, indicador)
   elseif indicador=="Años promedio de escolaridad"
     dfaux=getIDH(indicador,estado)
-  elseif indicador=="Años esperados de escolaridad"
+  elseif indicador=="Años esperados de escolarización"
     dfaux=getIDH(indicador,estado)
   elseif indicador=="Ingreso per cápita anual"
     dfaux=getIDH(indicador,estado)
@@ -237,9 +237,9 @@ function dato_estado(indicador::String,estado::String)
     dfaux=getIDH(indicador,estado)
   elseif indicador=="Índice de educación"
     dfaux=getIDH(indicador,esatdo)
-  elseif indicador=="Indice de salud"
+  elseif indicador=="Índice de salud"
     dfaux=getIDH(indicador,esatdo)
-  elseif indicador=="Indice de ingreso"
+  elseif indicador=="Índice de ingreso"
     dfaux=getIDH(indicador,estado)
   elseif indicador=="IDH"
     dfaux=getIDH(indicador,estado)
@@ -328,7 +328,7 @@ function conjunto_estado(indicadores::Vector{String},estado::String)
          end
       elseif indicador=="Años promedio de escolaridad"
           dfaux=innerjoin(dfaux,getIDH("Años promedio de escolaridad",estado),on=:Municipio)
-      elseif indicador=="Años esperados de escolaridad"
+      elseif indicador=="Años esperados de escolarización"
           dfaux=innerjoin(dfaux,getIDH("Años esperados de escolaridad",estado),on=:Municipio)
       elseif indicador=="Ingreso per cápita anual"
           dfaux=innerjoin(dfaux,getIDH("Ingreso per cápita anual",estado),on=:Municipio)
@@ -336,9 +336,9 @@ function conjunto_estado(indicadores::Vector{String},estado::String)
           dfaux=innerjoin(dfaux,getIDH("Tasa de mortalidad infantil",estado),on=:Municipio)
       elseif indicador=="Índice de educación"
           dfaux=innerjoin(dfaux,getIDH("Índice de educación",estado),on=:Municipio)
-      elseif indicador=="Indice de salud"
+      elseif indicador=="Índice de salud"
           dfaux=innerjoin(dfaux,getIDH("Índice de salud",estado),on=:Municipio)
-      elseif indicador=="Indice de ingreso"
+      elseif indicador=="Índice de ingreso"
           dfaux=innerjoin(dfaux,getIDH("Índice de ingreso",estado),on=:Municipio)
       elseif indicador=="IDH"
           dfaux=innerjoin(dfaux,getIDH("IDH",estado),on=:Municipio)
@@ -410,7 +410,7 @@ function dato_estado(indicador::String,estado::String,municipio::String)
     dfaux=getIndINEGI(estado, indicador)
   elseif indicador=="Años promedio de escolaridad"
     dfaux=getIDH(indicador,estado)
-  elseif indicador=="Años esperados de escolaridad"
+  elseif indicador=="Años esperados de escolarización"
     dfaux=getIDH(indicador,estado)
   elseif indicador=="Ingreso per cápita anual"
     dfaux=getIDH(indicador,estado)
@@ -418,9 +418,9 @@ function dato_estado(indicador::String,estado::String,municipio::String)
     dfaux=getIDH(indicador,estado)
   elseif indicador=="Índice de educación"
     dfaux=getIDH(indicador,estado)
-  elseif indicador=="Indice de salud"
+  elseif indicador=="Índice de salud"
     dfaux=getIDH(indicador,estado)
-  elseif indicador=="Indice de ingreso"
+  elseif indicador=="Índice de ingreso"
     dfaux=getIDH(indicador,estado)
   elseif indicador=="IDH"
     dfaux=getIDH(indicador,estado)
@@ -510,7 +510,7 @@ function conjunto_estado(indicadores::Vector{String},estado::String,municipio::S
          end
       elseif indicador=="Años promedio de escolaridad"
           dfaux=innerjoin(dfaux,getIDH("Años promedio de escolaridad",estado),on=:Municipio)
-      elseif indicador=="Años esperados de escolaridad"
+      elseif indicador=="Años esperados de escolarización"
           dfaux=innerjoin(dfaux,getIDH("Años esperados de escolaridad",estado),on=:Municipio)
       elseif indicador=="Ingreso per cápita anual"
           dfaux=innerjoin(dfaux,getIDH("Ingreso per cápita anual",estado),on=:Municipio)
@@ -518,9 +518,9 @@ function conjunto_estado(indicadores::Vector{String},estado::String,municipio::S
           dfaux=innerjoin(dfaux,getIDH("Tasa de mortalidad infantil",estado),on=:Municipio)
       elseif indicador=="Índice de educación"
           dfaux=innerjoin(dfaux,getIDH("Índice de educación",estado),on=:Municipio)
-      elseif indicador=="Indice de salud"
+      elseif indicador=="Índice de salud"
           dfaux=innerjoin(dfaux,getIDH("Índice de salud",estado),on=:Municipio)
-      elseif indicador=="Indice de ingreso"
+      elseif indicador=="Índice de ingreso"
           dfaux=innerjoin(dfaux,getIDH("Índice de ingreso",estado),on=:Municipio)
       elseif indicador=="IDH"
           dfaux=innerjoin(dfaux,getIDH("IDH",estado),on=:Municipio)
@@ -954,7 +954,7 @@ function getIDH(componente::String,estado::String)
         dfret=select(tfd,[:Estado,:Municipio,Symbol(names(tfd)[3])])
     elseif componente==names(tfd)[4]
         dfret=select(tfd,[:Estado,:Municipio,Symbol(names(tfd)[4])])
-    elseif componente=="Ingreso per capita anual"
+    elseif componente=="Ingreso per cápita anual"
         dfret=select(tfd,[:Estado,:Municipio,Symbol(names(tfd)[5])])
     elseif componente==names(tfd)[6]
         dfret=select(tfd,[:Estado,:Municipio,Symbol(names(tfd)[6])])
@@ -991,7 +991,7 @@ function getIDH(componente::String)
         dfret=select(tfd,[:Municipio,Symbol(names(tfd)[2])])
     elseif componente==names(tfd)[3]
         dfret=select(tfd,[:Municipio,Symbol(names(tfd)[3])])
-    elseif componente=="Ingreso per capita anual"
+    elseif componente=="Ingreso per cápita anual"
         dfret=select(tfd,[:Municipio,Symbol(names(tfd)[4])])
     elseif componente==names(tfd)[5]
         dfret=select(tfd,[:Municipio,Symbol(names(tfd)[5])])
