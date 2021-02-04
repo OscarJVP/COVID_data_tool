@@ -3,6 +3,13 @@ module COVID_data_tool
 using DataFrames, JSON, InfoZIP, ZipFile, HTTP, CSV, XLSX, ExcelFiles, Dates
 include("diccionarios_claves.jl");
 include("url_paths.jl");
+
+if isdir("C:\\archivos_CSV_COVID_data_tool") == true
+  println("Carpeta C:\\archivos_CSV_COVID_data_tool existe.")
+else
+  mkdir("C:\\archivos_CSV_COVID_data_tool")
+end
+
 function getJSSIn(clave_indicador:: String, clave_municipio:: String, estado:: String, clave_estado:: String)
   l = count(i -> (i == ','), clave_municipio)
   ak = split(clave_municipio[1:end-1], ",")
@@ -94,7 +101,8 @@ function getDF(data:: Array{Any,2})
 end
 
 function Ct_DocCSV(nombre_archivo:: String, tabla_datos:: DataFrame)
-  CSV.write(nombre_archivo, tabla_datos)
+  directorio = pathCSV * "\\" * nombre_archivo
+  CSV.write(directorio, tabla_datos)
   return nombre_archivo * " creado"
 end
 
@@ -119,9 +127,10 @@ function datos_indicador(indicador:: String, estado:: String)
   rename!(Ardic, :x1 => :Municipio)
   rename!(Ardic, :x2 => indicador)
 
-  nombre_archivo = "datos_" * indicador * "_" * estado * ".csv"
+  nombre_archivo = "datos_" * indicador * "_" * estado * "_" * Dates.format(now(), "dd_u_yyyy_HH_MM_SS") * ".csv"
   Ct_DocCSV(nombre_archivo, Ardic)
 end
+
 function lista_ComponentesIDH()
   adh=XLSX.readxlsx(path*"\\"*"Indice de Desarrollo Humano Municipal 2010 2015.xlsx")["IDH municipal 2015"]
   headIDH=adh["E8:L8"];
@@ -130,6 +139,7 @@ function lista_ComponentesIDH()
   end
     println("IDH y componentes")
 end
+
 function lista_IndicadoresPobreza()
   ar=XLSX.readxlsx(path*"\\"*"Concentrado, indicadores de pobreza.xlsx")["Concentrado municipal"]
   indPob= []
@@ -144,6 +154,7 @@ function lista_IndicadoresPobreza()
     println(i)
   end
 end
+
 function lista_ComponentesIIM()
   df=DataFrame(ExcelFiles.load(path*"\\"*"IIM2010_BASEMUN.xls","IIM2010_BASEMUN"))
   ar=[:ENT,:NOM_ENT,:MUN]
@@ -182,13 +193,14 @@ function datos_municipio(indicadores, estado::String, municipio::String)
     df = innerjoin(df, arreglo_df_datos[i], on=:Municipio)
   end
 
-  nombre_archivo = "datos_" * estado * "_" * municipio * ".csv"
+  nombre_archivo = "datos_" * estado * "_" * municipio * "_" * Dates.format(now(), "dd_u_yyyy_HH_MM_SS") * ".csv"
   Ct_DocCSV(nombre_archivo, df)
 end
 #=f=getCovData()
 compar1=Matrix(select(f,[:ENTIDAD_UM]))
 compar2=Matrix(select(f,[:MUNICIPIO_RES]))
 =#
+
 function comp_CovInd(indicadores::Vector{String},estado::String,municipio::String)
    dfest=DataFrame(ENTIDAD_UM=parse(Int64,get(diccionario_estados,estado,"Not founded")))
    dfmun=DataFrame(MUNICIPIO_RES=parse(Int64,get(diccionario_municipios[parse(Int64,get(diccionario_estados,estado,"Not founded"))],municipio,"Not founded")))
@@ -199,6 +211,7 @@ function comp_CovInd(indicadores::Vector{String},estado::String,municipio::Strin
    dfrec=hcat(dfmun,dfest)
    dfind=hcat(dfrec,dfind)
    f=innerjoin(f,dfind,on=[:MUNICIPIO_RES,:ENTIDAD_UM])
+
 end
 function dato_estado(indicador::String,estado::String)
   if indicador=="Extension territorial"
@@ -284,7 +297,7 @@ function dato_estado(indicador::String,estado::String)
   end
   dfDel=DataFrame(Municipio=plu)
   dfaux=innerjoin(dfaux,dfDel,on=:Municipio)
-  nombre_doc=indicador*"_"*estado*".csv"
+  nombre_doc=indicador*"_"*estado*"_"*Dates.format(now(), "dd_u_yyyy_HH_MM_SS")*".csv"
   Ct_DocCSV(nombre_doc,dfaux)
 end
 function conjunto_estado(indicadores::Vector{String},estado::String)
@@ -378,7 +391,7 @@ function conjunto_estado(indicadores::Vector{String},estado::String)
         dfaux=innerjoin(dfaux,getIndIM("LUG_NAL",estado),on=:Municipio)
       end
   end
-  nombre_doc="Conjunto_de_"*estado*".csv"
+  nombre_doc="Conjunto_de_"*estado*"_"*Dates.format(now(), "dd_u_yyyy_HH_MM_SS")*".csv"
   Ct_DocCSV(nombre_doc,dfaux)
 end
 function dato_estado(indicador::String,estado::String,municipio::String)
@@ -470,7 +483,7 @@ function dato_estado(indicador::String,estado::String,municipio::String)
   end
   dfDel=DataFrame(Municipio=plu)
   dfaux=innerjoin(dfaux,dfDel,on=:Municipio)
-  nombre_doc=indicador*"_"*estado*".csv"
+  nombre_doc=indicador*"_"*estado*"_"*Dates.format(now(), "dd_u_yyyy_HH_MM_SS")*".csv"
   Ct_DocCSV(nombre_doc,dfaux)
 end
 function conjunto_estado(indicadores::Vector{String},estado::String,municipio::String)

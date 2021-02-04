@@ -42,6 +42,10 @@ Crea un .csv con la información deseada en la entrada de la función y muestra 
 `indicadores_disponibles()`\
 Muestra la lista de indicadores disponibles para consulta.
 
+### Notas
+    * Las funciones que requieran un estado como entrada necesitan el nombre oficial del estado v. gr. Michoacán se introduce como Michoacán de Ocampo.\
+    * Las funciones que requieran un indicador como entrada necesitan introducirse como están en el listado. Este se puede observar utilizando la función `indicadores_disponibles().`
+
 ## Equipo de Trabajo
 Deep Alpha\
 <img src="images/deep_alpha.jpg" width="200">\
