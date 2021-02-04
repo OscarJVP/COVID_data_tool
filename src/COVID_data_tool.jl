@@ -4,11 +4,19 @@ using DataFrames, JSON, InfoZIP, ZipFile, HTTP, CSV, XLSX, ExcelFiles, Dates
 include("diccionarios_claves.jl");
 include("url_paths.jl");
 
-if isdir("C:\\archivos_CSV_COVID_data_tool") == true
-  println("Carpeta C:\\archivos_CSV_COVID_data_tool existe.")
-else
-  mkdir("C:\\archivos_CSV_COVID_data_tool")
+if Sys.iswindows()
+  if isdir("C:\\archivos_CSV_COVID_data_tool") == true
+    println("Carpeta C:\\archivos_CSV_COVID_data_tool existe.")
+  else
+    mkdir("C:\\archivos_CSV_COVID_data_tool")
+  end
+elseif Sys.islinux()
+  if isdir("/home/archivos_CSV_COVID_data_tool") == true
+    println("Carpeta /home/archivos_CSV_COVID_data_tool existe.")
+  else
+    mkdir("/home/archivos_CSV_COVID_data_tool")
 end
+
 
 function getJSSIn(clave_indicador:: String, clave_municipio:: String, estado:: String, clave_estado:: String)
   l = count(i -> (i == ','), clave_municipio)
