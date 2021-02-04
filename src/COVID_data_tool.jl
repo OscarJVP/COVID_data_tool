@@ -109,7 +109,7 @@ function getDF(data:: Array{Any,2})
 end
 
 function Ct_DocCSV(nombre_archivo:: String, tabla_datos:: DataFrame)
-  directorio = pathCSV * "\\" * nombre_archivo
+  directorio = pathCSV * nombre_archivo
   CSV.write(directorio, tabla_datos)
   return nombre_archivo * " creado"
 end
@@ -148,7 +148,7 @@ function datos_indicador(indicador:: String, estado:: String)
 end
 
 function lista_ComponentesIDH()
-  adh=XLSX.readxlsx(path*"\\"*"Indice de Desarrollo Humano Municipal 2010 2015.xlsx")["IDH municipal 2015"]
+  adh=XLSX.readxlsx(path*"Indice de Desarrollo Humano Municipal 2010 2015.xlsx")["IDH municipal 2015"]
   headIDH=adh["E8:L8"];
   for str in headIDH
     println(str)
@@ -156,7 +156,7 @@ function lista_ComponentesIDH()
 end
 
 function lista_IndicadoresPobreza()
-  ar=XLSX.readxlsx(path*"\\"*"Concentrado, indicadores de pobreza.xlsx")["Concentrado municipal"]
+  ar=XLSX.readxlsx(path*"Concentrado, indicadores de pobreza.xlsx")["Concentrado municipal"]
   indPob= []
   for a in ar["H5:CU5"]
       if !isequal(missing,a)
@@ -171,7 +171,7 @@ function lista_IndicadoresPobreza()
 end
 
 function lista_ComponentesIIM()
-  df=DataFrame(ExcelFiles.load(path*"\\"*"IIM2010_BASEMUN.xls","IIM2010_BASEMUN"))
+  df=DataFrame(ExcelFiles.load(path*"IIM2010_BASEMUN.xls","IIM2010_BASEMUN"))
   ar=[:ENT,:NOM_ENT,:MUN,:NOM_MUN]
   select!(df,Not(ar))
   dicIIM=Dict("TOT_VIV"=>"Total de viviendas particulares habitadas","VIV_REM"=>"Porcentaje de viviendas que reciben remesas","VIV_EMIG"=>"Porcentaje de viviendas con emigrantes a EU","VIV_CIRC"=>"Porcentaje de viviendas con migrantes circulares","VIV_RET"=>"Porcentaje de viviendas con migrantes de retorno","IIM_2010"=>"Índice de intensidad migratoria 2010","IIM0a100"=>"Indice de instansidad migratoria en escala de 0 a 100","GIM_2010"=>"Grado de intensidad migratoria 2010","LUG_EDO"=>"Lugar que ocupa en el contexto estatal","LUG_NAL"=>"Lugar que ocupa en el contexto nacional")
@@ -603,7 +603,7 @@ function getCovData()
     covName=replace(covName,"-"=>"")
     covName=SubString(covName,3)
     covName=covName*"COVID19MEXICO.csv"
-    covFile= pathCov*"\\"*covName;
+    covFile= pathCov*covName;
     ce=CSV.read(covFile,DataFrame);
     return ce
 end
@@ -614,7 +614,7 @@ function downloadIP()
 end
 
 function getIndPobreza(ind:: String,estado::String)
-    ar=XLSX.readxlsx(path*"\\"*"Concentrado, indicadores de pobreza.xlsx")["Concentrado municipal"]
+    ar=XLSX.readxlsx(path*"Concentrado, indicadores de pobreza.xlsx")["Concentrado municipal"]
     pobData=Array{Float64,2}
     indPob= []
     for a in ar["G5:CU5"]
@@ -754,7 +754,7 @@ function getIndPobreza(ind:: String,estado::String)
 end
 
 function getIndPobreza(ind:: String)
-    ar=XLSX.readxlsx(path*"\\"*"Concentrado, indicadores de pobreza.xlsx")["Concentrado municipal"]
+    ar=XLSX.readxlsx(path*"Concentrado, indicadores de pobreza.xlsx")["Concentrado municipal"]
     pobData=Array{Float64,2}
     indPob= []
     for a in ar["G5:CU5"]
@@ -925,7 +925,7 @@ function downloadIIM()
 end
 
 function getIndIM(field:: String,estado::String)
-    dfIIM=DataFrame(ExcelFiles.load(path*"\\"*"IIM2010_BASEMUN.xls","IIM2010_BASEMUN"))
+    dfIIM=DataFrame(ExcelFiles.load(path*"IIM2010_BASEMUN.xls","IIM2010_BASEMUN"))
     ar=[:ENT,:MUN]
     select!(dfIIM,Not(ar))
     rename!(dfIIM,:NOM_MUN=>"Municipio")
@@ -964,7 +964,7 @@ function getIndIM(field:: String,estado::String)
 end
 
 function getIDH(componente::String,estado::String)
-    adh=XLSX.readxlsx(path*"\\"*"Indice de Desarrollo Humano Municipal 2010 2015.xlsx")["IDH municipal 2015"]
+    adh=XLSX.readxlsx(path*"Indice de Desarrollo Humano Municipal 2010 2015.xlsx")["IDH municipal 2015"]
     headIDH=adh["C8:L8"]
     idhData=adh["C10:L2469"]
     tfd=DataFrame(idhData)
@@ -1002,7 +1002,7 @@ function getIDH(componente::String,estado::String)
 end
 
 function getIDH(componente::String)
-    adh=XLSX.readxlsx(path*"\\"*"Indice de Desarrollo Humano Municipal 2010 2015.xlsx")["IDH municipal 2015"]
+    adh=XLSX.readxlsx(path*"Indice de Desarrollo Humano Municipal 2010 2015.xlsx")["IDH municipal 2015"]
     headIDH=adh["D8:L8"]
     idhData=adh["D10:L2469"]
     tfd=DataFrame(idhData)
@@ -1035,100 +1035,100 @@ end
 function codPos_municipio(estado::String,municipio::String)
     headCP=[:d_codigo,:d_asenta,:d_tipo_asenta,:D_mnpio]
     if estado=="Aguascalientes"
-      CPdata=(XLSX.readxlsx(path*"\\"*"CPdescarga.xlsx")["Aguascalientes"])["A2:D1357"]
+      CPdata=(XLSX.readxlsx(path*"CPdescarga.xlsx")["Aguascalientes"])["A2:D1357"]
       dfCPA=DataFrame(CPdata,headCP)
     elseif estado=="Baja California"
-      CPdata=(XLSX.readxlsx(path*"\\"*"CPdescarga.xlsx")["Baja_California"])["A2:D2437"]
+      CPdata=(XLSX.readxlsx(path*"CPdescarga.xlsx")["Baja_California"])["A2:D2437"]
       dfCPA=DataFrame(CPdata,headCP)
     elseif estado=="Baja California Sur"
-      CPdata=(XLSX.readxlsx(path*"\\"*"CPdescarga.xlsx")["Baja_California_Sur"])["A2:D988"]
+      CPdata=(XLSX.readxlsx(path*"CPdescarga.xlsx")["Baja_California_Sur"])["A2:D988"]
       dfCPA=DataFrame(CPdata,headCP)
     elseif estado=="Campeche"
-      CPdata=(XLSX.readxlsx(path*"\\"*"CPdescarga.xlsx")["Campeche"])["A2:D1310"]
+      CPdata=(XLSX.readxlsx(path*"CPdescarga.xlsx")["Campeche"])["A2:D1310"]
       dfCPA=DataFrame(CPdata,headCP)
     elseif estado=="Coahuila de Zaragoza"
-      CPdata=(XLSX.readxlsx(path*"\\"*"CPdescarga.xlsx")["Coahuila_de_Zaragoza"])["A2:D3967"]
+      CPdata=(XLSX.readxlsx(path*"CPdescarga.xlsx")["Coahuila_de_Zaragoza"])["A2:D3967"]
       dfCPA=DataFrame(CPdata,headCP)
     elseif estado=="Colima"
-      CPdata=(XLSX.readxlsx(path*"\\"*"CPdescarga.xlsx")["Colima"])["A2:D834"]
+      CPdata=(XLSX.readxlsx(path*"CPdescarga.xlsx")["Colima"])["A2:D834"]
       dfCPA=DataFrame(CPdata,headCP)
     elseif estado=="Chiapas"
-      CPdata=(XLSX.readxlsx(path*"\\"*"CPdescarga.xlsx")["Chiapas"])["A2:D7639"]
+      CPdata=(XLSX.readxlsx(path*"CPdescarga.xlsx")["Chiapas"])["A2:D7639"]
       dfCPA=DataFrame(CPdata,headCP)
     elseif estado=="Chihuahua"
-      CPdata=(XLSX.readxlsx(path*"\\"*"CPdescarga.xlsx")["Chihuahua"])["A2:D9561"]
+      CPdata=(XLSX.readxlsx(path*"CPdescarga.xlsx")["Chihuahua"])["A2:D9561"]
       dfCPA=DataFrame(CPdata,headCP)
     elseif estado=="Ciudad de México"
-      CPdata=(XLSX.readxlsx(path*"\\"*"CPdescarga.xlsx")["Distrito_Federal"])["A2:D1516"]
+      CPdata=(XLSX.readxlsx(path*"CPdescarga.xlsx")["Distrito_Federal"])["A2:D1516"]
       dfCPA=DataFrame(CPdata,headCP)
     elseif estado=="Durango"
-      CPdata=(XLSX.readxlsx(path*"\\"*"CPdescarga.xlsx")["Durango"])["A2:D7049"]
+      CPdata=(XLSX.readxlsx(path*"CPdescarga.xlsx")["Durango"])["A2:D7049"]
       dfCPA=DataFrame(CPdata,headCP)
     elseif estado=="Guanajuato"
-      CPdata=(XLSX.readxlsx(path*"\\"*"CPdescarga.xlsx")["Guanajuato"])["A2:D10050"]
+      CPdata=(XLSX.readxlsx(path*"CPdescarga.xlsx")["Guanajuato"])["A2:D10050"]
       dfCPA=DataFrame(CPdata,headCP)
     elseif estado=="Guerrero"
-      CPdata=(XLSX.readxlsx(path*"\\"*"CPdescarga.xlsx")["Guerrero"])["A2:D4793"]
+      CPdata=(XLSX.readxlsx(path*"CPdescarga.xlsx")["Guerrero"])["A2:D4793"]
       dfCPA=DataFrame(CPdata,headCP)
     elseif estado=="Hidalgo"
-      CPdata=(XLSX.readxlsx(path*"\\"*"CPdescarga.xlsx")["Hidalgo"])["A2:D6090"]
+      CPdata=(XLSX.readxlsx(path*"CPdescarga.xlsx")["Hidalgo"])["A2:D6090"]
       dfCPA=DataFrame(CPdata,headCP)
     elseif estado=="Jalisco"
-      CPdata=(XLSX.readxlsx(path*"\\"*"CPdescarga.xlsx")["Jalisco"])["A2:D5741"]
+      CPdata=(XLSX.readxlsx(path*"CPdescarga.xlsx")["Jalisco"])["A2:D5741"]
       dfCPA=DataFrame(CPdata,headCP)
     elseif estado=="México"
-      CPdata=(XLSX.readxlsx(path*"\\"*"CPdescarga.xlsx")["México"])["A2:D8158"]
+      CPdata=(XLSX.readxlsx(path*"CPdescarga.xlsx")["México"])["A2:D8158"]
       dfCPA=DataFrame(CPdata,headCP)
     elseif estado=="Michoacán de Ocampo"
-      CPdata=(XLSX.readxlsx(path*"\\"*"CPdescarga.xlsx")["Michoacán_de_Ocampo"])["A2:D10182"]
+      CPdata=(XLSX.readxlsx(path*"CPdescarga.xlsx")["Michoacán_de_Ocampo"])["A2:D10182"]
       dfCPA=DataFrame(CPdata,headCP)
     elseif estado=="Morelos"
-      CPdata=(XLSX.readxlsx(path*"\\"*"CPdescarga.xlsx")["Morelos"])["A2:D1744"]
+      CPdata=(XLSX.readxlsx(path*"CPdescarga.xlsx")["Morelos"])["A2:D1744"]
       dfCPA=DataFrame(CPdata,headCP)
     elseif estado=="Nayarit"
-      CPdata=(XLSX.readxlsx(path*"\\"*"CPdescarga.xlsx")["Nayarit"])["A2:D1980"]
+      CPdata=(XLSX.readxlsx(path*"CPdescarga.xlsx")["Nayarit"])["A2:D1980"]
       dfCPA=DataFrame(CPdata,headCP)
     elseif estado=="Nuevo León"
-      CPdata=(XLSX.readxlsx(path*"\\"*"CPdescarga.xlsx")["Nuevo_León"])["A2:D4878"]
+      CPdata=(XLSX.readxlsx(path*"CPdescarga.xlsx")["Nuevo_León"])["A2:D4878"]
       dfCPA=DataFrame(CPdata,headCP)
     elseif estado=="Oaxaca"
-      CPdata=(XLSX.readxlsx(path*"\\"*"CPdescarga.xlsx")["Oaxaca"])["A2:D6063"]
+      CPdata=(XLSX.readxlsx(path*"CPdescarga.xlsx")["Oaxaca"])["A2:D6063"]
       dfCPA=DataFrame(CPdata,headCP)
     elseif estado=="Puebla"
-      CPdata=(XLSX.readxlsx(path*"\\"*"CPdescarga.xlsx")["Puebla"])["A2:D5428"]
+      CPdata=(XLSX.readxlsx(path*"CPdescarga.xlsx")["Puebla"])["A2:D5428"]
       dfCPA=DataFrame(CPdata,headCP)
     elseif estado=="Querétaro"
-      CPdata=(XLSX.readxlsx(path*"\\"*"CPdescarga.xlsx")["Querétaro"])["A2:D3100"]
+      CPdata=(XLSX.readxlsx(path*"CPdescarga.xlsx")["Querétaro"])["A2:D3100"]
       dfCPA=DataFrame(CPdata,headCP)
     elseif estado=="Quintana Roo"
-      CPdata=(XLSX.readxlsx(path*"\\"*"CPdescarga.xlsx")["Quintana_Roo"])["A2:D1150"]
+      CPdata=(XLSX.readxlsx(path*"CPdescarga.xlsx")["Quintana_Roo"])["A2:D1150"]
       dfCPA=DataFrame(CPdata,headCP)
     elseif estado=="San Luis Potosí"
-      CPdata=(XLSX.readxlsx(path*"\\"*"CPdescarga.xlsx")["San_Luis_Potosí"])["A2:D5982"]
+      CPdata=(XLSX.readxlsx(path*"CPdescarga.xlsx")["San_Luis_Potosí"])["A2:D5982"]
       dfCPA=DataFrame(CPdata,headCP)
     elseif estado=="Sinaloa"
-      CPdata=(XLSX.readxlsx(path*"\\"*"CPdescarga.xlsx")["Sinaloa"])["A2:D4165"]
+      CPdata=(XLSX.readxlsx(path*"CPdescarga.xlsx")["Sinaloa"])["A2:D4165"]
       dfCPA=DataFrame(CPdata,headCP)
     elseif estado=="Sonora"
-      CPdata=(XLSX.readxlsx(path*"\\"*"CPdescarga.xlsx")["Sonora"])["A2:D8734"]
+      CPdata=(XLSX.readxlsx(path*"CPdescarga.xlsx")["Sonora"])["A2:D8734"]
       dfCPA=DataFrame(CPdata,headCP)
     elseif estado=="Tabasco"
-      CPdata=(XLSX.readxlsx(path*"\\"*"CPdescarga.xlsx")["Tabasco"])["A2:D2645"]
+      CPdata=(XLSX.readxlsx(path*"CPdescarga.xlsx")["Tabasco"])["A2:D2645"]
       dfCPA=DataFrame(CPdata,headCP)
     elseif estado=="Tamaulipas"
-      CPdata=(XLSX.readxlsx(path*"\\"*"CPdescarga.xlsx")["Tamaulipas"])["A2:D3281"]
+      CPdata=(XLSX.readxlsx(path*"CPdescarga.xlsx")["Tamaulipas"])["A2:D3281"]
       dfCPA=DataFrame(CPdata,headCP)
     elseif estado=="Tlaxcala"
-      CPdata=(XLSX.readxlsx(path*"\\"*"CPdescarga.xlsx")["Tlaxcala"])["A2:D1443"]
+      CPdata=(XLSX.readxlsx(path*"CPdescarga.xlsx")["Tlaxcala"])["A2:D1443"]
       dfCPA=DataFrame(CPdata,headCP)
     elseif estado=="Veracruz de Ignacio de la Llave"
-      CPdata=(XLSX.readxlsx(path*"\\"*"CPdescarga.xlsx")["Veracruz_de_Ignacio_de_la_Llave"])["A2:D8950"]
+      CPdata=(XLSX.readxlsx(path*"CPdescarga.xlsx")["Veracruz_de_Ignacio_de_la_Llave"])["A2:D8950"]
       dfCPA=DataFrame(CPdata,headCP)
     elseif estado=="Yucatán"
-      CPdata=(XLSX.readxlsx(path*"\\"*"CPdescarga.xlsx")["Yucatán"])["A2:D1643"]
+      CPdata=(XLSX.readxlsx(path*"CPdescarga.xlsx")["Yucatán"])["A2:D1643"]
       dfCPA=DataFrame(CPdata,headCP)
     elseif estado=="Zacatecas"
-      CPdata=(XLSX.readxlsx(path*"\\"*"CPdescarga.xlsx")["Zacatecas"])["A2:D1846"]
+      CPdata=(XLSX.readxlsx(path*"CPdescarga.xlsx")["Zacatecas"])["A2:D1846"]
       dfCPA=DataFrame(CPdata,headCP)
     end
         dfaux=DataFrame(D_mnpio=[municipio])
@@ -1136,68 +1136,73 @@ function codPos_municipio(estado::String,municipio::String)
 end
 
 function getIndINEGI(estado::String,indicador::String)
-    dfIndINE=CSV.read(pathINEGI*estado*"\\datos_"*indicador*"_"*estado*".csv",DataFrame);
+    if Sys.iswindows()
+      dfIndINE=CSV.read(pathINEGI*estado*"\\datos_"*indicador*"_"*estado*".csv",DataFrame);
+ 
+    elseif Sys.islinux()
+      dfIndINE=CSV.read(pathINEGI*estado*"/datos_"*indicador*"_"*estado*".csv",DataFrame);
+    end
     return dfIndINE
 end
 
 function getExtTer(estado:: String)
   headET=[:Municipio,:Total]
   if estado=="Aguascalientes"
-      dfET=DataFrame((XLSX.readxlsx(path*"\\"*"Extension territorial.xlsx")[estado])["A2:B11"],headET)
+      dfET=DataFrame((XLSX.readxlsx(path*"Extension territorial.xlsx")[estado])["A2:B11"],headET)
   elseif estado=="Baja California"
-      dfET=DataFrame((XLSX.readxlsx(path*"\\"*"Extension territorial.xlsx")[estado])["A2:B7"],headET)
+      dfET=DataFrame((XLSX.readxlsx(path*"Extension territorial.xlsx")[estado])["A2:B7"],headET)
   elseif estado=="Baja California Sur"
-      dfET=DataFrame((XLSX.readxlsx(path*"\\"*"Extension territorial.xlsx")[estado])["A2:B6"],headET)
+      dfET=DataFrame((XLSX.readxlsx(path*"Extension territorial.xlsx")[estado])["A2:B6"],headET)
   elseif estado=="Campeche"
-      dfET=DataFrame((XLSX.readxlsx(path*"\\"*"Extension territorial.xlsx")[estado])["A2:B13"],headET)
+      dfET=DataFrame((XLSX.readxlsx(path*"Extension territorial.xlsx")[estado])["A2:B13"],headET)
   elseif estado=="Coahuila de Zaragoza"
-      dfET=DataFrame((XLSX.readxlsx(path*"\\"*"Extension territorial.xlsx")[estado])["A2:B39"],headET)
+      dfET=DataFrame((XLSX.readxlsx(path*"Extension territorial.xlsx")[estado])["A2:B39"],headET)
   elseif estado=="Colima"
-      dfET=DataFrame((XLSX.readxlsx(path*"\\"*"Extension territorial.xlsx")[estado])["A2:B11"],headET)
+      dfET=DataFrame((XLSX.readxlsx(path*"Extension territorial.xlsx")[estado])["A2:B11"],headET)
   elseif estado=="Chiapas"
-      dfET=DataFrame((XLSX.readxlsx(path*"\\"*"Extension territorial.xlsx")[estado])["A2:B125"],headET)
+      dfET=DataFrame((XLSX.readxlsx(path*"Extension territorial.xlsx")[estado])["A2:B125"],headET)
   elseif estado=="Chihuahua"
-      dfET=DataFrame((XLSX.readxlsx(path*"\\"*"Extension territorial.xlsx")[estado])["A2:B68"],headET)
+      dfET=DataFrame((XLSX.readxlsx(path*"Extension territorial.xlsx")[estado])["A2:B68"],headET)
   elseif estado=="Ciudad de México"
-      dfET=DataFrame((XLSX.readxlsx(path*"\\"*"Extension territorial.xlsx")[estado])["A2:B17"],headET)
+      dfET=DataFrame((XLSX.readxlsx(path*"Extension territorial.xlsx")[estado])["A2:B17"],headET)
   elseif estado=="Durango"
-      dfET=DataFrame((XLSX.readxlsx(path*"\\"*"Extension territorial.xlsx")[estado])["A2:B40"],headET)
+      dfET=DataFrame((XLSX.readxlsx(path*"Extension territorial.xlsx")[estado])["A2:B40"],headET)
   elseif estado=="Guanajuato"
-      dfET=DataFrame((XLSX.readxlsx(path*"\\"*"Extension territorial.xlsx")[estado])["A2:B47"],headET)
+      dfET=DataFrame((XLSX.readxlsx(path*"Extension territorial.xlsx")[estado])["A2:B47"],headET)
   elseif estado=="Guerrero"
-      dfET=DataFrame((XLSX.readxlsx(path*"\\"*"Extension territorial.xlsx")[estado])["A2:B82"],headET)
+      dfET=DataFrame((XLSX.readxlsx(path*"Extension territorial.xlsx")[estado])["A2:B82"],headET)
   elseif estado=="Hidalgo"
-      dfET=DataFrame((XLSX.readxlsx(path*"\\"*"Extension territorial.xlsx")[estado])["A2:B85"],headET)
+      dfET=DataFrame((XLSX.readxlsx(path*"Extension territorial.xlsx")[estado])["A2:B85"],headET)
   elseif estado=="Jalisco"
-      dfET=DataFrame((XLSX.readxlsx(path*"\\"*"Extension territorial.xlsx")[estado])["A2:B126"],headET)
+      dfET=DataFrame((XLSX.readxlsx(path*"Extension territorial.xlsx")[estado])["A2:B126"],headET)
   elseif estado=="México"
-      dfET=DataFrame((XLSX.readxlsx(path*"\\"*"Extension territorial.xlsx")[estado])["A2:B126"],headET)
+      dfET=DataFrame((XLSX.readxlsx(path*"Extension territorial.xlsx")[estado])["A2:B126"],headET)
   elseif estado=="Michoacán de Ocampo"
-      dfET=DataFrame((XLSX.readxlsx(path*"\\"*"Extension territorial.xlsx")[estado])["A2:B114"],headET)
+      dfET=DataFrame((XLSX.readxlsx(path*"Extension territorial.xlsx")[estado])["A2:B114"],headET)
   elseif estado=="Morelos"
-      dfET=DataFrame((XLSX.readxlsx(path*"\\"*"Extension territorial.xlsx")[estado])["A2:B37"],headET)
+      dfET=DataFrame((XLSX.readxlsx(path*"Extension territorial.xlsx")[estado])["A2:B37"],headET)
   elseif estado=="Nayarit"
-      dfET=DataFrame((XLSX.readxlsx(path*"\\"*"Extension territorial.xlsx")[estado])["A2:B21"],headET)
+      dfET=DataFrame((XLSX.readxlsx(path*"Extension territorial.xlsx")[estado])["A2:B21"],headET)
   elseif estado=="Nuevo León"
-      dfET=DataFrame((XLSX.readxlsx(path*"\\"*"Extension territorial.xlsx")[estado])["A2:B52"],headET)
+      dfET=DataFrame((XLSX.readxlsx(path*"Extension territorial.xlsx")[estado])["A2:B52"],headET)
   elseif estado=="Oaxaca"
-      dfET=DataFrame((XLSX.readxlsx(path*"\\"*"Extension territorial.xlsx")[estado])["A2:B571"],headET)
+      dfET=DataFrame((XLSX.readxlsx(path*"Extension territorial.xlsx")[estado])["A2:B571"],headET)
   elseif estado=="Puebla"
-      dfET=DataFrame((XLSX.readxlsx(path*"\\"*"Extension territorial.xlsx")[estado])["A2:B218"],headET)
+      dfET=DataFrame((XLSX.readxlsx(path*"Extension territorial.xlsx")[estado])["A2:B218"],headET)
   elseif estado=="Querétaro"
-      dfET=DataFrame((XLSX.readxlsx(path*"\\"*"Extension territorial.xlsx")[estado])["A2:B19"],headET)
+      dfET=DataFrame((XLSX.readxlsx(path*"Extension territorial.xlsx")[estado])["A2:B19"],headET)
   elseif estado=="Quintana Roo"
-      dfET=DataFrame((XLSX.readxlsx(path*"\\"*"Extension territorial.xlsx")[estado])["A2:B10"],headET)
+      dfET=DataFrame((XLSX.readxlsx(path*"Extension territorial.xlsx")[estado])["A2:B10"],headET)
   elseif estado=="San Luis Potosí"
-      dfET=DataFrame((XLSX.readxlsx(path*"\\"*"Extension territorial.xlsx")[estado])["A2:B59"],headET)
+      dfET=DataFrame((XLSX.readxlsx(path*"Extension territorial.xlsx")[estado])["A2:B59"],headET)
   elseif estado=="Sinaloa"
-      dfET=DataFrame((XLSX.readxlsx(path*"\\"*"Extension territorial.xlsx")[estado])["A2:B19"],headET)
+      dfET=DataFrame((XLSX.readxlsx(path*"Extension territorial.xlsx")[estado])["A2:B19"],headET)
   elseif estado=="Sonora"
-      dfET=DataFrame((XLSX.readxlsx(path*"\\"*"Extension territorial.xlsx")[estado])["A2:B73"],headET)
+      dfET=DataFrame((XLSX.readxlsx(path*"Extension territorial.xlsx")[estado])["A2:B73"],headET)
   elseif estado=="Tabasco"
-      dfET=DataFrame((XLSX.readxlsx(path*"\\"*"Extension territorial.xlsx")[estado])["A2:B18"],headET)
+      dfET=DataFrame((XLSX.readxlsx(path*"Extension territorial.xlsx")[estado])["A2:B18"],headET)
   elseif estado=="Tamaulipas"
-      dfET=DataFrame((XLSX.readxlsx(path*"\\"*"Extension territorial.xlsx")[estado])["A2:B44"],headET)
+      dfET=DataFrame((XLSX.readxlsx(path*"Extension territorial.xlsx")[estado])["A2:B44"],headET)
   elseif estado=="Tlaxcala"
       dfET=DataFrame((XLSX.readxlsx(path*"\\"*"Extension territorial.xlsx")[estado])["A2:B61"],headET)
   elseif estado=="Veracruz de Ignacio de la Llave"
