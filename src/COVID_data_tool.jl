@@ -107,9 +107,17 @@ function Ct_DocCSV(nombre_archivo:: String, tabla_datos:: DataFrame)
 end
 
 function indicadores_disponibles()
+  println("***Indicadores generales***")
   for key in keys(diccionario_indicadores)
     println(key)
   end
+  println("***Indicadores IDH***")
+  lista_ComponentesIDH()
+  println("***Indicadores de Pobreza***")
+  lista_IndicadoresPobreza()
+  println("***Indicadores de Intensidad Migratoria***")
+  println("(Para las entradas de las funciones necesita las claves, no la descripción)")
+  lista_ComponentesIIM()
 end
 
 function datos_indicador(indicador:: String, estado:: String)
@@ -137,13 +145,12 @@ function lista_ComponentesIDH()
   for str in headIDH
     println(str)
   end
-    println("IDH y componentes")
 end
 
 function lista_IndicadoresPobreza()
   ar=XLSX.readxlsx(path*"\\"*"Concentrado, indicadores de pobreza.xlsx")["Concentrado municipal"]
   indPob= []
-  for a in ar["G5:CU5"]
+  for a in ar["H5:CU5"]
       if !isequal(missing,a)
           push!(indPob,a)
       end
@@ -157,12 +164,12 @@ end
 
 function lista_ComponentesIIM()
   df=DataFrame(ExcelFiles.load(path*"\\"*"IIM2010_BASEMUN.xls","IIM2010_BASEMUN"))
-  ar=[:ENT,:NOM_ENT,:MUN]
+  ar=[:ENT,:NOM_ENT,:MUN,:NOM_MUN]
   select!(df,Not(ar))
+  dicIIM=Dict("TOT_VIV"=>"Total de viviendas particulares habitadas","VIV_REM"=>"Porcentaje de viviendas que reciben remesas","VIV_EMIG"=>"Porcentaje de viviendas con emigrantes a EU","VIV_CIRC"=>"Porcentaje de viviendas con migrantes circulares","VIV_RET"=>"Porcentaje de viviendas con migrantes de retorno","IIM_2010"=>"Índice de intensidad migratoria 2010","IIM0a100"=>"Indice de instansidad migratoria en escala de 0 a 100","GIM_2010"=>"Grado de intensidad migratoria 2010","LUG_EDO"=>"Lugar que ocupa en el contexto estatal","LUG_NAL"=>"Lugar que ocupa en el contexto nacional")
   for i in names(df)
-    println(i)
+    println(i*" ---> "*dicIIM[i])
   end
-    println("Intensidad migratoria y componentes")
 end
 
 function datos_municipio(indicadores, estado::String, municipio::String)
