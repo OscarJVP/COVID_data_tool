@@ -1,7 +1,6 @@
 module COVID_data_tool
 
 using DataFrames, JSON, InfoZIP, ZipFile, HTTP, CSV, XLSX, ExcelFiles, Dates
-
 include("diccionarios_claves.jl");
 include("url_paths.jl");
 
@@ -201,114 +200,96 @@ end
 compar1=Matrix(select(f,[:ENTIDAD_UM]))
 compar2=Matrix(select(f,[:MUNICIPIO_RES]))
 =#
-#=
-function union_Covcon(Indicadores::Vector{String})
-  f=getCovData()
-  compar1=Matrix(select(f,[:ENTIDAD_UM]))
-  compar2=Matrix(select(f,[:MUNICIPIO_RES]))
-  ind_estado=""
-  ind_mun=""
-  indicadorNom="Union_Cov"
-  dfUnion=Array{DataFrame}(undef,4721997)
-  for i in 1:length(compar1)
-    @show i
-    for k in keys(diccionario_estados)
-      if parse(Int64,get(diccionario_estados,k,"Not founded"))==compar1[i]
-        for h in keys(diccionario_municipios[compar1[i]])
-          if h=="Total estatal"
-          elseif parse(Int64,get(diccionario_municipios[compar1[i]],h,"Not founded"))==compar2[i]
 
-              break
-          end
-        end
-        break
-      end
-    end
-  end
-  for ind in indicadores
-    indicadorNom=indicadorNom*"_"*ind
-  end
-  nombre="Union_Cov_"*indicadores*".csv"
-  Ct_DocCSV(nombre,f)
+function comp_CovInd(indicadores::Vector{String},estado::String,municipio::String)
+   dfest=DataFrame(ENTIDAD_UM=parse(Int64,get(diccionario_estados,estado,"Not founded")))
+   dfmun=DataFrame(MUNICIPIO_RES=parse(Int64,get(diccionario_municipios[parse(Int64,get(diccionario_estados,estado,"Not founded"))],municipio,"Not founded")))
+   f=getCovData()
+   f=innerjoin(f,dfest,on=:ENTIDAD_UM)
+   f=innerjoin(f,dfmun,on=:MUNICIPIO_RES)
+   dfind=conjunto_estado(indicadores,estado,municipio)
+   dfrec=hcat(dfmun,dfest)
+   dfind=hcat(dfrec,dfind)
+   f=innerjoin(f,dfind,on=[:MUNICIPIO_RES,:ENTIDAD_UM])
+
 end
-=#
 function dato_estado(indicador::String,estado::String)
   if indicador=="Extension territorial"
     dfaux=getExtTer(estado)
   elseif indicador=="Indicadores de pobreza"
-    dfaux=getIndPobreza("All")
+    dfaux=getIndPobreza("All",estado)
   elseif indicador=="IDH y componentes"
-    dfaux=getIDH("All")
+    dfaux=getIDH("All",estado)
   elseif indicador=="Intesidad migratoria y componentes"
-    dfaux=getIndIM("All")
+    dfaux=getIndIM("All",estado)
   elseif haskey(diccionario_indicadores,indicador)
     dfaux=getIndINEGI(estado, indicador)
   elseif indicador=="Años promedio de escolaridad"
-    dfaux=getIDH(indicador)
+    dfaux=getIDH(indicador,estado)
   elseif indicador=="Años esperados de escolaridad"
-    dfaux=getIDH(indicador)
+    dfaux=getIDH(indicador,estado)
   elseif indicador=="Ingreso per cápita anual"
-    dfaux=getIDH(indicador)
+    dfaux=getIDH(indicador,estado)
   elseif indicador=="Tasa de mortalidad infantil"
-    dfaux=getIDH(indicador)
+    dfaux=getIDH(indicador,estado)
   elseif indicador=="Índice de educación"
-    dfaux=getIDH(indicador)
+    dfaux=getIDH(indicador,esatdo)
   elseif indicador=="Indice de salud"
-    dfaux=getIDH(indicador)
+    dfaux=getIDH(indicador,esatdo)
   elseif indicador=="Indice de ingreso"
-    dfaux=getIDH(indicador)
+    dfaux=getIDH(indicador,estado)
   elseif indicador=="IDH"
-    dfaux=getIDH(indicador)
+    dfaux=getIDH(indicador,estado)
   elseif indicador=="Pobreza"
-    dfaux=getIndPobreza(indicador)
+    dfaux=getIndPobreza(indicador,estado)
   elseif indicador=="Pobreza extrema"
-    dfaux=getIndPobreza(indicador)
+    dfaux=getIndPobreza(indicador,estado)
   elseif indicador=="Pobreza moderada"
-    dfaux=getIndPobreza(indicador)
+    dfaux=getIndPobreza(indicador,estado)
   elseif indicador=="Vulnerables por carencia social"
-    dfaux=getIndPobreza(indicador)
+    dfaux=getIndPobreza(indicador,estado)
   elseif indicador=="Vulnerables por ingreso"
-    dfaux=getIndPobreza(indicador)
+    dfaux=getIndPobreza(indicador,estado)
   elseif indicador=="No pobres y no vulnerables"
-    dfaux=getIndPobreza(indicador)
+    dfaux=getIndPobreza(indicador,estado)
   elseif indicador=="Rezago educativo"
-    dfaux=getIndPobreza(indicador)
+    dfaux=getIndPobreza(indicador,estado)
   elseif indicador=="Carencia por acceso a los servicios de salud"
-    dfaux=getIndPobreza(indicador)
+    dfaux=getIndPobreza(indicador,estado)
   elseif indicador=="Carencia por acceso a la seguridad social"
-    dfaux=getIndPobreza(indicador)
+    dfaux=getIndPobreza(indicador,estado)
   elseif indicador=="Carencia por acceso a los servicios básicos en la vivienda"
-    dfaux=getIndPobreza(indicador)
+    dfaux=getIndPobreza(indicador,estado)
   elseif indicador=="Carencia por acceso a la alimentación"
-    dfaux=getIndPobreza(indicador)
+    dfaux=getIndPobreza(indicador,estado)
   elseif indicador=="Población con al menos una carencia social"
-    dfaux=getIndPobreza(indicador)
+    dfaux=getIndPobreza(indicador,estado)
   elseif indicador=="Población con tres o más carencias sociales"
-    dfaux=getIndPobreza(indicador)
+    dfaux=getIndPobreza(indicador,estado)
   elseif indicador=="Población con ingreso inferior a la línea de bienestar"
-    dfaux=getIndPobreza(indicador)
+    dfaux=getIndPobreza(indicador,estado)
   elseif indicador=="Población con ingreso inferior a la línea de bienestar mínimo"
-    dfaux=getIndPobreza(indicador)
+    dfaux=getIndPobreza(indicador,estado)
   elseif indicador=="TOT_VIV"
-    dfaux=getIndIM(indicador)
+    dfaux=getIndIM(indicador,estado)
   elseif indicador=="VIV_REM"
-    dfaux=getIndIM(indicador)
+    dfaux=getIndIM(indicador,estado)
   elseif indicador=="VIV_EMIG"
-    dfaux=getIndIM(indicador)
+    dfaux=getIndIM(indicador,estado)
   elseif indicador=="VIV_CIRC"
-    dfaux=getIndIM(indicador)
+    dfaux=getIndIM(indicador,estado)
   elseif indicador=="VIV_RET"
-    dfaux=getIndIM(indicador)
+    dfaux=getIndIM(indicador,estado)
   elseif indicador=="IIM_2010"
-    dfaux=getIndIM(indicador)
+    dfaux=getIndIM(indicador,estado)
   elseif indicador=="IIMa100"
-    dfaux=getIndIM(indicador)
+    dfaux=getIndIM(indicador,estado)
   elseif indicador=="GIM_2010"
-    dfaux=getIndIM(indicador)
+    dfaux=getIndIM(indicador,estado)
   elseif indicador=="LUG_EDO"
-    dfaux=getIndIM(indicador)
+    dfaux=getIndIM(indicador,estado)
   elseif indicador=="LUG_NAL"
-    dfaux=getIndIM(indicador)
+    dfaux=getIndIM(indicador,estado)
   end
   plu=[]
   for k in keys(diccionario_municipios[parse(Int64,get(diccionario_estados,estado,"Not founded"))])
@@ -325,184 +306,6 @@ function conjunto_estado(indicadores::Vector{String},estado::String)
     push!(munau,k)
   end
   dfaux=DataFrame(Municipio=munau)
-  for indicador in indicadores
-      if indicador=="Extension territorial"
-        dfaux=innerjoin(dfaux,getExtTer(estado),on=:Municipio)
-        rename!(dfaux,:Total=>indicador)
-      elseif indicador=="Indicadores de pobreza"
-        dfaux=innerjoin(dfaux,getIndPobreza("All",estado),on=:Municipio)
-      elseif indicador=="IDH y componentes"
-        dfaux=innerjoin(dfaux,getIDH("All",estado),on=:Municipio)
-      elseif indicador=="Intesidad migratoria y componentes"
-        dfaux=innerjoin(dfaux,getIndIM("All",estado),on=:Municipio)
-      elseif haskey(diccionario_indicadores,indicador)
-        dfaux=innerjoin(dfaux,getIndINEGI(estado,indicador),on=:Municipio)
-        rename!(dfaux,:Total=>indicador)
-      elseif indicador=="Años promedio de escolaridad"
-          dfaux=innerjoin(dfaux,getIDH("Años promedio de escolaridad",estado),on=:Municipio)
-      elseif indicador=="Años esperados de escolaridad"
-          dfaux=innerjoin(dfaux,getIDH("Años esperados de escolaridad",estado),on=:Municipio)
-      elseif indicador=="Ingreso per cápita anual"
-          dfaux=innerjoin(dfaux,getIDH("Ingreso per cápita anual",estado),on=:Municipio)
-      elseif indicador=="Tasa de mortalidad infantil"
-          dfaux=innerjoin(dfaux,getIDH("Tasa de mortalidad infantil",estado),on=:Municipio)
-      elseif indicador=="Índice de educación"
-          dfaux=innerjoin(dfaux,getIDH("Índice de educación",estado),on=:Municipio)
-      elseif indicador=="Indice de salud"
-          dfaux=innerjoin(dfaux,getIDH("Índice de salud",estado),on=:Municipio)
-      elseif indicador=="Indice de ingreso"
-          dfaux=innerjoin(dfaux,getIDH("Índice de ingreso",estado),on=:Municipio)
-      elseif indicador=="IDH"
-          dfaux=innerjoin(dfaux,getIDH("IDH",estado),on=:Municipio)
-      elseif indicador=="Pobreza"
-        dfaux=innerjoin(dfaux,getIndPobreza("Pobreza",estado),on=:Municipio)
-      elseif indicador=="Pobreza extrema"
-        dfaux=innerjoin(dfaux,getIndPobreza("Pobreza extrema",estado),on=:Municipio)
-      elseif indicador=="Pobreza moderada"
-        dfaux=innerjoin(dfaux,getIndPobreza("Pobreza moderada",estado),on=:Municipio)
-      elseif indicador=="Vulnerables por carencia social"
-        dfaux=innerjoin(dfaux,getIndPobreza("Vulnerables por carencia social",estado),on=:Municipio)
-      elseif indicador=="Vulnerables por ingreso"
-        dfaux=innerjoin(dfaux,getIndPobreza("Vulnerables por ingreso",estado),on=:Municipio)
-      elseif indicador=="No pobres y no vulnerables"
-        dfaux=innerjoin(dfaux,getIndPobreza("No pobres y no vulnerables",estado),on=:Municipio)
-      elseif indicador=="Rezago educativo"
-        dfaux=innerjoin(dfaux,getIndPobreza("Rezago educativo",estado),on=:Municipio)
-      elseif indicador=="Carencia por acceso a los servicios de salud"
-        dfaux=innerjoin(dfaux,getIndPobreza("Carencia por acceso a los servicios de salud",estado),on=:Municipio)
-      elseif indicador=="Carencia por acceso a la seguridad social"
-        dfaux=innerjoin(dfaux,getIndPobreza("Carencia por acceso a la seguridad social",estado),on=:Municipio)
-      elseif indicador=="Carencia por acceso a los servicios básicos en la vivienda"
-        dfaux=innerjoin(dfaux,getIndPobreza("Carencia por acceso a los servicios básicos en la vivienda",estado),on=:Municipio)
-      elseif indicador=="Carencia por acceso a la alimentación"
-        dfaux=innerjoin(dfaux,getIndPobreza("Carencia por acceso a la alimentación",estado),on=:Municipio)
-      elseif indicador=="Población con al menos una carencia social"
-        dfaux=innerjoin(dfaux,getIndPobreza("Población con al menos una carencia social",estado),on=:Municipio)
-      elseif indicador=="Población con tres o más carencias sociales"
-        dfaux=innerjoin(dfaux,getIndPobreza("Población con tres o más carencias sociales",estado),on=:Municipio)
-      elseif indicador=="Población con ingreso inferior a la línea de bienestar"
-        dfaux=innerjoin(dfaux,getIndPobreza("Población con ingreso inferior a la línea de bienestar",estado),on=:Municipio)
-      elseif indicador=="Población con ingreso inferior a la línea de bienestar mínimo"
-        dfaux=innerjoin(dfaux,getIndPobreza("Población con ingreso inferior a la línea de bienestar mínimo",estado),on=:Municipio)
-      elseif indicador=="TOT_VIV"
-        dfaux=innerjoin(dfaux,getIndIM("TOT_VIV",estado),on=:Municipio)
-      elseif indicador=="VIV_REM"
-        dfaux=innerjoin(dfaux,getIndIM("VIV_REM",estado),on=:Municipio)
-      elseif indicador=="VIV_EMIG"
-        dfaux=innerjoin(dfaux,getIndIM("VIV_EMIG",estado),on=:Municipio)
-      elseif indicador=="VIV_CIRC"
-        dfaux=innerjoin(dfaux,getIndIM("VIV_CIRC",estado),on=:Municipio)
-      elseif indicador=="VIV_RET"
-        dfaux=innerjoin(dfaux,getIndIM("VIV_RET",estado),on=:Municipio)
-      elseif indicador=="IIM_2010"
-        dfaux=innerjoin(dfaux,getIndIM("IIM_2010",estado),on=:Municipio)
-      elseif indicador=="IIMa100"
-        dfaux=innerjoin(dfaux,getIndIM("IIMa100",estado),on=:Municipio)
-      elseif indicador=="GIM_2010"
-        dfaux=innerjoin(dfaux,getIndIM("GIM_2010",estado),on=:Municipio)
-      elseif indicador=="LUG_EDO"
-        dfaux=innerjoin(dfaux,getIndIM("LUG_EDO",estado),on=:Municipio)
-      elseif indicador=="LUG_NAL"
-        dfaux=innerjoin(dfaux,getIndIM("LUG_NAL",estado),on=:Municipio)
-      end
-  end
-  nombre_doc="Conjunto_de_"*estado*"_"*Dates.format(now(), "dd_u_yyyy_HH_MM_SS")*".csv"
-  Ct_DocCSV(nombre_doc,dfaux)
-end
-function dato_estado(indicador::String,estado::String,municipio::String)
-  if indicador=="Extension territorial"
-    dfaux=getExtTer(estado)
-  elseif indicador=="Indicadores de pobreza"
-    dfaux=getIndPobreza("All")
-  elseif indicador=="IDH y componentes"
-    dfaux=getIDH("All")
-  elseif indicador=="Intesidad migratoria y componentes"
-    dfaux=getIndIM("All")
-  elseif haskey(diccionario_indicadores,indicador)
-    dfaux=getIndINEGI(estado, indicador)
-  elseif indicador=="Años promedio de escolaridad"
-    dfaux=getIDH(indicador)
-  elseif indicador=="Años esperados de escolaridad"
-    dfaux=getIDH(indicador)
-  elseif indicador=="Ingreso per cápita anual"
-    dfaux=getIDH(indicador)
-  elseif indicador=="Tasa de mortalidad infantil"
-    dfaux=getIDH(indicador)
-  elseif indicador=="Índice de educación"
-    dfaux=getIDH(indicador)
-  elseif indicador=="Indice de salud"
-    dfaux=getIDH(indicador)
-  elseif indicador=="Indice de ingreso"
-    dfaux=getIDH(indicador)
-  elseif indicador=="IDH"
-    dfaux=getIDH(indicador)
-    for c in 1:length(names(dfaux))
-       if string(names(dfaux)[c])=="Total"
-          rename!(dfaux,:Total=>indicador)
-       end
-     end
-  elseif indicador=="Pobreza"
-    dfaux=getIndPobreza(indicador)
-  elseif indicador=="Pobreza extrema"
-    dfaux=getIndPobreza(indicador)
-  elseif indicador=="Pobreza moderada"
-    dfaux=getIndPobreza(indicador)
-  elseif indicador=="Vulnerables por carencia social"
-    dfaux=getIndPobreza(indicador)
-  elseif indicador=="Vulnerables por ingreso"
-    dfaux=getIndPobreza(indicador)
-  elseif indicador=="No pobres y no vulnerables"
-    dfaux=getIndPobreza(indicador)
-  elseif indicador=="Rezago educativo"
-    dfaux=getIndPobreza(indicador)
-  elseif indicador=="Carencia por acceso a los servicios de salud"
-    dfaux=getIndPobreza(indicador)
-  elseif indicador=="Carencia por acceso a la seguridad social"
-    dfaux=getIndPobreza(indicador)
-  elseif indicador=="Carencia por acceso a los servicios básicos en la vivienda"
-    dfaux=getIndPobreza(indicador)
-  elseif indicador=="Carencia por acceso a la alimentación"
-    dfaux=getIndPobreza(indicador)
-  elseif indicador=="Población con al menos una carencia social"
-    dfaux=getIndPobreza(indicador)
-  elseif indicador=="Población con tres o más carencias sociales"
-    dfaux=getIndPobreza(indicador)
-  elseif indicador=="Población con ingreso inferior a la línea de bienestar"
-    dfaux=getIndPobreza(indicador)
-  elseif indicador=="Población con ingreso inferior a la línea de bienestar mínimo"
-    dfaux=getIndPobreza(indicador)
-  elseif indicador=="TOT_VIV"
-    dfaux=getIndIM(indicador)
-  elseif indicador=="VIV_REM"
-    dfaux=getIndIM(indicador)
-  elseif indicador=="VIV_EMIG"
-    dfaux=getIndIM(indicador)
-  elseif indicador=="VIV_CIRC"
-    dfaux=getIndIM(indicador)
-  elseif indicador=="VIV_RET"
-    dfaux=getIndIM(indicador)
-  elseif indicador=="IIM_2010"
-    dfaux=getIndIM(indicador)
-  elseif indicador=="IIMa100"
-    dfaux=getIndIM(indicador)
-  elseif indicador=="GIM_2010"
-    dfaux=getIndIM(indicador)
-  elseif indicador=="LUG_EDO"
-    dfaux=getIndIM(indicador)
-  elseif indicador=="LUG_NAL"
-    dfaux=getIndIM(indicador)
-  end
-  plu=[]
-  for k in keys(diccionario_municipios[parse(Int64,get(diccionario_estados,estado,"Not founded"))])
-    push!(plu,k)
-  end
-  dfDel=DataFrame(Municipio=plu)
-  dfaux=innerjoin(dfaux,dfDel,on=:Municipio)
-  nombre_doc=indicador*"_"*estado*"_"*Dates.format(now(), "dd_u_yyyy_HH_MM_SS")*".csv"
-  Ct_DocCSV(nombre_doc,dfaux)
-end
-function conjunto_estado(indicadores::Vector{String},estado::String,municipio::String)
-  dfaux=DataFrame(Municipio=municipio)
   for indicador in indicadores
       if indicador=="Extension territorial"
         dfaux=innerjoin(dfaux,getExtTer(estado),on=:Municipio)
@@ -588,6 +391,188 @@ function conjunto_estado(indicadores::Vector{String},estado::String,municipio::S
         dfaux=innerjoin(dfaux,getIndIM("LUG_NAL",estado),on=:Municipio)
       end
   end
+  nombre_doc="Conjunto_de_"*estado*"_"*Dates.format(now(), "dd_u_yyyy_HH_MM_SS")*".csv"
+  Ct_DocCSV(nombre_doc,dfaux)
+end
+function dato_estado(indicador::String,estado::String,municipio::String)
+  if indicador=="Extension territorial"
+    dfaux=getExtTer(estado)
+  elseif indicador=="Indicadores de pobreza"
+    dfaux=getIndPobreza("All",estado)
+  elseif indicador=="IDH y componentes"
+    dfaux=getIDH("All",estado)
+  elseif indicador=="Intesidad migratoria y componentes"
+    dfaux=getIndIM("All",estado)
+  elseif haskey(diccionario_indicadores,indicador)
+    dfaux=getIndINEGI(estado, indicador)
+  elseif indicador=="Años promedio de escolaridad"
+    dfaux=getIDH(indicador,estado)
+  elseif indicador=="Años esperados de escolaridad"
+    dfaux=getIDH(indicador,estado)
+  elseif indicador=="Ingreso per cápita anual"
+    dfaux=getIDH(indicador,estado)
+  elseif indicador=="Tasa de mortalidad infantil"
+    dfaux=getIDH(indicador,estado)
+  elseif indicador=="Índice de educación"
+    dfaux=getIDH(indicador,estado)
+  elseif indicador=="Indice de salud"
+    dfaux=getIDH(indicador,estado)
+  elseif indicador=="Indice de ingreso"
+    dfaux=getIDH(indicador,estado)
+  elseif indicador=="IDH"
+    dfaux=getIDH(indicador,estado)
+    for c in 1:length(names(dfaux))
+       if string(names(dfaux)[c])=="Total"
+          rename!(dfaux,:Total=>indicador)
+       end
+     end
+  elseif indicador=="Pobreza"
+    dfaux=getIndPobreza(indicador,estado)
+  elseif indicador=="Pobreza extrema"
+    dfaux=getIndPobreza(indicador,estado)
+  elseif indicador=="Pobreza moderada"
+    dfaux=getIndPobreza(indicador,estado)
+  elseif indicador=="Vulnerables por carencia social"
+    dfaux=getIndPobreza(indicador,estado)
+  elseif indicador=="Vulnerables por ingreso"
+    dfaux=getIndPobreza(indicador,estado)
+  elseif indicador=="No pobres y no vulnerables"
+    dfaux=getIndPobreza(indicador,estado)
+  elseif indicador=="Rezago educativo"
+    dfaux=getIndPobreza(indicador,estado)
+  elseif indicador=="Carencia por acceso a los servicios de salud"
+    dfaux=getIndPobreza(indicador,estado)
+  elseif indicador=="Carencia por acceso a la seguridad social"
+    dfaux=getIndPobreza(indicador,estado)
+  elseif indicador=="Carencia por acceso a los servicios básicos en la vivienda"
+    dfaux=getIndPobreza(indicador,estado)
+  elseif indicador=="Carencia por acceso a la alimentación"
+    dfaux=getIndPobreza(indicador,estado)
+  elseif indicador=="Población con al menos una carencia social"
+    dfaux=getIndPobreza(indicador,estado)
+  elseif indicador=="Población con tres o más carencias sociales"
+    dfaux=getIndPobreza(indicador,estado)
+  elseif indicador=="Población con ingreso inferior a la línea de bienestar"
+    dfaux=getIndPobreza(indicador,estado)
+  elseif indicador=="Población con ingreso inferior a la línea de bienestar mínimo"
+    dfaux=getIndPobreza(indicador,estado)
+  elseif indicador=="TOT_VIV"
+    dfaux=getIndIM(indicador,estado)
+  elseif indicador=="VIV_REM"
+    dfaux=getIndIM(indicador,estado)
+  elseif indicador=="VIV_EMIG"
+    dfaux=getIndIM(indicador,estado)
+  elseif indicador=="VIV_CIRC"
+    dfaux=getIndIM(indicador,estado)
+  elseif indicador=="VIV_RET"
+    dfaux=getIndIM(indicador,estado)
+  elseif indicador=="IIM_2010"
+    dfaux=getIndIM(indicador,estado)
+  elseif indicador=="IIMa100"
+    dfaux=getIndIM(indicador,estado)
+  elseif indicador=="GIM_2010"
+    dfaux=getIndIM(indicador,estado)
+  elseif indicador=="LUG_EDO"
+    dfaux=getIndIM(indicador,estado)
+  elseif indicador=="LUG_NAL"
+    dfaux=getIndIM(indicador,estado)
+  end
+  plu=[]
+  for k in keys(diccionario_municipios[parse(Int64,get(diccionario_estados,estado,"Not founded"))])
+    push!(plu,k)
+  end
+  dfDel=DataFrame(Municipio=plu)
+  dfaux=innerjoin(dfaux,dfDel,on=:Municipio)
+  nombre_doc=indicador*"_"*estado*"_"*Dates.format(now(), "dd_u_yyyy_HH_MM_SS")*".csv"
+  Ct_DocCSV(nombre_doc,dfaux)
+end
+function conjunto_estado(indicadores::Vector{String},estado::String,municipio::String)
+  dfaux=DataFrame(Municipio=municipio)
+  for indicador in indicadores
+      if indicador=="Extension territorial"
+        dfaux=innerjoin(dfaux,getExtTer(estado),on=:Municipio)
+        rename!(dfaux,:Total=>indicador)
+      elseif indicador=="Indicadores de pobreza"
+        dfaux=innerjoin(dfaux,getIndPobreza("All",estado),on=:Municipio)
+      elseif indicador=="IDH y componentes"
+        dfaux=innerjoin(dfaux,getIDH("All",estado),on=:Municipio)
+      elseif indicador=="Intensidad migratoria y componentes"
+        dfaux=innerjoin(dfaux,getIndIM("All",estado),on=:Municipio)
+      elseif haskey(diccionario_indicadores,indicador)
+        dfaux=innerjoin(dfaux,getIndINEGI(estado,indicador),on=:Municipio)
+        for c in 1:length(names(dfaux))
+           if string(names(dfaux)[c])=="Total"
+              rename!(dfaux,:Total=>indicador)
+           end
+         end
+      elseif indicador=="Años promedio de escolaridad"
+          dfaux=innerjoin(dfaux,getIDH("Años promedio de escolaridad",estado),on=:Municipio)
+      elseif indicador=="Años esperados de escolaridad"
+          dfaux=innerjoin(dfaux,getIDH("Años esperados de escolaridad",estado),on=:Municipio)
+      elseif indicador=="Ingreso per cápita anual"
+          dfaux=innerjoin(dfaux,getIDH("Ingreso per cápita anual",estado),on=:Municipio)
+      elseif indicador=="Tasa de mortalidad infantil"
+          dfaux=innerjoin(dfaux,getIDH("Tasa de mortalidad infantil",estado),on=:Municipio)
+      elseif indicador=="Índice de educación"
+          dfaux=innerjoin(dfaux,getIDH("Índice de educación",estado),on=:Municipio)
+      elseif indicador=="Indice de salud"
+          dfaux=innerjoin(dfaux,getIDH("Índice de salud",estado),on=:Municipio)
+      elseif indicador=="Indice de ingreso"
+          dfaux=innerjoin(dfaux,getIDH("Índice de ingreso",estado),on=:Municipio)
+      elseif indicador=="IDH"
+          dfaux=innerjoin(dfaux,getIDH("IDH",estado),on=:Municipio)
+      elseif indicador=="Pobreza"
+        dfaux=innerjoin(dfaux,getIndPobreza("Pobreza",estado),on=:Municipio)
+      elseif indicador=="Pobreza extrema"
+        dfaux=innerjoin(dfaux,getIndPobreza("Pobreza extrema",estado),on=:Municipio)
+      elseif indicador=="Pobreza moderada"
+        dfaux=innerjoin(dfaux,getIndPobreza("Pobreza moderada",estado),on=:Municipio)
+      elseif indicador=="Vulnerables por carencia social"
+        dfaux=innerjoin(dfaux,getIndPobreza("Vulnerables por carencia social",estado),on=:Municipio)
+      elseif indicador=="Vulnerables por ingreso"
+        dfaux=innerjoin(dfaux,getIndPobreza("Vulnerables por ingreso",estado),on=:Municipio)
+      elseif indicador=="No pobres y no vulnerables"
+        dfaux=innerjoin(dfaux,getIndPobreza("No pobres y no vulnerables",estado),on=:Municipio)
+      elseif indicador=="Rezago educativo"
+        dfaux=innerjoin(dfaux,getIndPobreza("Rezago educativo",estado),on=:Municipio)
+      elseif indicador=="Carencia por acceso a los servicios de salud"
+        dfaux=innerjoin(dfaux,getIndPobreza("Carencia por acceso a los servicios de salud",estado),on=:Municipio)
+      elseif indicador=="Carencia por acceso a la seguridad social"
+        dfaux=innerjoin(dfaux,getIndPobreza("Carencia por acceso a la seguridad social",estado),on=:Municipio)
+      elseif indicador=="Carencia por acceso a los servicios básicos en la vivienda"
+        dfaux=innerjoin(dfaux,getIndPobreza("Carencia por acceso a los servicios básicos en la vivienda",estado),on=:Municipio)
+      elseif indicador=="Carencia por acceso a la alimentación"
+        dfaux=innerjoin(dfaux,getIndPobreza("Carencia por acceso a la alimentación",estado),on=:Municipio)
+      elseif indicador=="Población con al menos una carencia social"
+        dfaux=innerjoin(dfaux,getIndPobreza("Población con al menos una carencia social",estado),on=:Municipio)
+      elseif indicador=="Población con tres o más carencias sociales"
+        dfaux=innerjoin(dfaux,getIndPobreza("Población con tres o más carencias sociales",estado),on=:Municipio)
+      elseif indicador=="Población con ingreso inferior a la línea de bienestar"
+        dfaux=innerjoin(dfaux,getIndPobreza("Población con ingreso inferior a la línea de bienestar",estado),on=:Municipio)
+      elseif indicador=="Población con ingreso inferior a la línea de bienestar mínimo"
+        dfaux=innerjoin(dfaux,getIndPobreza("Población con ingreso inferior a la línea de bienestar mínimo",estado),on=:Municipio)
+      elseif indicador=="TOT_VIV"
+        dfaux=innerjoin(dfaux,getIndIM("TOT_VIV",estado),on=:Municipio)
+      elseif indicador=="VIV_REM"
+        dfaux=innerjoin(dfaux,getIndIM("VIV_REM",estado),on=:Municipio)
+      elseif indicador=="VIV_EMIG"
+        dfaux=innerjoin(dfaux,getIndIM("VIV_EMIG",estado),on=:Municipio)
+      elseif indicador=="VIV_CIRC"
+        dfaux=innerjoin(dfaux,getIndIM("VIV_CIRC",estado),on=:Municipio)
+      elseif indicador=="VIV_RET"
+        dfaux=innerjoin(dfaux,getIndIM("VIV_RET",estado),on=:Municipio)
+      elseif indicador=="IIM_2010"
+        dfaux=innerjoin(dfaux,getIndIM("IIM_2010",estado),on=:Municipio)
+      elseif indicador=="IIMa100"
+        dfaux=innerjoin(dfaux,getIndIM("IIMa100",estado),on=:Municipio)
+      elseif indicador=="GIM_2010"
+        dfaux=innerjoin(dfaux,getIndIM("GIM_2010",estado),on=:Municipio)
+      elseif indicador=="LUG_EDO"
+        dfaux=innerjoin(dfaux,getIndIM("LUG_EDO",estado),on=:Municipio)
+      elseif indicador=="LUG_NAL"
+        dfaux=innerjoin(dfaux,getIndIM("LUG_NAL",estado),on=:Municipio)
+      end
+  end
   return dfaux
 end
 #Codigo para la obtencion de los datos faltantes
@@ -595,7 +580,6 @@ function downloadCD()
     fileDir=HTTP.download(url,pathCov);
     InfoZIP.unzip(fileDir,pathCov);
 end
-
 function getCovData()
     covName=string(Dates.today()-Dates.Day(1))
     covName=replace(covName,"-"=>"")
@@ -605,7 +589,6 @@ function getCovData()
     ce=CSV.read(covFile,DataFrame);
     return ce
 end
-
 function downloadIP()
     inPobDir=HTTP.download(turl,path)
     InfoZIP.unzip(inPobDir,path)
