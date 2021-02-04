@@ -230,7 +230,7 @@ function dato_estado(indicador::String,estado::String)
   elseif indicador=="Intesidad migratoria y componentes"
     dfaux=getIndIM("All")
   elseif haskey(diccionario_indicadores,indicador)
-    dfaux=getIndINEGI(indicador)
+    dfaux=getIndINEGI(estado, indicador)
   elseif indicador=="Años promedio de escolaridad"
     dfaux=getIDH(indicador)
   elseif indicador=="Años esperados de escolaridad"
