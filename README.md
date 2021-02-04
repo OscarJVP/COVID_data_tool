@@ -57,9 +57,9 @@ Recibe los indicadores a consultar como un `array` de tipo `String`,el estado co
 Crea un .csv con la información deseada en la entrada de la función y muestra el nombre del archivo creado con éxito.
 
 
-`datos_municipio(indicadores, estado::String, municipio::String)`\
+`comp_CovInd(indicadores::Vector{String},estado::String,municipio::String)`\
 Recibe los indicadores a consultar como un `array` de tipo `String`,el estado como `String` y el municipio como `String`.\
-Crea un .csv con la información deseada en la entrada de la función y muestra el nombre del archivo creado con éxito.
+Crea un .csv con la información deseada adicional a información de COVID-19 en la entrada de la función y muestra el nombre del archivo creado con éxito.
 
 
 `downloadCD()`\

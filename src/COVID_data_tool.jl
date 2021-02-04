@@ -128,6 +128,7 @@ function indicadores_disponibles()
   lista_ComponentesIIM()
 end
 
+#=
 function datos_indicador(indicador:: String, estado:: String)
   clave_estado = get_clave_estado(estado);
   clave_indicador = get_clave_indicador(indicador);
@@ -146,6 +147,7 @@ function datos_indicador(indicador:: String, estado:: String)
   nombre_archivo = "datos_" * indicador * "_" * estado * "_" * Dates.format(now(), "dd_u_yyyy_HH_MM_SS") * ".csv"
   Ct_DocCSV(nombre_archivo, Ardic)
 end
+=#
 
 function lista_ComponentesIDH()
   adh=XLSX.readxlsx(path*"Indice de Desarrollo Humano Municipal 2010 2015.xlsx")["IDH municipal 2015"]
@@ -180,6 +182,7 @@ function lista_ComponentesIIM()
   end
 end
 
+#=
 function datos_municipio(indicadores, estado::String, municipio::String)
   clave_estado = get_clave_estado(estado)
   clave_municipio = get_clave_municipio(municipio, clave_estado)
@@ -211,6 +214,7 @@ function datos_municipio(indicadores, estado::String, municipio::String)
   nombre_archivo = "datos_" * estado * "_" * municipio * "_" * Dates.format(now(), "dd_u_yyyy_HH_MM_SS") * ".csv"
   Ct_DocCSV(nombre_archivo, df)
 end
+=#
 
 function comp_CovInd(indicadores::Vector{String},estado::String,municipio::String)
    dfest=DataFrame(ENTIDAD_UM=parse(Int64,get(diccionario_estados,estado,"Not founded")))
@@ -1138,7 +1142,7 @@ end
 function getIndINEGI(estado::String,indicador::String)
     if Sys.iswindows()
       dfIndINE=CSV.read(pathINEGI*estado*"\\datos_"*indicador*"_"*estado*".csv",DataFrame);
- 
+
     elseif Sys.islinux()
       dfIndINE=CSV.read(pathINEGI*estado*"/datos_"*indicador*"_"*estado*".csv",DataFrame);
     end
