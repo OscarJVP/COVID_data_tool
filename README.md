@@ -17,7 +17,8 @@ Pueden instalarse con el administrador de paquetes de JULIA pulsando la tecla `]
     `add HTTP DataFrames CSV JSON InfoZIP ZipFile XLSX ExcelFiles Dates`\
     \
     ![](images/prerequisitos.GIF)
-
+    \
+Si ya tienes estas paqueterías previamente mencionadas puedes omitir este paso.
 
 ### Instalación
 Haciendo uso del REPL de JULIA presiona la tecla `]` para al administrador de paquetes de JULIA e ingresar\
@@ -43,14 +44,6 @@ Puedes probarla con\
 ### Funciones
 `indicadores_disponibles()`\
 Muestra la lista de indicadores disponibles para consulta.
-
-
-`lista_ComponentesIDH()`\
-Muestra la lista de componentes relacionados al IDH disponibles para consulta.
-
-
-`lista_IndicadoresPobreza()`\
-Muestra la lista de indicadores de pobreza disponibles para consulta.
 
 
 `dato_estado(indicador::String, estado::String)`\
