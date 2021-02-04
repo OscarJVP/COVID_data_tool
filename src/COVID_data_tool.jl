@@ -325,7 +325,11 @@ function conjunto_estado(indicadores::Vector{String},estado::String)
         dfaux=innerjoin(dfaux,getIndIM("All",estado),on=:Municipio)
       elseif haskey(diccionario_indicadores,indicador)
         dfaux=innerjoin(dfaux,getIndINEGI(estado,indicador),on=:Municipio)
-        rename!(dfaux,:Total=>indicador)
+        for c in 1:length(names(dfaux))
+           if string(names(dfaux)[c])=="Total"
+              rename!(dfaux,:Total=>indicador)
+           end
+         end
       elseif indicador=="Años promedio de escolaridad"
           dfaux=innerjoin(dfaux,getIDH("Años promedio de escolaridad",estado),on=:Municipio)
       elseif indicador=="Años esperados de escolaridad"
