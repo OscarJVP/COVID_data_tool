@@ -252,7 +252,7 @@ function dato_estado(indicador::String,estado::String)
   elseif indicador=="Índice de educación"
     dfaux=getIDH(indicador,esatdo)
   elseif indicador=="Índice de salud"
-    dfaux=getIDH(indicador,esatdo)
+    dfaux=getIDH(indicador,estado)
   elseif indicador=="Índice de ingreso"
     dfaux=getIDH(indicador,estado)
   elseif indicador=="IDH"
