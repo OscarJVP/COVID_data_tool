@@ -68,12 +68,12 @@ Realiza la descarga de datos acerca del COVID-19 para poder ser consultados.
     * Todos los archivos .csv se generan en una carpeta con nombre archivos_CSV_COVID_data_tool dentro de C:\\archivos_CSV_COVID_data_tool en Windows, /home/archivos_CSV_COVID_data_tool en Linux.
 
 ## Fuentes de información
-    * ![INEGI](https://www.inegi.org.mx/)
-    * ![CONEVAL](https://www.coneval.org.mx/Paginas/principal.aspx)
-    * ![Programa de las Naciones Unidas para el Desarrollo](https://www.mx.undp.org/content/mexico/es/home.html)
-    * ![CONAPO](https://www.gob.mx/conapo)
-    * ![Municipios](http://www.municipios.mx/)
-    * ![Correos de México](https://www.gob.mx/correosdemexico)
+    ![INEGI](https://www.inegi.org.mx/)
+    ![CONEVAL](https://www.coneval.org.mx/Paginas/principal.aspx)
+    ![Programa de las Naciones Unidas para el Desarrollo](https://www.mx.undp.org/content/mexico/es/home.html)
+    ![CONAPO](https://www.gob.mx/conapo)
+    ![Municipios](http://www.municipios.mx/)
+    ![Correos de México](https://www.gob.mx/correosdemexico)
 
 
 ## Equipo de Trabajo
