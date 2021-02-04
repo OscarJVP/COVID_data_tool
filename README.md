@@ -27,14 +27,10 @@ Haciendo uso del REPL de JULIA presiona la tecla `]` para al administrador de pa
     \
     ![](images/instalacion_1.GIF)
     \
-Regresar a la línea de comandos de JULIA presionando la tecla `backspace` e ingresar\
+Por último regresar a la línea de comandos de JULIA presionando la tecla `backspace` y compilar la paquetería ingresando\
     `using COVID_data_tool`\
     \
     ![](images/instalacion_2.gif)
-    \
-Por último ejecutar la función `COVID_data_tool.downloadCD()`, esta descargara datos necesarios para el funcionamiento de la paquetería.\
-    \
-    ![](images/instalacion_3.GIF)
     \
 Puedes probarla con\
     `COVID_data_tool.indicadores_disponibles()`\
@@ -72,12 +68,12 @@ Realiza la descarga de datos acerca del COVID-19 para poder ser consultados.
     * Todos los archivos .csv se generan en una carpeta con nombre archivos_CSV_COVID_data_tool dentro de C:\\archivos_CSV_COVID_data_tool en Windows, /home/archivos_CSV_COVID_data_tool en Linux.
 
 ## Fuentes de información
-    * INEGI	https://www.inegi.org.mx/
-    * CONEVAL https://www.coneval.org.mx/Paginas/principal.aspx
-    * Programa de las Naciones Unidas para el Desarrollo https://www.mx.undp.org/content/mexico/es/home.html
-    * CONAPO https://www.gob.mx/conapo
-    * Municipios http://www.municipios.mx/
-    * Correos de mexico https://www.gob.mx/correosdemexico
+    * ![INEGI](https://www.inegi.org.mx/)
+    * ![CONEVAL](https://www.coneval.org.mx/Paginas/principal.aspx)
+    * ![Programa de las Naciones Unidas para el Desarrollo](https://www.mx.undp.org/content/mexico/es/home.html)
+    * ![CONAPO](https://www.gob.mx/conapo)
+    * ![Municipios](http://www.municipios.mx/)
+    * ![Correos de México](https://www.gob.mx/correosdemexico)
 
 
 ## Equipo de Trabajo
