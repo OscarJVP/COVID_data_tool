@@ -578,7 +578,7 @@ function downloadCD()
     fileDir=HTTP.download(url,pathCov);
     InfoZIP.unzip(fileDir,pathCov);
 end
-downloadCD()
+
 function getCovData()
     covName=string(Dates.today()-Dates.Day(1))
     covName=replace(covName,"-"=>"")
