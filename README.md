@@ -16,7 +16,7 @@ Paquetes de JULIA necesarios para el funcionamiento de la paquetería.\
 Pueden instalarse con el administrador de paquetes de JULIA pulsando la tecla `]` en el REPL\
     `add HTTP DataFrames CSV JSON InfoZIP ZipFile XLSX ExcelFiles Dates`\
     \
-    ![](images/prerrequisitos.GIF)
+    ![](images/prerequisitos.GIF)
     \
 
 ### Instalación
