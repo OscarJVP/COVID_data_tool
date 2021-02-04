@@ -17,7 +17,6 @@ elseif Sys.islinux()
     mkdir("/home/archivos_CSV_COVID_data_tool")
 end
 
-
 function getJSSIn(clave_indicador:: String, clave_municipio:: String, estado:: String, clave_estado:: String)
   l = count(i -> (i == ','), clave_municipio)
   ak = split(clave_municipio[1:end-1], ",")
