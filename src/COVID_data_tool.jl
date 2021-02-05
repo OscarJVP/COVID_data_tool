@@ -528,7 +528,7 @@ function conjunto_estado(indicadores::Vector{String},estado::String,municipio::S
       elseif indicador=="Años promedio de escolaridad"
           dfaux=innerjoin(dfaux,getIDH("Años promedio de escolaridad",estado),on=:Municipio)
       elseif indicador=="Años esperados de escolarización"
-          dfaux=innerjoin(dfaux,getIDH("Años esperados de escolaridad",estado),on=:Municipio)
+          dfaux=innerjoin(dfaux,getIDH("Años esperados de escolarización",estado),on=:Municipio)
       elseif indicador=="Ingreso per cápita anual"
           dfaux=innerjoin(dfaux,getIDH("Ingreso per cápita anual",estado),on=:Municipio)
       elseif indicador=="Tasa de mortalidad infantil"
@@ -902,6 +902,14 @@ function getdf2015data(ar::XLSX.Worksheet,dfaux:: DataFrame,estado::String)
         estPob=ar["C9:C2465"]
         dfmunPob=DataFrame(munPob,["Municipio"])
         dfestPob=DataFrame(estPob,["Estado"])
+        estado1=estado
+        if estado=="Ciudad de México"
+	          estado="Distrito Federal"
+        elseif estado=="Veracruz de Ignacio de la Llave"
+	          estado="Veracruz"
+         elseif estado=="Michoacán de Ocampo"
+	          estado="Michoacán"
+        end
         dfPob=hcat(dfmunPob,dfaux)
         dfPob=hcat(dfestPob,dfPob)
         notoddAR=collect(2:2:length(names(dfaux)))
@@ -915,7 +923,7 @@ function getdf2015data(ar::XLSX.Worksheet,dfaux:: DataFrame,estado::String)
         end
         select(dfPob,Not(headPob2015))
         munau=[]
-        for k in keys(diccionario_municipios[parse(Int64,get(diccionario_estados,estado,"Not founded"))])
+        for k in keys(diccionario_municipios[parse(Int64,get(diccionario_estados,estado1,"Not founded"))])
           push!(munau,k)
         end
         dfmunIM=DataFrame(Municipio=munau)
@@ -972,6 +980,12 @@ function getIDH(componente::String,estado::String)
     headIDH=adh["C8:L8"]
     idhData=adh["C10:L2469"]
     tfd=DataFrame(idhData)
+    estado1=estado
+    if estado=="Veracruz de Ignacio de la Llave"
+	      estado="Veracruz"
+    elseif estado=="Michoacán de Ocampo"
+	      estado="Michoacán"
+    end
     for i in 1:length(headIDH)
         rename!(tfd,Symbol("x$i")=>(headIDH[i]))
     end
@@ -996,7 +1010,7 @@ function getIDH(componente::String,estado::String)
         dfret=tfd
     end
     munau=[]
-    for k in keys(diccionario_municipios[parse(Int64,get(diccionario_estados,estado,"Not founded"))])
+    for k in keys(diccionario_municipios[parse(Int64,get(diccionario_estados,estado1,"Not founded"))])
       push!(munau,k)
     end
     dfmunIM=DataFrame(Municipio=munau)
